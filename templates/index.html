@@ -52,7 +52,7 @@
                         <div class="top-bar-right text-end">
                             <div class="ltn__top-bar-menu">
                                 <ul>
-                                    
+
                                     <li>
                                         <!-- ltn__language-menu -->
                                         <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
@@ -70,31 +70,31 @@
                                               <!-- user-menu -->
                                               <div class="ltn__drop-menu user-menu">
                                                   {% if request.user.is_anonymous %}
-                                                  <ul>                                                  
+                                                  <ul>
                                                     <li>
-                                                        <a href="#"><i class="icon-user"></i></a>                                                          
-                                                        <ul>                                                                                            
+                                                        <a href="#"><i class="icon-user"></i></a>
+                                                        <ul>
                                                           <li><a href="login">Sign in</a></li>
                                                           <li><a href="register">Register</a></li>
                                                           <li><a href="account">My Account</a></li>
                                                           <li><a href="wishlist">Wishlist</a></li>
-                                                        </ul>                                                                                                                                                                              
+                                                        </ul>
                                                     </li>
                                                 </ul>
-                                                  
+
                                                   {%else%}
                                                   <ul>
                                                     <span>Hi, {{request.user.first_name}}</span>
                                                       <li>
-                                                          <a href="#"><i class="icon-user"></i></a>                                                          
-                                                          <ul>                                                                                            
+                                                          <a href="#"><i class="icon-user"></i></a>
+                                                          <ul>
                                                             <li><a href="account">My Account</a></li>
                                                             <li><a href="wishlist">Wishlist</a></li>
                                                             <li><a href="logoutEvent">Logout</a></li>
-                                                          </ul>                                                                                                                                                                              
+                                                          </ul>
                                                       </li>
                                                   </ul>
-                                                  
+
                                                   {%endif%}
                                               </div>
                                             </ul>
@@ -163,7 +163,6 @@
                                           </ul>
                                         </li>
                                         <li><a href="about">About Us</a></li>
-                                        <li><a href="blog">News</a></li>
                                         <li><a href="#">Land</a>
                                           <ul>
                                             <li><a href="#">Commercial</a></li>
@@ -295,7 +294,7 @@
                     </ul>
                   </li>
                   <li><a href="about">About Us</a></li>
-                  <li><a href="blog">News</a></li>
+
                   <li><a href="#">Land</a>
                     <ul>
                       <li><a href="#">Commercial</a></li>
@@ -493,7 +492,7 @@
                 </div>
             </div>
             <div class="row ltn__product-slider-item-three-active--- slick-arrow-1">
-                <!-- ltn__product-item -->    
+                <!-- ltn__product-item -->
                 <!-- item 1 -->
                 <div class="col-xl-4 col-sm-6 col-12">
                     <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
@@ -511,7 +510,7 @@
                                     <li class="sale-badg">For Sale</li>
                                 </ul>
                             </div>
-                            
+
                             <h2 class="product-title"><a href="product-details/houseSale/{{lastHouseSale.id}}">{{lastHouseSale.title|truncatechars:25}}</a></h2>
                             <div class="product-img-location">
                                 <ul>
@@ -522,7 +521,7 @@
                             </div>
                             <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li><span>{{lastHouseSale.bed}} </span>
-                                    Bed                                   
+                                    Bed
                                 </li>
                                 <li><span>{{lastHouseSale.rooms}} </span>
                                     Room
@@ -554,7 +553,7 @@
                             </div>
                         </div>
                         <div class="product-info-bottom">
-                            <div class="product-price">                               
+                            <div class="product-price">
                                 <span>GHS {{lastHouseSale.price}}</span>
                             </div>
                         </div>
@@ -579,7 +578,7 @@
                                     <li class="sale-badg">For Sale</li>
                                 </ul>
                             </div>
-                            
+
                             <h2 class="product-title"><a href="product-details">{{lastLandSale.title|truncatechars:25}}</a></h2>
                             <div class="product-img-location">
                                 <ul>
@@ -591,8 +590,8 @@
                             <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
                                     {%if lastLandSale.serviced == True %}
-                                    <span>Serviced </span>  
-                                    {%endif%}                                
+                                    <span>Serviced </span>
+                                    {%endif%}
                                 </li>
                                 <li>
                                     {%if lastLandSale.fenced == True %}
@@ -626,8 +625,8 @@
                             </div>
                         </div>
                         <div class="product-info-bottom">
-                            <div class="product-price">                               
-                                <span>GHS {{lastLandSale.price}}</span>                              
+                            <div class="product-price">
+                                <span>GHS {{lastLandSale.price}}</span>
                             </div>
                         </div>
                     </div>
@@ -646,12 +645,12 @@
                             </div>
                         </div>
                         <div class="product-info">
-                            <div class="product-badge">                               
+                            <div class="product-badge">
                                 <ul>
                                     <li class="sale-badg">For Rent</li>
                                 </ul>
                             </div>
-                            
+
                             <h2 class="product-title"><a href="product-details">{{lastHouseRent.title|truncatechars:25}}</a></h2>
                             <div class="product-img-location">
                                 <ul>
@@ -662,7 +661,7 @@
                             </div>
                             <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li><span>{{lastHouseRent.bed}} </span>
-                                    Bed                                   
+                                    Bed
                                 </li>
                                 <li><span>{{lastHouseRent.rooms}} </span>
                                     Room
@@ -694,14 +693,14 @@
                             </div>
                         </div>
                         <div class="product-info-bottom">
-                            <div class="product-price">                                                               
-                                <span>GHS {{lastHouseRent.price}}<label>/Month</label></span>                                
+                            <div class="product-price">
+                                <span>GHS {{lastHouseRent.price}}<label>/Month</label></span>
                             </div>
                         </div>
                     </div>
                 </div>
                  <!-- end of item 3 -->
-                
+
                  <!-- item 4 -->
                 <div class="col-xl-4 col-sm-6 col-12">
                     <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
@@ -714,12 +713,12 @@
                             </div>
                         </div>
                         <div class="product-info">
-                            <div class="product-badge">                               
+                            <div class="product-badge">
                                 <ul>
                                     <li class="sale-badg">For Rent</li>
                                 </ul>
                             </div>
-                            
+
                             <h2 class="product-title"><a href="product-details">{{previousLastHouseRent.title|truncatechars:25}}</a></h2>
                             <div class="product-img-location">
                                 <ul>
@@ -730,7 +729,7 @@
                             </div>
                             <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li><span>{{previousLastHouseRent.bed}} </span>
-                                    Bed                                   
+                                    Bed
                                 </li>
                                 <li><span>{{previousLastHouseRent.rooms}} </span>
                                     Room
@@ -762,8 +761,8 @@
                             </div>
                         </div>
                         <div class="product-info-bottom">
-                            <div class="product-price">                                                               
-                                <span>GHS {{previousLastHouseRent.price}}<label>/Month</label></span>                                
+                            <div class="product-price">
+                                <span>GHS {{previousLastHouseRent.price}}<label>/Month</label></span>
                             </div>
                         </div>
                     </div>
@@ -787,7 +786,7 @@
                                     <li class="sale-badg">For Sale</li>
                                 </ul>
                             </div>
-                            
+
                             <h2 class="product-title"><a href="product-details">{{previousLastLandSale.title|truncatechars:25}}</a></h2>
                             <div class="product-img-location">
                                 <ul>
@@ -799,8 +798,8 @@
                             <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li>
                                     {%if previousLastLandSale.serviced == True %}
-                                    <span>Serviced </span>  
-                                    {%endif%}                                
+                                    <span>Serviced </span>
+                                    {%endif%}
                                 </li>
                                 <li>
                                     {%if previousLastLandSale.fenced == True %}
@@ -834,8 +833,8 @@
                             </div>
                         </div>
                         <div class="product-info-bottom">
-                            <div class="product-price">                               
-                                <span>GHS {{previousLastLandSale.price}}</span>                              
+                            <div class="product-price">
+                                <span>GHS {{previousLastLandSale.price}}</span>
                             </div>
                         </div>
                     </div>
@@ -859,7 +858,7 @@
                                     <li class="sale-badg">For Sale</li>
                                 </ul>
                             </div>
-                            
+
                             <h2 class="product-title"><a href="product-details">{{previousLastHouseSale.title|truncatechars:25}}</a></h2>
                             <div class="product-img-location">
                                 <ul>
@@ -870,7 +869,7 @@
                             </div>
                             <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li><span>{{previousLastHouseSale.bed}} </span>
-                                    Bed                                   
+                                    Bed
                                 </li>
                                 <li><span>{{previousLastHouseSale.rooms}} </span>
                                     Room
@@ -902,7 +901,7 @@
                             </div>
                         </div>
                         <div class="product-info-bottom">
-                            <div class="product-price">                               
+                            <div class="product-price">
                                 <span>GHS {{previousLastHouseSale.price}}</span>
                             </div>
                         </div>
@@ -940,7 +939,7 @@
                                 </ul>
                                 {%endif%}
                             </div>
-                            
+
                             <h2 class="product-title"><a href="product-details">{{item.title|truncatechars:25}}</a></h2>
                             <div class="product-img-location">
                                 <ul>
@@ -951,7 +950,7 @@
                             </div>
                             <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li><span>{{item.bed}} </span>
-                                    Bed                                   
+                                    Bed
                                 </li>
                                 <li><span>{{item.rooms}} </span>
                                     Room
@@ -983,7 +982,7 @@
                             </div>
                         </div>
                         <div class="product-info-bottom">
-                            <div class="product-price">                               
+                            <div class="product-price">
                                 {% if item.status == 'rent' %}
                                 <span>GHS {{item.price}}<label>/Month</label></span>
                                 {%else%}
@@ -1149,7 +1148,7 @@
                             </div>
                             <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
                                 <li><span>Fenced </span>
-                                    
+
                                 </li>
                                 <li><span></span>
                                     Serviced
@@ -1360,7 +1359,7 @@
                         <div class="product-info-bottom">
                             <div class="product-price">
                                 <span>GHS 3,503,760</span>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -2376,177 +2375,7 @@
     <!-- BRAND LOGO AREA END -->
 
     <!-- BLOG AREA START (blog-3) -->
-    <div class="ltn__blog-area pt-115--- pb-70">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title-area ltn__section-title-2--- text-center">
-                        <h6 class="section-subtitle section-subtitle-2 ltn__secondary-color">News & Blogs</h6>
-                        <h1 class="section-title">Leatest News Feeds</h1>
-                    </div>
-                </div>
-            </div>
-            <div class="row  ltn__blog-slider-one-active slick-arrow-1 ltn__blog-item-3-normal">
-                <!-- Blog Item -->
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-3">
-                        <div class="ltn__blog-img">
-                            <a href="blog-details"><img src="{% static 'img/blog/1.jpg' %}" alt="#"></a>
-                        </div>
-                        <div class="ltn__blog-brief">
-                            <div class="ltn__blog-meta">
-                                <ul>
-                                    <li class="ltn__blog-author">
-                                        <a href="#"><i class="far fa-user"></i>by: Admin</a>
-                                    </li>
-                                    <li class="ltn__blog-tags">
-                                        <a href="#"><i class="fas fa-tags"></i>Decorate</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="ltn__blog-title"><a href="blog-details">10 Brilliant Ways To Decorate Your Home</a></h3>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i>June 24, 2021</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog Item -->
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-3">
-                        <div class="ltn__blog-img">
-                            <a href="blog-details"><img src="{% static 'img/blog/2.jpg' %}" alt="#"></a>
-                        </div>
-                        <div class="ltn__blog-brief">
-                            <div class="ltn__blog-meta">
-                                <ul>
-                                    <li class="ltn__blog-author">
-                                        <a href="#"><i class="far fa-user"></i>by: Admin</a>
-                                    </li>
-                                    <li class="ltn__blog-tags">
-                                        <a href="#"><i class="fas fa-tags"></i>Interior</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="ltn__blog-title"><a href="blog-details">The Most Inspiring Interior Design Of 2021</a></h3>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i>July 23, 2021</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog Item -->
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-3">
-                        <div class="ltn__blog-img">
-                            <a href="blog-details"><img src="{% static 'img/blog/3.jpg' %}" alt="#"></a>
-                        </div>
-                        <div class="ltn__blog-brief">
-                            <div class="ltn__blog-meta">
-                                <ul>
-                                    <li class="ltn__blog-author">
-                                        <a href="#"><i class="far fa-user"></i>by: Admin</a>
-                                    </li>
-                                    <li class="ltn__blog-tags">
-                                        <a href="#"><i class="fas fa-tags"></i>Estate</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="ltn__blog-title"><a href="blog-details">Recent Commercial Real Estate Transactions</a></h3>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i>May 22, 2021</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog Item -->
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-3">
-                        <div class="ltn__blog-img">
-                            <a href="blog-details"><img src="{% static 'img/blog/4.jpg' %}" alt="#"></a>
-                        </div>
-                        <div class="ltn__blog-brief">
-                            <div class="ltn__blog-meta">
-                                <ul>
-                                    <li class="ltn__blog-author">
-                                        <a href="#"><i class="far fa-user"></i>by: Admin</a>
-                                    </li>
-                                    <li class="ltn__blog-tags">
-                                        <a href="#"><i class="fas fa-tags"></i>Room</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="ltn__blog-title"><a href="blog-details">Renovating a Living Room? Experts Share Their Secrets</a></h3>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i>June 24, 2021</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Blog Item -->
-                <div class="col-lg-12">
-                    <div class="ltn__blog-item ltn__blog-item-3">
-                        <div class="ltn__blog-img">
-                            <a href="blog-details"><img src="{% static 'img/blog/5.jpg' %}" alt="#"></a>
-                        </div>
-                        <div class="ltn__blog-brief">
-                            <div class="ltn__blog-meta">
-                                <ul>
-                                    <li class="ltn__blog-author">
-                                        <a href="#"><i class="far fa-user"></i>by: Admin</a>
-                                    </li>
-                                    <li class="ltn__blog-tags">
-                                        <a href="#"><i class="fas fa-tags"></i>Trends</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <h3 class="ltn__blog-title"><a href="blog-details">7 home trends that will shape your house in 2021</a></h3>
-                            <div class="ltn__blog-meta-btn">
-                                <div class="ltn__blog-meta">
-                                    <ul>
-                                        <li class="ltn__blog-date"><i class="far fa-calendar-alt"></i>June 24, 2021</li>
-                                    </ul>
-                                </div>
-                                <div class="ltn__blog-btn">
-                                    <a href="blog-details">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--  -->
-            </div>
-        </div>
-    </div>
-    <!-- BLOG AREA END -->
+
 
     <!-- CALL TO ACTION START (call-to-action-6) -->
     <div class="ltn__call-to-action-area call-to-action-6 before-bg-bottom" data-bs-bg="{% static 'img/1.jpg' %}">
