@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 </head>
 
-<body>
+<body >
     <!--[if lte IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
@@ -129,7 +129,7 @@
                     <div class="col">
                         <div class="site-logo-wrap">
                             <div class="site-logo">
-                                <a href=""><img src="{% static 'img/sikadahomes.png' %}" alt="Logo"></a>
+                                <a href="/"><img src="{% static 'img/sikadahomes.png' %}" alt="Logo"></a>
                             </div>
                             <div class="get-support clearfix d-none">
                                 <div class="get-support-icon">
@@ -148,7 +148,7 @@
                                 <div class="ltn__main-menu">
                                     <ul>
                                         <li>
-                                          <a href="">Home</a>
+                                          <a href="/">Home</a>
                                         </li>
                                         <li class="menu-icon"><a href="#">Buy</a>
                                           <ul>
@@ -266,7 +266,7 @@
         <div class="ltn__utilize-menu-inner ltn__scrollbar">
             <div class="ltn__utilize-menu-head">
                 <div class="site-logo">
-                    <a href=""><img src="{% static 'img/logo.png' %}" alt="Logo"></a>
+                    <a href="/"><img src="{% static 'img/logo.png' %}" alt="Logo"></a>
                 </div>
                 <button class="ltn__utilize-close">×</button>
             </div>
@@ -279,7 +279,7 @@
             <div class="ltn__utilize-menu">
               <ul>
                   <li>
-                    <a href="">Home</a>
+                    <a href="/">Home</a>
                   </li>
                   <li class="menu-icon"><a href="#">Buy</a>
                     <ul>
@@ -384,42 +384,51 @@
                                         <div class="tab-content pb-10">
                                             <div class="tab-pane fade active show" id="ltn__form_tab_1_1">
                                                 <div class="car-dealer-form-inner">
-                                                    <form action="#" class="ltn__car-dealer-form-box row">
+                                                    <form action="shop-right-sidebar" method="GET" class="ltn__car-dealer-form-box row">
+                                                        <!-- {% csrf_token %} -->
                                                         <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-car col-lg-3 col-md-6">
-                                                            <select class="nice-select">
-                                                                <option>Property Type</option>
-                                                                <option>Apartment</option>
-                                                                <option>Co-op</option>
-                                                                <option>Condo</option>
-                                                                <option>Single Family Home</option>
+                                                            <select required name="property_type" class="nice-select">
+                                                                <option value="none">Property Type</option>
+                                                                <option value="house_for_sale">House for Sale</option>
+                                                                <option value="house_for_rent">House for Rent</option>
+                                                                <option value="land_for_sale">Land for Sale</option>
+                                                                <option value="house_for_lease">House for Lease</option>
                                                             </select>
                                                         </div>
                                                         <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-meter col-lg-3 col-md-6">
-                                                            <select class="nice-select">
-                                                                <option>Location</option>
-                                                                <option>chicago</option>
-                                                                <option>London</option>
-                                                                <option>Los Angeles</option>
-                                                                <option>New York</option>
-                                                                <option>New Jersey</option>
+                                                            <select name="location" class="nice-select">
+                                                                <option value="none">Location</option>
+                                                                <option value="greater_accra">Greater Accra</option>
+                                                                <option value="ashanti">Ashanti Region</option>
+                                                                <option value="northern">Northern Region</option>
+                                                                <option value="eastern">Eastern Region</option>
+                                                                <option value="central">Central Region</option>
+                                                               <option value="western">Western Region</option> 
+                                                               <option value="upper_east">Upper East Region</option>
+                                                               <option value="bono">Bono Region</option>
+                                                               <option value="ahafo">Ahafo Region</option>
+                                                               <option value="bono_west">Bono West Region</option>
+                                                               <option value="volta">Volta Region</option>
+                                                               <!-- <option value="bono">Bono Region</option> -->
+                                                               <option value="bono_east">Bono East Region</option>
+                                                               <option value="oti">Oti Region</option>
+                                                               <option value="north_east">North East Region</option>
+                                                               <option value="savannah">Savannah Region</option>                                                               
                                                             </select>
                                                         </div>
                                                         <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
-                                                            <select class="nice-select">
-                                                                <option>Sub Location</option>
-                                                                <option>Bayonne</option>
-                                                                <option>Greenville</option>
-                                                                <option>Manhattan</option>
-                                                                <option>Queens</option>
-                                                                <option>The Heights</option>
-                                                                <option>Upper East Side</option>
-                                                                <option>West Side</option>
+                                                            <select name="price_range" class="nice-select">
+                                                                <option value="none">Price Range</option>
+                                                                <option value="low_budget">Low Budget</option>
+                                                                <option value="medium_budget">Medium</option>
+                                                                <option value="high_budget">High Budget</option>
                                                             </select>
                                                         </div>
                                                         <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
                                                             <div class="btn-wrapper text-center mt-0">
                                                                 <!-- <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Inventory</button> -->
-                                                                <a href="shop-right-sidebar" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search</a>
+                                                                <!-- <a href="shop-right-sidebar" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search</a> -->
+                                                                <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search</a>
                                                             </div>
                                                         </div>
                                                     </form>
