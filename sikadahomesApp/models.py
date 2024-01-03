@@ -1,16 +1,29 @@
 from django.db import models
 
 # from sikadahomesApp.views import locations
+
+class AllProperties(models.Model):
+    property_id = models.CharField(max_length=100)
+    property_type = models.CharField(max_length=100)
+    price = models.IntegerField()
+    location = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.property_id
+
+
+
 BUILDING_TYPE_CHOICES = (
     ('Apartment', 'Apartment'),
     ('Single_Room', 'Single Room')
 )
 class HouseRent(models.Model):
     # id = models.CharField(primary_key = True, max_length=100)
+    property_id = models.CharField(max_length=20, null=True, blank=True)
     title = models.CharField(null=True, blank=True, max_length=30)
     type = models.CharField(choices=BUILDING_TYPE_CHOICES, max_length=50) 
     status = models.CharField(default='rent', max_length=10)
-    price = models.CharField(max_length=50) 
+    price = models.IntegerField()
     location = models.CharField(max_length=100) 
     sub_location = models.CharField(max_length=100) 
     description = models.TextField()
@@ -38,10 +51,11 @@ class HouseRent(models.Model):
 
 
 class HouseSale(models.Model):
+    property_id = models.CharField(max_length=20, null=True, blank=True)
     title = models.CharField(null=True, blank=True, max_length=30)
     type = models.CharField(choices=BUILDING_TYPE_CHOICES, max_length=50) 
     status = models.CharField(default='sale', max_length=10)
-    price = models.CharField(max_length=50) 
+    price = models.IntegerField() 
     location = models.CharField(max_length=100) 
     sub_location = models.CharField(max_length=100) 
     description = models.TextField()
@@ -67,10 +81,11 @@ class HouseSale(models.Model):
 
     
 class LandSale(models.Model):
+    property_id = models.CharField(max_length=20, null=True, blank=True)
     title = models.CharField(null=True, blank=True, max_length=30)
     # type = models.CharField(choices=TYPE_CHOICES, max_length=50) 
     status = models.CharField(default='sale', max_length=10)
-    price = models.CharField(max_length=50) 
+    price = models.IntegerField() 
     location = models.CharField(max_length=100) 
     sub_location = models.CharField(max_length=100) 
     description = models.TextField()
