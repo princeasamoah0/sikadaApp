@@ -25,6 +25,7 @@ urlpatterns = [
 
 path('admin/', admin.site.urls),
 path('', include('sikadahomesApp.urls')),
+path('accounts/', include('allauth.urls'))
 ]
 
 

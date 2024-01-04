@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 import re
 
 from itertools import chain
 import random
-from .models import HouseRent,HouseSale,LandSale,AllProperties
+from .models import HouseRent,HouseSale,LandSale,AllProperties,Feedback
 
 # Create your views here.
 
@@ -23,6 +24,9 @@ def index (request):
     landSale = LandSale.objects.all().order_by('-id')[:2]
     lastLandSale = landSale[0]
     previousLastLandSale = landSale[1]
+
+    feedback = Feedback.objects.all().order_by('-id')[:4]
+
     # import uuid
     # print (uuid.uuid4())
     # {'Rent_House':lastHouseRent, 'House_Sale':lastHouseSale}
@@ -31,7 +35,8 @@ def index (request):
                                          'lastHouseSale':lastHouseSale,
                                          'previousLastHouseSale':previousLastHouseSale,
                                          'lastLandSale':lastLandSale,
-                                         'previousLastLandSale':previousLastLandSale                                         
+                                         'previousLastLandSale':previousLastLandSale,
+                                         'feedback':feedback                                       
                                          } )
 
 def page_404 (request):
@@ -103,7 +108,10 @@ def login_view(request):
             user = authenticate(request, username=signIn_Param, password=password)        
             if user is not None:
                 login(request, user) 
-                return redirect(index)    
+                if request.GET.get('next'):
+                    return redirect(wishlist)
+                else:
+                    return redirect(index)    
             else:
                 messages.error(request, "Invalid Login Credentials")
     
@@ -302,6 +310,7 @@ def team_details(request):
 def team(request):
     return render(request, 'team.html')
 
+@login_required
 def wishlist(request):
     return render(request, 'wishlist.html')
 

@@ -107,4 +107,12 @@ class LandSale(models.Model):
         return self.title
 
 # LandRent
+    
+
+class Feedback(models.Model):
+    message = models.CharField(max_length=500, blank=True, null= True)
+    status = models.CharField(max_length=200, blank=True, null= True)
+    name  = models.CharField(max_length=200, blank=True, null= True)  
+
+
 

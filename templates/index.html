@@ -2250,29 +2250,26 @@
                 </div>
             </div>
             <div class="row ltn__testimonial-slider-5-active slick-arrow-1">
+                {% for feed in feedback %}
                 <div class="col-lg-4">
                     <div class="ltn__testimonial-item ltn__testimonial-item-7">
                         <div class="ltn__testimoni-info">
                             <p><i class="flaticon-left-quote-1"></i>
-                                Precious ipsum dolor sit amet
-                                consectetur adipisicing elit, sed dos
-                                mod tempor incididunt ut labore et
-                                dolore magna aliqua. Ut enim ad min
-                                veniam, quis nostrud Precious ips
-                                um dolor sit amet, consecte</p>
+                                {{feed.message}}</p>
                             <div class="ltn__testimoni-info-inner">
                                 <div class="ltn__testimoni-img">
                                     <img src="{% static 'img/testimonial/1.jpg' %}" alt="#">
                                 </div>
                                 <div class="ltn__testimoni-name-designation">
-                                    <h5>Jacob William</h5>
-                                    <label>Selling Agents</label>
+                                    <h5>{{feed.name}}</h5>
+                                    <label>{{feed.status}}</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                {%endfor%}
+                <!-- <div class="col-lg-4">
                     <div class="ltn__testimonial-item ltn__testimonial-item-7">
                         <div class="ltn__testimoni-info">
                             <p><i class="flaticon-left-quote-1"></i>
@@ -2293,8 +2290,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
+                </div> -->
+                <!-- <div class="col-lg-4">
                     <div class="ltn__testimonial-item ltn__testimonial-item-7">
                         <div class="ltn__testimoni-info">
                             <p><i class="flaticon-left-quote-1"></i>
@@ -2315,8 +2312,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
+                </div> -->
+                <!-- <div class="col-lg-4">
                     <div class="ltn__testimonial-item ltn__testimonial-item-7">
                         <div class="ltn__testimoni-info">
                             <p><i class="flaticon-left-quote-1"></i>
@@ -2337,7 +2334,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!--  -->
             </div>
         </div>
@@ -2397,7 +2394,7 @@
                             <p>We can help you realize your dream of a new home</p>
                         </div>
                         <div class="btn-wrapper">
-                            <a class="btn btn-effect-3 btn-white" href="contact">Explore Properties <i class="icon-next"></i></a>
+                            <a class="btn btn-effect-3 btn-white" href="shop-right-sidebar?property_type=none&location=none&price_range=none">Explore Properties <i class="icon-next"></i></a>
                         </div>
                     </div>
                 </div>
