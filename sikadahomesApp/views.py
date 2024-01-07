@@ -14,30 +14,24 @@ from .models import HouseRent,HouseSale,LandSale,AllProperties,Feedback
 
 def index (request):
     houseRent = HouseRent.objects.all().order_by('-id')[:2]
-    lastHouseRent = houseRent[0]
-    previousLastHouseRent = houseRent[1]
-
-    houseSale = HouseSale.objects.all().order_by('-id')[:2]
-    lastHouseSale = houseSale[0]
-    previousLastHouseSale = houseSale[1]
-
+    houseSale = HouseSale.objects.all().order_by('-id')[:2]  
     landSale = LandSale.objects.all().order_by('-id')[:2]
-    lastLandSale = landSale[0]
-    previousLastLandSale = landSale[1]
-
     feedback = Feedback.objects.all().order_by('-id')[:4]
+    latest_listings = list(chain(houseRent, houseSale,landSale))
+    random.shuffle(latest_listings)
+    # print(f"chained {latest_listings}")
+    # print(latest_listings[0])
+    # context = {'la':latest_listings}
+    # return render(request, 'index.html',{'lastHouseRent':lastHouseRent, 
+    #                                      'previousLastHouseRent':previousLastHouseRent,
+    #                                      'lastHouseSale':lastHouseSale,
+    #                                      'previousLastHouseSale':previousLastHouseSale,
+    #                                      'lastLandSale':lastLandSale,
+    #                                      'previousLastLandSale':previousLastLandSale,
+    #                                      'feedback':feedback                                       
+    #                                      } )
 
-    # import uuid
-    # print (uuid.uuid4())
-    # {'Rent_House':lastHouseRent, 'House_Sale':lastHouseSale}
-    return render(request, 'index.html',{'lastHouseRent':lastHouseRent, 
-                                         'previousLastHouseRent':previousLastHouseRent,
-                                         'lastHouseSale':lastHouseSale,
-                                         'previousLastHouseSale':previousLastHouseSale,
-                                         'lastLandSale':lastLandSale,
-                                         'previousLastLandSale':previousLastLandSale,
-                                         'feedback':feedback                                       
-                                         } )
+    return render(request, 'index.html', {'context':latest_listings, 'feedback':feedback })
 
 def page_404 (request):
     return render(request, '404.html')
@@ -193,8 +187,6 @@ def shop_right_sidebar(request):
     location = request.GET.get('location')
     price_range = request.GET.get('price_range')
     call_all = ''
-
-
 
     # COUNTS
     count_house_for_sale = AllProperties.objects.filter(property_type = 'house_for_sale').count()

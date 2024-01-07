@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # from sikadahomesApp.views import locations
 
@@ -22,7 +23,7 @@ class HouseRent(models.Model):
     property_id = models.CharField(max_length=20, null=True, blank=True)
     title = models.CharField(null=True, blank=True, max_length=30)
     type = models.CharField(choices=BUILDING_TYPE_CHOICES, max_length=50) 
-    status = models.CharField(default='rent', max_length=10)
+    status = models.CharField(default='house_rent', max_length=10)
     price = models.IntegerField()
     location = models.CharField(max_length=100) 
     sub_location = models.CharField(max_length=100) 
@@ -54,7 +55,7 @@ class HouseSale(models.Model):
     property_id = models.CharField(max_length=20, null=True, blank=True)
     title = models.CharField(null=True, blank=True, max_length=30)
     type = models.CharField(choices=BUILDING_TYPE_CHOICES, max_length=50) 
-    status = models.CharField(default='sale', max_length=10)
+    status = models.CharField(default='house_sale', max_length=10)
     price = models.IntegerField() 
     location = models.CharField(max_length=100) 
     sub_location = models.CharField(max_length=100) 
@@ -84,7 +85,7 @@ class LandSale(models.Model):
     property_id = models.CharField(max_length=20, null=True, blank=True)
     title = models.CharField(null=True, blank=True, max_length=30)
     # type = models.CharField(choices=TYPE_CHOICES, max_length=50) 
-    status = models.CharField(default='sale', max_length=10)
+    status = models.CharField(default='land_sale', max_length=10)
     price = models.IntegerField() 
     location = models.CharField(max_length=100) 
     sub_location = models.CharField(max_length=100) 
@@ -116,3 +117,7 @@ class Feedback(models.Model):
 
 
 
+class Wishlist(models.Model):
+    # id - models.CharField()
+    property_id = models.CharField(max_length=20, null=True, blank=True)
+    date_time = models.DateTimeField(default = timezone.now)
