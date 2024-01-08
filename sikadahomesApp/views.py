@@ -2,34 +2,36 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 import re
-from .models import HouseRent,HouseSale,LandSale
+
+from itertools import chain
+import random
+from .models import HouseRent,HouseSale,LandSale,AllProperties,Feedback
 
 # Create your views here.
 
 def index (request):
     houseRent = HouseRent.objects.all().order_by('-id')[:2]
-    lastHouseRent = houseRent[0]
-    previousLastHouseRent = houseRent[1]
-
-    houseSale = HouseSale.objects.all().order_by('-id')[:2]
-    lastHouseSale = houseSale[0]
-    previousLastHouseSale = houseSale[1]
-
+    houseSale = HouseSale.objects.all().order_by('-id')[:2]  
     landSale = LandSale.objects.all().order_by('-id')[:2]
-    lastLandSale = landSale[0]
-    previousLastLandSale = landSale[1]
-    # import uuid
-    # print (uuid.uuid4())
-    # {'Rent_House':lastHouseRent, 'House_Sale':lastHouseSale}
-    return render(request, 'index.html',{'lastHouseRent':lastHouseRent, 
-                                         'previousLastHouseRent':previousLastHouseRent,
-                                         'lastHouseSale':lastHouseSale,
-                                         'previousLastHouseSale':previousLastHouseSale,
-                                         'lastLandSale':lastLandSale,
-                                         'previousLastLandSale':previousLastLandSale                                         
-                                         } )
+    feedback = Feedback.objects.all().order_by('-id')[:4]
+    latest_listings = list(chain(houseRent, houseSale,landSale))
+    random.shuffle(latest_listings)
+    # print(f"chained {latest_listings}")
+    # print(latest_listings[0])
+    # context = {'la':latest_listings}
+    # return render(request, 'index.html',{'lastHouseRent':lastHouseRent, 
+    #                                      'previousLastHouseRent':previousLastHouseRent,
+    #                                      'lastHouseSale':lastHouseSale,
+    #                                      'previousLastHouseSale':previousLastHouseSale,
+    #                                      'lastLandSale':lastLandSale,
+    #                                      'previousLastLandSale':previousLastLandSale,
+    #                                      'feedback':feedback                                       
+    #                                      } )
+
+    return render(request, 'index.html', {'context':latest_listings, 'feedback':feedback })
 
 def page_404 (request):
     return render(request, '404.html')
@@ -100,7 +102,10 @@ def login_view(request):
             user = authenticate(request, username=signIn_Param, password=password)        
             if user is not None:
                 login(request, user) 
-                return redirect(index)    
+                if request.GET.get('next'):
+                    return redirect(wishlist)
+                else:
+                    return redirect(index)    
             else:
                 messages.error(request, "Invalid Login Credentials")
     
@@ -178,7 +183,115 @@ def shop_list(request):
     return render(request, 'shop-list.html')
 
 def shop_right_sidebar(request):
-    return render(request, 'shop-right-sidebar.html')
+    property_type = request.GET.get('property_type')
+    location = request.GET.get('location')
+    price_range = request.GET.get('price_range')
+    call_all = ''
+
+    # COUNTS
+    count_house_for_sale = AllProperties.objects.filter(property_type = 'house_for_sale').count()
+    count_house_for_rent= AllProperties.objects.filter(property_type = 'house_for_rent').count()
+    count_land_for_sale= AllProperties.objects.filter(property_type = 'land_for_sale').count()
+   
+    count_greater_accra= AllProperties.objects.filter(location='greater_accra').count()
+    count_ashanti= AllProperties.objects.filter(location='ashanti').count()
+    count_northern= AllProperties.objects.filter(location='northern').count()
+    count_eastern= AllProperties.objects.filter(location='eastern').count()
+    count_central= AllProperties.objects.filter(location='central').count()
+    count_western= AllProperties.objects.filter(location='western').count()
+    count_upper_east= AllProperties.objects.filter(location='upper_east').count()
+    count_bono= AllProperties.objects.filter(location='bono').count()
+    count_ahafo= AllProperties.objects.filter(location='ahafo').count()
+    count_bono_west= AllProperties.objects.filter(location='bono_west').count()
+    count_volta= AllProperties.objects.filter(location='volta').count()
+    count_bono_east= AllProperties.objects.filter(location='bono_east').count()
+    count_oti= AllProperties.objects.filter(location='oti').count()
+    count_north_east= AllProperties.objects.filter(location='north_east').count()
+    count_savannah= AllProperties.objects.filter(location='savannah').count()
+    
+
+    counts = {'count_house_for_sale':count_house_for_sale, 'count_house_for_rent':count_house_for_rent,'count_land_for_sale':count_land_for_sale,
+            'count_greater_accra':count_greater_accra, 'count_ashanti':count_ashanti,
+            'count_northern':count_northern,'count_eastern':count_eastern,'count_central':count_central,
+            'count_western':count_western,'count_upper_east':count_upper_east,'count_bono':count_bono,
+            'count_ahafo':count_ahafo,'count_bono_west':count_bono_west,'count_volta':count_volta,'count_bono_east':count_bono_east,
+            'count_oti':count_oti,'count_north_east':count_north_east,'count_savannah':count_savannah
+           
+            }
+
+    # print(count_house_for_sale,count_house_for_rent, count_land_for_sale)
+    # house_sale_count = HouseSale.objects.all().count()
+    # house_rent_count = HouseRent.objects.all().count()
+    # land_sale.count = LandSale.objects.all().count()
+    
+    if(property_type == 'none' and location == 'none' and price_range == 'none'):
+        query = AllProperties.objects.all()  
+        call_all = True     
+    elif(property_type != 'none' and location == 'none' and price_range == 'none'):
+        query = AllProperties.objects.filter(property_type=property_type) 
+    elif(property_type == 'none' and location != 'none' and price_range == 'none'):  
+        query = AllProperties.objects.filter(location=location)  
+    elif(property_type == 'none' and location != 'none' and price_range != 'none'): 
+        if price_range == 'low_budget':
+            query = AllProperties.objects.filter(location=location, price__lt = 10000)
+            print(price_range) 
+        elif price_range == 'medium_budget':
+            query = AllProperties.objects.filter(location=location, price__gt=10000, price__lt=30000)
+            print(price_range) 
+        elif price_range == 'high_budget':
+            query = AllProperties.objects.filter(location=location, price__gt=30000) 
+            print(price_range)   
+    elif(property_type != 'none' and location != 'none' and price_range == 'none'): 
+        print(1) 
+        query = AllProperties.objects.filter(property_type=property_type, location=location) 
+    elif(property_type == 'none' and location == 'none' and price_range != 'none'): 
+        print(4, price_range)
+        if price_range == 'low_budget':
+            print('low')
+            # query = AllProperties.objects.filter(price__lt=10000)
+            query = AllProperties.objects.filter(price__lt = 10000)
+        elif price_range == 'medium_budget':
+            print('mid')
+            query = AllProperties.objects.filter(price__gt=10000, price__lt=30000)
+        elif price_range == 'high_budget':
+            print('high')
+            query = AllProperties.objects.filter(price__gt=30000)
+
+    elif(property_type != 'none' and location != 'none' and price_range != 'none'): 
+        print(2, location)  
+        if price_range == 'low_budget':
+            query = AllProperties.objects.filter(property_type=property_type, location=location, price__lt=10000)
+        elif price_range == 'medium_budget':
+            query = AllProperties.objects.filter(property_type=property_type, location=location, price__gt=10000, price__lt=30000)
+        elif price_range == 'high_budget':
+            query = AllProperties.objects.filter(property_type=property_type, location=location, price__gt=30000)
+    querylist = [i.property_id for i in query]
+    # print(query)
+
+    house_sale = HouseSale.objects.filter(property_id__in=querylist)
+    house_rent = HouseRent.objects.filter(property_id__in=querylist)
+    land_sale = LandSale.objects.filter(property_id__in=querylist)
+    
+
+    all = list(chain(house_sale,house_rent,land_sale))
+    random.shuffle(all)
+    print(f"chanined {all}")
+    
+    context = {'property_type':property_type, 'location':location, 'price_range':price_range}
+
+    if call_all == True:
+        return render(request, 'shop-right-sidebar.html', {'context':context, 'data':all, 'counts':counts})
+    elif house_sale.exists():
+        return render(request, 'shop-right-sidebar.html', {'context':context, 'data':house_sale, 'counts':counts})
+    elif house_rent.exists():
+        return render(request, 'shop-right-sidebar.html', {'context':context, 'data':house_rent, 'counts':counts})
+    elif land_sale.exists():
+        return render(request, 'shop-right-sidebar.html', {'context':context, 'data':land_sale, 'counts':counts})
+    
+    # print(f"House sale {house_sale}, Land sale {land_sale}, House rent {house_rent}")
+    
+    
+    return render(request, 'shop-right-sidebar.html', {'context':context, 'counts':counts, 'house_sale':house_sale, 'house_rent':house_rent, 'house_sale':house_sale})
 
 def shop(request):
     return render(request, 'shop.html')
@@ -189,6 +302,7 @@ def team_details(request):
 def team(request):
     return render(request, 'team.html')
 
+@login_required
 def wishlist(request):
     return render(request, 'wishlist.html')
 

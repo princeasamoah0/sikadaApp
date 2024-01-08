@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 </head>
 
-<body>
+<body >
     <!--[if lte IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
@@ -129,7 +129,7 @@
                     <div class="col">
                         <div class="site-logo-wrap">
                             <div class="site-logo">
-                                <a href=""><img src="{% static 'img/sikadahomes.png' %}" alt="Logo"></a>
+                                <a href="/"><img src="{% static 'img/sikadahomes.png' %}" alt="Logo"></a>
                             </div>
                             <div class="get-support clearfix d-none">
                                 <div class="get-support-icon">
@@ -148,7 +148,7 @@
                                 <div class="ltn__main-menu">
                                     <ul>
                                         <li>
-                                          <a href="">Home</a>
+                                          <a href="/">Home</a>
                                         </li>
                                         <li class="menu-icon"><a href="#">Buy</a>
                                           <ul>
@@ -221,7 +221,7 @@
                         <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
                     </div>
                     <div class="mini-cart-info">
-                        <h6><a href="#">3 Rooms Manhattan</a></h6>
+                        <h6><a href="#">1 Rooms Manhattan</a></h6>
                         <span class="mini-cart-quantity">1 x $85.00</span>
                     </div>
                 </div>
@@ -266,7 +266,7 @@
         <div class="ltn__utilize-menu-inner ltn__scrollbar">
             <div class="ltn__utilize-menu-head">
                 <div class="site-logo">
-                    <a href=""><img src="{% static 'img/logo.png' %}" alt="Logo"></a>
+                    <a href="/"><img src="{% static 'img/logo.png' %}" alt="Logo"></a>
                 </div>
                 <button class="ltn__utilize-close">×</button>
             </div>
@@ -279,7 +279,7 @@
             <div class="ltn__utilize-menu">
               <ul>
                   <li>
-                    <a href="">Home</a>
+                    <a href="/">Home</a>
                   </li>
                   <li class="menu-icon"><a href="#">Buy</a>
                     <ul>
@@ -384,42 +384,51 @@
                                         <div class="tab-content pb-10">
                                             <div class="tab-pane fade active show" id="ltn__form_tab_1_1">
                                                 <div class="car-dealer-form-inner">
-                                                    <form action="#" class="ltn__car-dealer-form-box row">
+                                                    <form action="shop-right-sidebar" method="GET" class="ltn__car-dealer-form-box row">
+                                                        <!-- {% csrf_token %} -->
                                                         <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-car col-lg-3 col-md-6">
-                                                            <select class="nice-select">
-                                                                <option>Property Type</option>
-                                                                <option>Apartment</option>
-                                                                <option>Co-op</option>
-                                                                <option>Condo</option>
-                                                                <option>Single Family Home</option>
+                                                            <select required name="property_type" class="nice-select">
+                                                                <option value="none">Property Type</option>
+                                                                <option value="house_for_sale">House for Sale</option>
+                                                                <option value="house_for_rent">House for Rent</option>
+                                                                <option value="land_for_sale">Land for Sale</option>
+                                                                <option value="house_for_lease">House for Lease</option>
                                                             </select>
                                                         </div>
                                                         <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-meter col-lg-3 col-md-6">
-                                                            <select class="nice-select">
-                                                                <option>Location</option>
-                                                                <option>chicago</option>
-                                                                <option>London</option>
-                                                                <option>Los Angeles</option>
-                                                                <option>New York</option>
-                                                                <option>New Jersey</option>
+                                                            <select name="location" class="nice-select">
+                                                                <option value="none">Location</option>
+                                                                <option value="greater_accra">Greater Accra</option>
+                                                                <option value="ashanti">Ashanti Region</option>
+                                                                <option value="northern">Northern Region</option>
+                                                                <option value="eastern">Eastern Region</option>
+                                                                <option value="central">Central Region</option>
+                                                               <option value="western">Western Region</option> 
+                                                               <option value="upper_east">Upper East Region</option>
+                                                               <option value="bono">Bono Region</option>
+                                                               <option value="ahafo">Ahafo Region</option>
+                                                               <option value="bono_west">Bono West Region</option>
+                                                               <option value="volta">Volta Region</option>
+                                                               <!-- <option value="bono">Bono Region</option> -->
+                                                               <option value="bono_east">Bono East Region</option>
+                                                               <option value="oti">Oti Region</option>
+                                                               <option value="north_east">North East Region</option>
+                                                               <option value="savannah">Savannah Region</option>                                                               
                                                             </select>
                                                         </div>
                                                         <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
-                                                            <select class="nice-select">
-                                                                <option>Sub Location</option>
-                                                                <option>Bayonne</option>
-                                                                <option>Greenville</option>
-                                                                <option>Manhattan</option>
-                                                                <option>Queens</option>
-                                                                <option>The Heights</option>
-                                                                <option>Upper East Side</option>
-                                                                <option>West Side</option>
+                                                            <select name="price_range" class="nice-select">
+                                                                <option value="none">Price Range</option>
+                                                                <option value="low_budget">Low Budget</option>
+                                                                <option value="medium_budget">Medium</option>
+                                                                <option value="high_budget">High Budget</option>
                                                             </select>
                                                         </div>
                                                         <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
                                                             <div class="btn-wrapper text-center mt-0">
                                                                 <!-- <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search Inventory</button> -->
-                                                                <a href="shop-right-sidebar" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search</a>
+                                                                <!-- <a href="shop-right-sidebar" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search</a> -->
+                                                                <button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase">Search</a>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -491,13 +500,15 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- LATEST LISTINGS -->
             <div class="row ltn__product-slider-item-three-active--- slick-arrow-1">
                 <!-- ltn__product-item -->
-                <!-- item 1 -->
+                {% for item in context %}
                 <div class="col-xl-4 col-sm-6 col-12">
-                    <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
+                    <div id="latest_listings_{{item.product_id}}" class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                         <div class="product-img">
-                            <a href="product-details/houseSale/{{lastHouseSale.id}}"><img src="{{lastHouseSale.image_1.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
+                            <a href="product-details/houseSale/{{item.id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.image_1.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
                             <div class="real-estate-agent">
                                 <div class="agent-img">
                                     <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
@@ -506,441 +517,19 @@
                         </div>
                         <div class="product-info">
                             <div class="product-badge">
+                                {%if item.status|slice:"-4:" == 'sale' %}
                                 <ul>
                                     <li class="sale-badg">For Sale</li>
-                                </ul>
-                            </div>
-
-                            <h2 class="product-title"><a href="product-details/houseSale/{{lastHouseSale.id}}">{{lastHouseSale.title|truncatechars:25}}</a></h2>
-                            <div class="product-img-location">
-                                <ul>
-                                    <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> {{lastHouseSale.sub_location}}, {{lastHouseSale.location}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                <li><span>{{lastHouseSale.bed}} </span>
-                                    Bed
-                                </li>
-                                <li><span>{{lastHouseSale.rooms}} </span>
-                                    Room
-                                </li>
-                                <li><span>{{lastHouseSale.bath}} </span>
-                                    Bath
-                                </li>
-                                <li><span>{{lastHouseSale.land_size}} </span>
-                                    Square Ft
-                                </li>
-                            </ul>
-                            <div class="product-hover-action">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="flaticon-expand"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                            <i class="flaticon-heart-1"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details/houseSale/{{lastHouseSale.id}}" title="Product Details">
-                                            <i class="flaticon-add"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-info-bottom">
-                            <div class="product-price">
-                                <span>GHS {{lastHouseSale.price}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end of item 1 -->
-
-                <!-- item 2 -->
-                <div class="col-xl-4 col-sm-6 col-12">
-                    <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                        <div class="product-img">
-                            <a href="product-details"><img src="{{lastLandSale.image_1.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
-                            <div class="real-estate-agent">
-                                <div class="agent-img">
-                                    <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-badge">
-                                <ul>
-                                    <li class="sale-badg">For Sale</li>
-                                </ul>
-                            </div>
-
-                            <h2 class="product-title"><a href="product-details">{{lastLandSale.title|truncatechars:25}}</a></h2>
-                            <div class="product-img-location">
-                                <ul>
-                                    <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> {{lastLandSale.sub_location}}, {{lastLandSale.location}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                <li>
-                                    {%if lastLandSale.serviced == True %}
-                                    <span>Serviced </span>
-                                    {%endif%}
-                                </li>
-                                <li>
-                                    {%if lastLandSale.fenced == True %}
-                                    <span>Fenced </span>
-                                    {%endif%}
-                                </li>
-                                <!-- <li><span> </span>
-                                    Bath
-                                </li> -->
-                                <li><span>{{lastLandSale.land_size}} </span>
-                                    Square Ft
-                                </li>
-                            </ul>
-                            <div class="product-hover-action">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="flaticon-expand"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                            <i class="flaticon-heart-1"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details" title="Product Details">
-                                            <i class="flaticon-add"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-info-bottom">
-                            <div class="product-price">
-                                <span>GHS {{lastLandSale.price}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end of item 2 -->
-
-                 <!-- item 3 -->
-                <div class="col-xl-4 col-sm-6 col-12">
-                    <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                        <div class="product-img">
-                            <a href="product-details"><img src="{{lastHouseRent.image_1.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
-                            <div class="real-estate-agent">
-                                <div class="agent-img">
-                                    <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-badge">
-                                <ul>
-                                    <li class="sale-badg">For Rent</li>
-                                </ul>
-                            </div>
-
-                            <h2 class="product-title"><a href="product-details">{{lastHouseRent.title|truncatechars:25}}</a></h2>
-                            <div class="product-img-location">
-                                <ul>
-                                    <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> {{lastHouseRent.sub_location}}, {{lastHouseRent.location}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                <li><span>{{lastHouseRent.bed}} </span>
-                                    Bed
-                                </li>
-                                <li><span>{{lastHouseRent.rooms}} </span>
-                                    Room
-                                </li>
-                                <li><span>{{lastHouseRent.bath}} </span>
-                                    Bath
-                                </li>
-                                <li><span>{{lastHouseRent.land_size}} </span>
-                                    Square Ft
-                                </li>
-                            </ul>
-                            <div class="product-hover-action">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="flaticon-expand"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                            <i class="flaticon-heart-1"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details" title="Product Details">
-                                            <i class="flaticon-add"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-info-bottom">
-                            <div class="product-price">
-                                <span>GHS {{lastHouseRent.price}}<label>/Month</label></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <!-- end of item 3 -->
-
-                 <!-- item 4 -->
-                <div class="col-xl-4 col-sm-6 col-12">
-                    <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                        <div class="product-img">
-                            <a href="product-details"><img src="{{previousLastHouseRent.image_1.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
-                            <div class="real-estate-agent">
-                                <div class="agent-img">
-                                    <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-badge">
-                                <ul>
-                                    <li class="sale-badg">For Rent</li>
-                                </ul>
-                            </div>
-
-                            <h2 class="product-title"><a href="product-details">{{previousLastHouseRent.title|truncatechars:25}}</a></h2>
-                            <div class="product-img-location">
-                                <ul>
-                                    <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> {{previousLastHouseRent.sub_location}}, {{previousLastHouseRent.location}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                <li><span>{{previousLastHouseRent.bed}} </span>
-                                    Bed
-                                </li>
-                                <li><span>{{previousLastHouseRent.rooms}} </span>
-                                    Room
-                                </li>
-                                <li><span>{{previousLastHouseRent.bath}} </span>
-                                    Bath
-                                </li>
-                                <li><span>{{previousLastHouseRent.land_size}} </span>
-                                    Square Ft
-                                </li>
-                            </ul>
-                            <div class="product-hover-action">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="flaticon-expand"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                            <i class="flaticon-heart-1"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details" title="Product Details">
-                                            <i class="flaticon-add"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-info-bottom">
-                            <div class="product-price">
-                                <span>GHS {{previousLastHouseRent.price}}<label>/Month</label></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 <!-- end of item 4 -->
-
-                 <!-- item 5 -->
-                <div class="col-xl-4 col-sm-6 col-12">
-                    <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                        <div class="product-img">
-                            <a href="product-details"><img src="{{previousLastLandSale.image_1.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
-                            <div class="real-estate-agent">
-                                <div class="agent-img">
-                                    <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-badge">
-                                <ul>
-                                    <li class="sale-badg">For Sale</li>
-                                </ul>
-                            </div>
-
-                            <h2 class="product-title"><a href="product-details">{{previousLastLandSale.title|truncatechars:25}}</a></h2>
-                            <div class="product-img-location">
-                                <ul>
-                                    <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> {{previousLastLandSale.sub_location}}, {{previousLastLandSale.location}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                <li>
-                                    {%if previousLastLandSale.serviced == True %}
-                                    <span>Serviced </span>
-                                    {%endif%}
-                                </li>
-                                <li>
-                                    {%if previousLastLandSale.fenced == True %}
-                                    <span>Fenced </span>
-                                    {%endif%}
-                                </li>
-                                <!-- <li><span> </span>
-                                    Bath
-                                </li> -->
-                                <li><span>{{previousLastLandSale.land_size}} </span>
-                                    Square Ft
-                                </li>
-                            </ul>
-                            <div class="product-hover-action">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="flaticon-expand"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                            <i class="flaticon-heart-1"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details" title="Product Details">
-                                            <i class="flaticon-add"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-info-bottom">
-                            <div class="product-price">
-                                <span>GHS {{previousLastLandSale.price}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end of item 5 -->
-
-                <!-- item 6 -->
-                <div class="col-xl-4 col-sm-6 col-12">
-                    <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                        <div class="product-img">
-                            <a href="product-details"><img src="{{previousLastHouseSale.image_1.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
-                            <div class="real-estate-agent">
-                                <div class="agent-img">
-                                    <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-badge">
-                                <ul>
-                                    <li class="sale-badg">For Sale</li>
-                                </ul>
-                            </div>
-
-                            <h2 class="product-title"><a href="product-details">{{previousLastHouseSale.title|truncatechars:25}}</a></h2>
-                            <div class="product-img-location">
-                                <ul>
-                                    <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> {{previousLastHouseSale.sub_location}}, {{previousLastHouseSale.location}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                <li><span>{{previousLastHouseSale.bed}} </span>
-                                    Bed
-                                </li>
-                                <li><span>{{previousLastHouseSale.rooms}} </span>
-                                    Room
-                                </li>
-                                <li><span>{{previousLastHouseSale.bath}} </span>
-                                    Bath
-                                </li>
-                                <li><span>{{previousLastHouseSale.land_size}} </span>
-                                    Square Ft
-                                </li>
-                            </ul>
-                            <div class="product-hover-action">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="flaticon-expand"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                            <i class="flaticon-heart-1"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details" title="Product Details">
-                                            <i class="flaticon-add"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-info-bottom">
-                            <div class="product-price">
-                                <span>GHS {{previousLastHouseSale.price}}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end of item 6 -->
-
-
-
-
-
-
-
-
-                {% for item in Rent_House %}
-                <div class="col-xl-4 col-sm-6 col-12">
-                    <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                        <div class="product-img">
-                            <a href="product-details"><img src="{{item.image_1.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
-                            <div class="real-estate-agent">
-                                <div class="agent-img">
-                                    <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-badge">
-                                {% if item.status == 'rent' %}
-                                <ul>
-                                    <li class="sale-badg">For Rent</li>
                                 </ul>
                                 {%else%}
                                 <ul>
-                                    <li class="sale-badg">For Sale</li>
+                                    <li class="sale-badg">For Rent</li>
                                 </ul>
                                 {%endif%}
                             </div>
+                            
 
-                            <h2 class="product-title"><a href="product-details">{{item.title|truncatechars:25}}</a></h2>
+                            <h2 class="product-title"><a id="latest_listings_title_{{item.property_id}}" href="product-details/houseSale/{{item.id}}">{{item.title|truncatechars:25}}</a></h2>
                             <div class="product-img-location">
                                 <ul>
                                     <li>
@@ -949,6 +538,7 @@
                                 </ul>
                             </div>
                             <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
+                                {%if item.status|slice:"-5" == 'house' %}
                                 <li><span>{{item.bed}} </span>
                                     Bed
                                 </li>
@@ -958,23 +548,39 @@
                                 <li><span>{{item.bath}} </span>
                                     Bath
                                 </li>
+                                {%else%}
+
+                                {%if item.serviced == True %}
+                                <li><span>Serviced</span></li>                                
+                                {%endif%}
+
+                                {%if item.fenced == True %}
+                                <li><span>Fenced</span></li> 
+                                
+                                {%endif%}
+                                
+                                <!-- serviced = models.BooleanField()
+                                fenced = models.BooleanField() -->
+
+                                {%endif%}
                                 <li><span>{{item.land_size}} </span>
                                     Square Ft
                                 </li>
+
                             </ul>
                             <div class="product-hover-action">
                                 <ul>
                                     <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-id="{{item.property_id}}" data-bs-target="#quick_view_modal">
                                             <i class="flaticon-expand"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-info="Hi" data-bs-target="#liton_wishlist_modal">
                                             <i class="flaticon-heart-1"></i></a>
                                     </li>
                                     <li>
-                                        <a href="product-details" title="Product Details">
+                                        <a href="product-details/houseSale/{{item.id}}" title="Product Details">
                                             <i class="flaticon-add"></i>
                                         </a>
                                     </li>
@@ -983,388 +589,19 @@
                         </div>
                         <div class="product-info-bottom">
                             <div class="product-price">
-                                {% if item.status == 'rent' %}
-                                <span>GHS {{item.price}}<label>/Month</label></span>
+                                {%if item.status|slice:'-4:' == 'rent' %}              
+                                <span id="latest_listings_price_{{item.property_id}}">GHS {{item.price}} / Month</span>
                                 {%else%}
-                                <span>GHS {{item.price}}</span>
+                                <span id ="latest_listings_price_{{item.property_id}}">GHS {{item.price}}</span>
                                 {%endif%}
                             </div>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+                {%endfor%}
+                <!-- end of item 1 -->
 
 
-                <!-- <div class="col-xl-4 col-sm-6 col-12">
-                    <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                        <div class="product-img">
-                            <a href="product-details"><img src="{% static 'img/house-images/house 1.jpeg' %}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
-                            <div class="real-estate-agent">
-                                <div class="agent-img">
-                                    <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-badge">
-                                <ul>
-                                    <li class="sale-badg">For Rent</li>
-                                </ul>
-                            </div>
-                            <h2 class="product-title"><a href="product-details">6 Bedroom Apartment</a></h2>
-                            <div class="product-img-location">
-                                <ul>
-                                    <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> Bawaleshi, East-Legon</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                <li><span>7 </span>
-                                    Bed
-                                </li>
-                                <li><span>6 </span>
-                                    Rooms
-                                </li>
-                                <li><span>7 </span>
-                                    Bath
-                                </li>
-                                <li><span>6050 </span>
-                                    Square Ft
-                                </li>
-                            </ul>
-                            <div class="product-hover-action">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="flaticon-expand"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                            <i class="flaticon-heart-1"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details" title="Product Details">
-                                            <i class="flaticon-add"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-info-bottom">
-                            <div class="product-price">
-                                <span>GHS 5,900<label>/Month</label></span>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- ltn__product-item -->
-                <!-- <div class="col-xl-4 col-sm-6 col-12">
-                    <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                        <div class="product-img">
-                            <a href="product-details"><img src="{% static 'img/house-images/house 2.jpeg' %}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
-                            <div class="real-estate-agent">
-                                <div class="agent-img">
-                                    <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-badge">
-                                <ul>
-                                    <li class="sale-badg">For Sale</li>
-                                </ul>
-                            </div>
-                            <h2 class="product-title"><a href="product-details">New Apartment Nice View</a></h2>
-                            <div class="product-img-location">
-                                <ul>
-                                    <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> Cantoment, Accra</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                <li><span>3 </span>
-                                    Bed
-                                </li>
-                                <li><span>2 </span>
-                                    Bath
-                                </li>
-                                <li><span>3450 </span>
-                                    Square Ft
-                                </li>
-                            </ul>
-                            <div class="product-hover-action">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="flaticon-expand"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                            <i class="flaticon-heart-1"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details" title="Product Details">
-                                            <i class="flaticon-add"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-info-bottom">
-                            <div class="product-price">
-                                <span>GHS 2,034,900</span>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- ltn__product-item -->
-                <!-- <div class="col-xl-4 col-sm-6 col-12">
-                    <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                        <div class="product-img">
-                            <a href="product-details"><img src="{% static 'img/house-images/land_1.jpeg' %}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
-                            <div class="real-estate-agent">
-                                <div class="agent-img">
-                                    <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-badge">
-                                <ul>
-                                    <li class="sale-badg">For Sale</li>
-                                </ul>
-                            </div>
-                            <h2 class="product-title"><a href="product-details">Serviced Plot of Land</a></h2>
-                            <div class="product-img-location">
-                                <ul>
-                                    <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> Effiduase, Koforidua</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                <li><span>Fenced </span>
-
-                                </li>
-                                <li><span></span>
-                                    Serviced
-                                </li>
-                                <li><span>3450 </span>
-                                    Square Ft
-                                </li>
-                            </ul>
-                            <div class="product-hover-action">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="flaticon-expand"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                            <i class="flaticon-heart-1"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details" title="Product Details">
-                                            <i class="flaticon-add"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-info-bottom">
-                            <div class="product-price">
-                                <span>GHS 34,900<label></label></span>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- ltn__product-item -->
-                <!-- <div class="col-xl-4 col-sm-6 col-12">
-                    <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                        <div class="product-img">
-                            <a href="product-details"><img src="{% static 'img/house-images/house_3.jpeg' %}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
-                            <div class="real-estate-agent">
-                                <div class="agent-img">
-                                    <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-badge">
-                                <ul>
-                                    <li class="sale-badg">For Rent</li>
-                                </ul>
-                            </div>
-                            <h2 class="product-title"><a href="product-details">5 Bedroom House For Sale</a></h2>
-                            <div class="product-img-location">
-                                <ul>
-                                    <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> Oyibi, Accra</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                <li><span>5 </span>
-                                    Rooms
-                                </li>
-                                <li><span>6 </span>
-                                    Bath
-                                </li>
-                                <li><span>5750 </span>
-                                    Square Ft
-                                </li>
-                            </ul>
-                            <div class="product-hover-action">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="flaticon-expand"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                            <i class="flaticon-heart-1"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details" title="Product Details">
-                                            <i class="flaticon-add"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-info-bottom">
-                            <div class="product-price">
-                                <span>GHS 10,000<label>/Month</label></span>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- ltn__product-item -->
-                <!-- <div class="col-xl-4 col-sm-6 col-12">
-                    <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                        <div class="product-img">
-                            <a href="product-details"><img src="{% static 'img/house-images/land_3.jpeg' %}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
-                            <div class="real-estate-agent">
-                                <div class="agent-img">
-                                    <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-badge">
-                                <ul>
-                                    <li class="sale-badg">For Sale</li>
-                                </ul>
-                            </div>
-                            <h2 class="product-title"><a href="product-details">70 x 100 Feet Land For Sale, Rush now.</a></h2>
-                            <div class="product-img-location">
-                                <ul>
-                                    <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> Liberty Gardens, Takoradi</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                <li><span>3450 </span>
-                                    Square Ft
-                                </li>
-                            </ul>
-                            <div class="product-hover-action">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="flaticon-expand"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                            <i class="flaticon-heart-1"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details" title="Product Details">
-                                            <i class="flaticon-add"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-info-bottom">
-                            <div class="product-price">
-                                <span>GHS 34,900</span>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- ltn__product-item -->
-                <!-- <div class="col-xl-4 col-sm-6 col-12">
-                    <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
-                        <div class="product-img">
-                            <a href="product-details"><img src="{% static 'img/house-images/house_4.jpeg' %}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
-                            <div class="real-estate-agent">
-                                <div class="agent-img">
-                                    <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-badge">
-                                <ul>
-                                    <li class="sale-badg">For Sale</li>
-                                </ul>
-                            </div>
-                            <h2 class="product-title"><a href="product-details">3 Bedroom House For Sale</a></h2>
-                            <div class="product-img-location">
-                                <ul>
-                                    <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> Ayeduase, Kumasi</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                <li><span>3 </span>
-                                    Bed
-                                </li>
-                                <li><span>2 </span>
-                                    Bath
-                                </li>
-                                <li><span>3450 </span>
-                                    Square Ft
-                                </li>
-                            </ul>
-                            <div class="product-hover-action">
-                                <ul>
-                                    <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
-                                            <i class="flaticon-expand"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
-                                            <i class="flaticon-heart-1"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details" title="Product Details">
-                                            <i class="flaticon-add"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-info-bottom">
-                            <div class="product-price">
-                                <span>GHS 3,503,760</span>
-
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!--  -->
             </div>
         </div>
     </div>
@@ -2241,29 +1478,26 @@
                 </div>
             </div>
             <div class="row ltn__testimonial-slider-5-active slick-arrow-1">
+                {% for feed in feedback %}
                 <div class="col-lg-4">
                     <div class="ltn__testimonial-item ltn__testimonial-item-7">
                         <div class="ltn__testimoni-info">
                             <p><i class="flaticon-left-quote-1"></i>
-                                Precious ipsum dolor sit amet
-                                consectetur adipisicing elit, sed dos
-                                mod tempor incididunt ut labore et
-                                dolore magna aliqua. Ut enim ad min
-                                veniam, quis nostrud Precious ips
-                                um dolor sit amet, consecte</p>
+                                {{feed.message}}</p>
                             <div class="ltn__testimoni-info-inner">
                                 <div class="ltn__testimoni-img">
                                     <img src="{% static 'img/testimonial/1.jpg' %}" alt="#">
                                 </div>
                                 <div class="ltn__testimoni-name-designation">
-                                    <h5>Jacob William</h5>
-                                    <label>Selling Agents</label>
+                                    <h5>{{feed.name}}</h5>
+                                    <label>{{feed.status}}</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                {%endfor%}
+                <!-- <div class="col-lg-4">
                     <div class="ltn__testimonial-item ltn__testimonial-item-7">
                         <div class="ltn__testimoni-info">
                             <p><i class="flaticon-left-quote-1"></i>
@@ -2284,8 +1518,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
+                </div> -->
+                <!-- <div class="col-lg-4">
                     <div class="ltn__testimonial-item ltn__testimonial-item-7">
                         <div class="ltn__testimoni-info">
                             <p><i class="flaticon-left-quote-1"></i>
@@ -2306,8 +1540,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4">
+                </div> -->
+                <!-- <div class="col-lg-4">
                     <div class="ltn__testimonial-item ltn__testimonial-item-7">
                         <div class="ltn__testimoni-info">
                             <p><i class="flaticon-left-quote-1"></i>
@@ -2328,7 +1562,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!--  -->
             </div>
         </div>
@@ -2388,7 +1622,7 @@
                             <p>We can help you realize your dream of a new home</p>
                         </div>
                         <div class="btn-wrapper">
-                            <a class="btn btn-effect-3 btn-white" href="contact">Explore Properties <i class="icon-next"></i></a>
+                            <a class="btn btn-effect-3 btn-white" href="shop-right-sidebar?property_type=none&location=none&price_range=none">Explore Properties <i class="icon-next"></i></a>
                         </div>
                     </div>
                 </div>
@@ -2552,7 +1786,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
                                         <div class="modal-product-img">
-                                            <img src="{% static 'img/product/4.png' %}" alt="#">
+                                            <img id="quick_view_img" src="{% static 'img/product/4.png' %}" alt="#">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-12">
@@ -2567,10 +1801,10 @@
                                                     <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
                                                 </ul>
                                             </div>
-                                            <h3><a href="product-details">3 Rooms Manhattan</a></h3>
+                                            <h3><a id="quick_view_title" href="product-details">10 Rooms Manhattan</a></h3>
                                             <div class="product-price">
-                                                <span>$34,900</span>
-                                                <del>$36,500</del>
+                                                <span id="quick_view_price">$34,900</span>
+                                                <!-- <del>$36,500</del> -->
                                             </div>
                                             <hr>
                                             <div class="modal-product-brief">
@@ -2645,6 +1879,27 @@
     </div>
     <!-- MODAL AREA END -->
 
+    <script>
+        const modal = document.getElementById("quick_view_modal")
+        modal.addEventListener('show.bs.modal', function(event){
+            const button = event.relatedTarget;
+            const buttonId = button.getAttribute("data-bs-id")
+            const modal_image = document.getElementById('quick_view_img')
+            const modal_title = document.getElementById('quick_view_title')
+            const modal_price = document.getElementById('quick_view_price')
+            
+            original_image = document.getElementById(`latest_listings_img_${buttonId}`).src
+            original_title = document.getElementById(`latest_listings_title_${buttonId}`)
+            original_price = document.getElementById(`latest_listings_price_${buttonId}`)
+            
+            modal_image.src = original_image
+            modal_title.innerText = original_title.innerText
+            modal_price.innerText = original_price.innerText
+        })
+       
+    </script>
+    
+
     <!-- MODAL AREA START (Add To Cart Modal) -->
     <div class="ltn__modal-area ltn__add-to-cart-modal-area">
         <div class="modal fade" id="add_to_cart_modal" tabindex="-1">
@@ -2664,7 +1919,7 @@
                                             <img src="{% static 'img/product/1.png' %}" alt="#">
                                         </div>
                                          <div class="modal-product-info">
-                                            <h5><a href="product-details">3 Rooms Manhattan</a></h5>
+                                            <h5><a href="product-details">2 Rooms Manhattan</a></h5>
                                             <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Cart</p>
                                             <div class="btn-wrapper">
                                                 <a href="cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
@@ -2708,7 +1963,7 @@
                                             <img src="{% static 'img/product/7.png' %}" alt="#">
                                         </div>
                                          <div class="modal-product-info">
-                                            <h5><a href="product-details">3 Rooms Manhattan</a></h5>
+                                            <h5><a href="product-details">4 Rooms Manhattan</a></h5>
                                             <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Wishlist</p>
                                             <div class="btn-wrapper">
                                                 <a href="wishlist" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
