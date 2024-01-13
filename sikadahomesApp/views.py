@@ -19,68 +19,56 @@ def index (request):
     feedback = Feedback.objects.all().order_by('-id')[:4]
     latest_listings = list(chain(houseRent, houseSale,landSale))
     random.shuffle(latest_listings)
-    # print(f"chained {latest_listings}")
-    # print(latest_listings[0])
-    # context = {'la':latest_listings}
-    # return render(request, 'index.html',{'lastHouseRent':lastHouseRent, 
-    #                                      'previousLastHouseRent':previousLastHouseRent,
-    #                                      'lastHouseSale':lastHouseSale,
-    #                                      'previousLastHouseSale':previousLastHouseSale,
-    #                                      'lastLandSale':lastLandSale,
-    #                                      'previousLastLandSale':previousLastLandSale,
-    #                                      'feedback':feedback                                       
-    #                                      } )
-
-    return render(request, 'index.html', {'context':latest_listings, 'feedback':feedback })
+    return render(request, 'general/index.html', {'context':latest_listings, 'feedback':feedback })
 
 def page_404 (request):
-    return render(request, '404.html')
+    return render(request, 'general/404.html')
 
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'general/about.html')
 
 def account(request):
-    return render(request, 'account.html')
+    return render(request, 'general/account.html')
 
 def add_listing(request):
-    return render(request, 'add-listing.html')
+    return render(request, 'general/add-listing.html')
 
 def blog_details(request):
-    return render(request, 'blog-details.html')
+    return render(request, 'general/blog-details.html')
 
 def blog_grid(request):
-    return render(request, 'blog-grid.html')
+    return render(request, 'general/blog-grid.html')
 
 def blog_left_sidebar(request):
-    return render(request, 'blog-left-sidebar.html')
+    return render(request, 'general/blog-left-sidebar.html')
 
 def blog_right_sidebar(request):
-    return render(request, 'blog-right-sidebar.html')
+    return render(request, 'general/blog-right-sidebar.html')
 
 def blog(request):
-    return render(request, 'blog.html')
+    return render(request, 'general/blog.html')
 
 
 def cart(request):
-    return render(request, 'cart.html')
+    return render(request, 'general/cart.html')
 
 def checkout(request):
-    return render(request, 'checkout.html')
+    return render(request, 'general/checkout.html')
 
 def coming_soon(request):
-    return render(request, 'coming-soon.html')
+    return render(request, 'general/coming-soon.html')
 
 def contact(request):
-    return render(request, 'contact.html')
+    return render(request, 'general/contact.html')
 
 def faq(request):
-    return render(request, 'faq.html')
+    return render(request, 'general/faq.html')
 
 def history(request):
-    return render(request, 'history.html')
+    return render(request, 'general/history.html')
 
 def locations(request):
-    return render(request, 'locations.html')
+    return render(request, 'general/locations.html')
 
 def login_view(request):
     if request.method == "POST":
@@ -109,7 +97,7 @@ def login_view(request):
             else:
                 messages.error(request, "Invalid Login Credentials")
     
-    return render(request, 'login.html')
+    return render(request, 'general/login.html')
 
 def logoutEvent(request):
     logout(request)
@@ -117,21 +105,30 @@ def logoutEvent(request):
 
 
 def order_tracking(request):
-    return render(request, 'order-tracking.html')
+    return render(request, 'general/order-tracking.html')
 
 def portfolio_2(request):
-    return render(request, 'portfolio-2.html')
+    return render(request, 'general/portfolio-2.html')
 
 def portfolio_details(request):
-    return render(request, 'portfolio-details.html')
+    return render(request, 'general/portfolio-details.html')
 
 def portfolio(request):
-    return render(request, 'portfolio.html')
+    return render(request, 'general/portfolio.html')
 
-def product_details(request,search_type,pk):
-    houseDetail = HouseSale.objects.get(pk = pk)
+def product_details(request,property_id):
+    query = ''
+    if HouseRent.objects.filter(property_id = property_id):
+        query = HouseRent.objects.get(property_id = property_id)
+    elif HouseSale.objects.filter(property_id= property_id):
+        query = HouseSale.objects.get(property_id= property_id)
+    else:
+        query = LandSale.objects.get(property_id= property_id)
+            
+    print(query)
+    # houseDetail = HouseSale.objects.get(product = pk)
     # print(house_detail)
-    return render(request, 'product-details.html', {'houseDetail':houseDetail} )
+    return render(request, 'general/product-details.html', {'context':query} )
 
 def register(request):
     if request.method == 'POST':
@@ -145,7 +142,7 @@ def register(request):
         checkUserName = User.objects.filter(Q(username=phone) | Q(email=email))
         if checkUserName.count() != 0:
             messages.error(request, "Phone number or email already exists") 
-            return render(request, 'register.html')
+            return render(request, 'general/register.html')
         else:
             print('Here working')
             
@@ -157,7 +154,7 @@ def register(request):
 
             login(request, user)
             return redirect(index) 
-            # return render(request, 'index.html')
+            # return render(request, 'general/index.html')
 
             # print('User created successfully')
 
@@ -165,22 +162,22 @@ def register(request):
         
         # user = User.objects.create_user(phone, email, password)
        
-    return render(request, 'register.html')
+    return render(request, 'general/register.html')
 
 def service_details(request):
-    return render(request, 'service-details.html')
+    return render(request, 'general/service-details.html')
 
 def service(request):
-    return render(request, 'service.html')
+    return render(request, 'general/service.html')
 
 def shop_grid(request):
-    return render(request, 'shop-grid.html')
+    return render(request, 'general/shop-grid.html')
 
 def shop_left_sidebar(request):
-    return render(request, 'shop-left-sidebar.html')
+    return render(request, 'general/shop-left-sidebar.html')
 
 def shop_list(request):
-    return render(request, 'shop-list.html')
+    return render(request, 'general/shop-list.html')
 
 def shop_right_sidebar(request):
     property_type = request.GET.get('property_type')
@@ -280,31 +277,31 @@ def shop_right_sidebar(request):
     context = {'property_type':property_type, 'location':location, 'price_range':price_range}
 
     if call_all == True:
-        return render(request, 'shop-right-sidebar.html', {'context':context, 'data':all, 'counts':counts})
+        return render(request, 'general/shop-right-sidebar.html', {'context':context, 'data':all, 'counts':counts})
     elif house_sale.exists():
-        return render(request, 'shop-right-sidebar.html', {'context':context, 'data':house_sale, 'counts':counts})
+        return render(request, 'general/shop-right-sidebar.html', {'context':context, 'data':house_sale, 'counts':counts})
     elif house_rent.exists():
-        return render(request, 'shop-right-sidebar.html', {'context':context, 'data':house_rent, 'counts':counts})
+        return render(request, 'general/shop-right-sidebar.html', {'context':context, 'data':house_rent, 'counts':counts})
     elif land_sale.exists():
-        return render(request, 'shop-right-sidebar.html', {'context':context, 'data':land_sale, 'counts':counts})
+        return render(request, 'general/shop-right-sidebar.html', {'context':context, 'data':land_sale, 'counts':counts})
     
     # print(f"House sale {house_sale}, Land sale {land_sale}, House rent {house_rent}")
     
     
-    return render(request, 'shop-right-sidebar.html', {'context':context, 'counts':counts, 'house_sale':house_sale, 'house_rent':house_rent, 'house_sale':house_sale})
+    return render(request, 'general/shop-right-sidebar.html', {'context':context, 'counts':counts, 'house_sale':house_sale, 'house_rent':house_rent, 'house_sale':house_sale})
 
 def shop(request):
-    return render(request, 'shop.html')
+    return render(request, 'general/shop.html')
 
 def team_details(request):
-    return render(request, 'team-details.html')
+    return render(request, 'general/team-details.html')
 
 def team(request):
-    return render(request, 'team.html')
+    return render(request, 'general/team.html')
 
 @login_required
 def wishlist(request):
-    return render(request, 'wishlist.html')
+    return render(request, 'general/wishlist.html')
 
 
 

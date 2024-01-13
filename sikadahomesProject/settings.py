@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'sikadahomesApp',
+    'adminApp',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
