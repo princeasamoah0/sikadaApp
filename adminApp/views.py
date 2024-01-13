@@ -78,7 +78,7 @@ def locked(request):
     return render(request, 'admin-app/locked.html') 
 
 def mail_compose(request):
-    return render(request, 'admin-app/mail_compose.html') 
+    return render(request, 'admin-app/mail-compose.html') 
 
 def mail_inbox(request):
     return render(request, 'admin-app/mail-inbox.html')   

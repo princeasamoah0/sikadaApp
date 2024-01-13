@@ -5,21 +5,21 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
-
+{% load static %}
 <title>:: Compass RealEstate Bootstrap4 Admin ::</title>
-<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="{% static 'admin-app/assets/favicon.ico' %}" type="image/x-icon">
 <!-- Favicon-->
-<link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="{% static 'admin-app/assets/plugins/bootstrap/css/bootstrap.min.css' %}">
 <!-- Custom Css -->
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="stylesheet" href="assets/css/chatapp.css">
-<link rel="stylesheet" href="assets/css/color_skins.css">
+<link rel="stylesheet" href="{% static 'admin-app/assets/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'admin-app/assets/css/chatapp.css' %}">
+<link rel="stylesheet" href="{% static 'admin-app/assets/css/color_skins.css' %}">
 </head>
 <body class="theme-blue">
 <!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader">
-        <div class="m-t-30"><img class="zmdi-hc-spin" src="assets/images/logo.svg" width="48" height="48" alt="Compass"></div>
+        <div class="m-t-30"><img class="zmdi-hc-spin" src="{% static 'admin-app/assets/images/logo.svg' %}" width="48" height="48" alt="Compass"></div>
         <p>Please wait...</p>
     </div>
 </div>
@@ -32,7 +32,7 @@
     <div class="col-12">        
         <div class="navbar-header">
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" href="index.html"><img src="assets/images/logo.svg" width="30" alt="Compass"><span class="m-l-10">Estate</span></a>
+            <a class="navbar-brand" href="/admin-app"><img src="{% static 'admin-app/assets/images/logo.svg' %}" width="30" alt="Compass"><span class="m-l-10">Estate</span></a>
         </div>
         <ul class="nav navbar-nav navbar-left">
             <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>            
@@ -178,7 +178,7 @@
             <li>
                 <a href="javascript:void(0);" class="fullscreen hidden-sm-down" data-provide="fullscreen" data-close="true"><i class="zmdi zmdi-fullscreen"></i></a>
             </li>
-            <li><a href="sign-in.html" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a></li>
+            <li><a href="sign-in" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a></li>
             <li class=""><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
         </ul>
     </div>
@@ -190,83 +190,83 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <div class="image"><a href="profile.html"><img src="assets/images/profile_av.jpg" alt="User"></a></div>
+                    <div class="image"><a href="profile"><img src="{% static 'admin-app/assets/images/profile_av.jpg' %}" alt="User"></a></div>
                     <div class="detail">
                         <h4>Michael</h4>
                         <small>Agent</small>                        
                     </div>
-                    <a href="events.html" title="Events"><i class="zmdi zmdi-calendar"></i></a>
-                    <a href="mail-inbox.html" title="Inbox"><i class="zmdi zmdi-email"></i></a>
-                    <a href="contact.html" title="Contact List"><i class="zmdi zmdi-account-box-phone"></i></a>
-                    <a href="chat.html" title="Chat App"><i class="zmdi zmdi-comments"></i></a>
-                    <a href="sign-in.html" title="Sign out"><i class="zmdi zmdi-power"></i></a>
+                    <a href="events" title="Events"><i class="zmdi zmdi-calendar"></i></a>
+                    <a href="mail-inbox" title="Inbox"><i class="zmdi zmdi-email"></i></a>
+                    <a href="contact" title="Contact List"><i class="zmdi zmdi-account-box-phone"></i></a>
+                    <a href="chat" title="Chat App"><i class="zmdi zmdi-comments"></i></a>
+                    <a href="sign-in" title="Sign out"><i class="zmdi zmdi-power"></i></a>
                 </div>
             </li>
             <li class="header">MAIN</li>
-            <li><a href="index.html"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>            
+            <li><a href="/admin-app"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>            
             <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-city"></i><span>Property</span> </a>
                 <ul class="ml-menu">
-                    <li><a href="property-list.html">Property List</a></li>
-                    <li><a href="property-list3.html">3 Column</a></li>
-                    <li><a href="property-list4.html">4 Column</a></li>                        
-                    <li><a href="add-property.html">Add Property</a></li>
-                    <li><a href="property-detail.html">Property Detail</a></li>
+                    <li><a href="property-list">Property List</a></li>
+                    <li><a href="property-list3">3 Column</a></li>
+                    <li><a href="property-list4">4 Column</a></li>                        
+                    <li><a href="add-property">Add Property</a></li>
+                    <li><a href="property-detail">Property Detail</a></li>
                 </ul>
             </li>
             <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-city"></i><span>Types</span> </a>
                 <ul class="ml-menu">
-                    <li><a href="apartment.html">Apartment</a></li>
-                    <li><a href="office.html">Office</a></li>
-                    <li><a href="shop.html">Shop</a></li>                        
-                    <li><a href="villa.html">Villa</a></li>
+                    <li><a href="apartment">Apartment</a></li>
+                    <li><a href="office">Office</a></li>
+                    <li><a href="shop">Shop</a></li>                        
+                    <li><a href="villa">Villa</a></li>
                 </ul>
             </li><li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts-outline"></i><span>Agents</span> </a>
                 <ul class="ml-menu">
-                    <li><a href="agent.html">All Agents</a></li>
-                    <li><a href="add-agent.html">Add Agent</a></li>                       
-                    <li><a href="profile.html">Agent Profile</a></li>
-                    <li><a href="invoices.html">Agent Invoice</a></li>
+                    <li><a href="agent">All Agents</a></li>
+                    <li><a href="add-agent">Add Agent</a></li>                       
+                    <li><a href="profile">Agent Profile</a></li>
+                    <li><a href="invoices">Agent Invoice</a></li>
                 </ul>
             </li>
-            <li><a href="map.html"><i class="zmdi zmdi-pin"></i><span>Map</span></a></li>
-            <li><a href="reports.html"><i class="zmdi zmdi-file-text"></i><span>Reports</span></a></li>
+            <li><a href="map"><i class="zmdi zmdi-pin"></i><span>Map</span></a></li>
+            <li><a href="reports"><i class="zmdi zmdi-file-text"></i><span>Reports</span></a></li>
             <li class="active open"> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>App</span> </a>
                 <ul class="ml-menu">
-                    <li><a href="mail-inbox.html">Inbox</a></li>
-                    <li class="active"><a href="chat.html">Chat</a></li>
-                    <li><a href="events.html">Calendar</a></li>
-                    <li><a href="file-dashboard.html">File Manager</a></li>
-                    <li><a href="contact.html">Contact list</a></li>
-                    <li><a href="blog-dashboard.html">Blog</a></li>
+                    <li><a href="mail-inbox">Inbox</a></li>
+                    <li class="active"><a href="chat">Chat</a></li>
+                    <li><a href="events">Calendar</a></li>
+                    <li><a href="file-dashboard">File Manager</a></li>
+                    <li><a href="contact">Contact list</a></li>
+                    <li><a href="blog-dashboard">Blog</a></li>
                 </ul>
             </li>
             <li class="header">EXTRA COMPONENTS</li>
             <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-delicious"></i><span>Widgets</span> </a>
                 <ul class="ml-menu">
-                    <li><a href="widgets-app.html">Apps Widgetse</a></li>
-                    <li><a href="widgets-data.html">Data Widgetse</a></li>
+                    <li><a href="widgets-app">Apps Widgetse</a></li>
+                    <li><a href="widgets-data">Data Widgetse</a></li>
                 </ul>
             </li>
             <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-lock"></i><span>Authentication</span> </a>
                 <ul class="ml-menu">
-                    <li><a href="sign-in.html">Sign In</a> </li>
-                    <li><a href="sign-up.html">Sign Up</a> </li>
-                    <li><a href="forgot-password.html">Forgot Password</a> </li>
-                    <li><a href="404.html">Page 404</a> </li>
-                    <li><a href="500.html">Page 500</a> </li>
-                    <li><a href="page-offline.html">Page Offline</a> </li>
-                    <li><a href="locked.html">Locked Screen</a> </li>
+                    <li><a href="sign-in">Sign In</a> </li>
+                    <li><a href="sign-up">Sign Up</a> </li>
+                    <li><a href="forgot-password">Forgot Password</a> </li>
+                    <li><a href="404">Page 404</a> </li>
+                    <li><a href="500">Page 500</a> </li>
+                    <li><a href="page-offline">Page Offline</a> </li>
+                    <li><a href="locked">Locked Screen</a> </li>
                 </ul>
             </li>
             <li> <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-copy"></i><span>Sample Pages</span> </a>
                 <ul class="ml-menu">
-                    <li><a href="blank.html">Blank Page</a> </li>
-                    <li> <a href="image-gallery.html">Image Gallery</a> </li>
-                    <li><a href="profile.html">Profile</a></li>
-                    <li><a href="timeline.html">Timeline</a></li>
-                    <li><a href="pricing.html">Pricing</a></li>
-                    <li><a href="invoices.html">Invoices</a></li>
-                    <li><a href="search-results.html">Search Results</a></li>
+                    <li><a href="blank">Blank Page</a> </li>
+                    <li> <a href="image-gallery">Image Gallery</a> </li>
+                    <li><a href="profile">Profile</a></li>
+                    <li><a href="timeline">Timeline</a></li>
+                    <li><a href="pricing">Pricing</a></li>
+                    <li><a href="invoices">Invoices</a></li>
+                    <li><a href="search-results">Search Results</a></li>
                 </ul>
             </li>
             <li class="header">Extra</li>
@@ -402,7 +402,7 @@
                         <li class="online">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar4.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar4.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="name">Sophia</span>
                                         <span class="message">There are many variations of passages of Lorem Ipsum available</span>
@@ -414,7 +414,7 @@
                         <li class="online">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar5.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar5.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="name">Grayson</span>
                                         <span class="message">All the Lorem Ipsum generators on the</span>
@@ -426,7 +426,7 @@
                         <li class="offline">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar2.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar2.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="name">Isabella</span>
                                         <span class="message">Contrary to popular belief, Lorem Ipsum</span>
@@ -438,7 +438,7 @@
                         <li class="me">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar1.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar1.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="name">John</span>
                                         <span class="message">It is a long established fact that a reader</span>
@@ -450,7 +450,7 @@
                         <li class="online">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar3.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar3.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="name">Alexander</span>
                                         <span class="message">Richard McClintock, a Latin professor</span>
@@ -467,7 +467,7 @@
                         <li class="offline inlineblock">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar10.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar10.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="badge badge-outline status"></span>
                                     </div>
@@ -477,7 +477,7 @@
                         <li class="offline inlineblock">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar6.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar6.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="badge badge-outline status"></span>
                                     </div>
@@ -487,7 +487,7 @@
                         <li class="offline inlineblock">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar7.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar7.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="badge badge-outline status"></span>
                                     </div>
@@ -497,7 +497,7 @@
                         <li class="offline inlineblock">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar8.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar8.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="badge badge-outline status"></span>
                                     </div>
@@ -507,7 +507,7 @@
                         <li class="offline inlineblock">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar9.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar9.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="badge badge-outline status"></span>
                                     </div>
@@ -517,7 +517,7 @@
                         <li class="online inlineblock">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar5.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar5.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="badge badge-outline status"></span>
                                     </div>
@@ -527,7 +527,7 @@
                         <li class="offline inlineblock">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar4.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar4.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="badge badge-outline status"></span>
                                     </div>
@@ -537,7 +537,7 @@
                         <li class="offline inlineblock">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar3.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar3.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="badge badge-outline status"></span>
                                     </div>
@@ -547,7 +547,7 @@
                         <li class="online inlineblock">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar2.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar2.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="badge badge-outline status"></span>
                                     </div>
@@ -557,7 +557,7 @@
                         <li class="offline inlineblock">
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object " src="assets/images/xs/avatar1.jpg" alt="">
+                                    <img class="media-object " src="{% static 'admin-app/assets/images/xs/avatar1.jpg' %}" alt="">
                                     <div class="media-body">
                                         <span class="badge badge-outline status"></span>
                                     </div>
@@ -623,13 +623,13 @@
                         <ul class="list-unstyled team-info">
                             <li class="m-r-15"><small>Team</small></li>
                             <li>
-                                <img src="assets/images/xs/avatar2.jpg" alt="Avatar">
+                                <img src="{% static 'admin-app/assets/images/xs/avatar2.jpg' %}" alt="Avatar">
                             </li>
                             <li>
-                                <img src="assets/images/xs/avatar3.jpg" alt="Avatar">
+                                <img src="{% static 'admin-app/assets/images/xs/avatar3.jpg' %}" alt="Avatar">
                             </li>
                             <li>
-                                <img src="assets/images/xs/avatar4.jpg" alt="Avatar">
+                                <img src="{% static 'admin-app/assets/images/xs/avatar4.jpg' %}" alt="Avatar">
                             </li>                            
                         </ul>
                     </div>
@@ -643,19 +643,19 @@
                         <ul class="list-unstyled team-info">
                             <li class="m-r-15"><small>Team</small></li>
                             <li>
-                                <img src="assets/images/xs/avatar10.jpg" alt="Avatar">
+                                <img src="{% static 'admin-app/assets/images/xs/avatar10.jpg' %}" alt="Avatar">
                             </li>
                             <li>
-                                <img src="assets/images/xs/avatar9.jpg" alt="Avatar">
+                                <img src="{% static 'admin-app/assets/images/xs/avatar9.jpg' %}" alt="Avatar">
                             </li>
                             <li>
-                                <img src="assets/images/xs/avatar8.jpg" alt="Avatar">
+                                <img src="{% static 'admin-app/assets/images/xs/avatar8.jpg' %}" alt="Avatar">
                             </li>
                             <li>
-                                <img src="assets/images/xs/avatar7.jpg" alt="Avatar">
+                                <img src="{% static 'admin-app/assets/images/xs/avatar7.jpg' %}" alt="Avatar">
                             </li>
                             <li>
-                                <img src="assets/images/xs/avatar6.jpg" alt="Avatar">
+                                <img src="{% static 'admin-app/assets/images/xs/avatar6.jpg' %}" alt="Avatar">
                             </li>
                         </ul>
                     </div>
@@ -669,13 +669,13 @@
                         <ul class="list-unstyled team-info">
                             <li class="m-r-15"><small>Team</small></li>
                             <li>
-                                <img src="assets/images/xs/avatar5.jpg" alt="Avatar">
+                                <img src="{% static 'admin-app/assets/images/xs/avatar5.jpg' %}" alt="Avatar">
                             </li>
                             <li>
-                                <img src="assets/images/xs/avatar2.jpg" alt="Avatar">
+                                <img src="{% static 'admin-app/assets/images/xs/avatar2.jpg' %}" alt="Avatar">
                             </li>
                             <li>
-                                <img src="assets/images/xs/avatar7.jpg" alt="Avatar">
+                                <img src="{% static 'admin-app/assets/images/xs/avatar7.jpg' %}" alt="Avatar">
                             </li>                            
                         </ul>
                     </div>
@@ -698,7 +698,7 @@
                     <i class="zmdi zmdi-plus"></i>
                 </button>
                 <ul class="breadcrumb float-md-right">
-                    <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                    <li class="breadcrumb-item"><a href="/admin-app"><i class="zmdi zmdi-home"></i> Home</a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0);">App</a></li>
                     <li class="breadcrumb-item active">Chat</li>
                 </ul>                
@@ -724,63 +724,63 @@
                             <div role="tabpanel" class="tab-pane slideRight active" id="people">
                                 <ul class="chat-list list-unstyled m-b-0">
                                     <li class="clearfix">
-                                        <img src="assets/images/xs/avatar1.jpg" alt="avatar" />
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar1.jpg' %}" alt="avatar" />
                                         <div class="about">
                                             <div class="name">Vincent Porter</div>
                                             <div class="status"> <i class="zmdi zmdi-circle offline"></i> left 7 mins ago </div>                                            
                                         </div>
                                     </li>
                                     <li class="clearfix active">
-                                        <img src="assets/images/xs/avatar2.jpg" alt="avatar" />
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar2.jpg' %}" alt="avatar" />
                                         <div class="about">
                                             <div class="name">Aiden Chavez</div>
                                             <div class="status"> <i class="zmdi zmdi-circle online"></i> online </div>
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <img src="assets/images/xs/avatar3.jpg" alt="avatar" />
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar3.jpg' %}" alt="avatar" />
                                         <div class="about">
                                             <div class="name">Mike Thomas</div>
                                             <div class="status"> <i class="zmdi zmdi-circle online"></i> online </div>
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <img src="assets/images/xs/avatar4.jpg" alt="avatar" />
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar4.jpg' %}" alt="avatar" />
                                         <div class="about">
                                             <div class="name">Erica Hughes</div>
                                             <div class="status"> <i class="zmdi zmdi-circle online"></i> online </div>
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <img src="assets/images/xs/avatar5.jpg" alt="avatar" />
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar5.jpg' %}" alt="avatar" />
                                         <div class="about">
                                             <div class="name">Ginger Johnston</div>
                                             <div class="status"> <i class="zmdi zmdi-circle online"></i> online </div>
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <img src="assets/images/xs/avatar6.jpg" alt="avatar" />
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar6.jpg' %}" alt="avatar" />
                                         <div class="about">
                                             <div class="name">Tracy Carpenter</div>
                                             <div class="status"> <i class="zmdi zmdi-circle offline"></i> left 30 mins ago </div>
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <img src="assets/images/xs/avatar7.jpg" alt="avatar" />
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar7.jpg' %}" alt="avatar" />
                                         <div class="about">
                                             <div class="name">Christian Kelly</div>
                                             <div class="status"> <i class="zmdi zmdi-circle offline"></i> left 10 hours ago </div>
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <img src="assets/images/xs/avatar8.jpg" alt="avatar" />
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar8.jpg' %}" alt="avatar" />
                                         <div class="about">
                                             <div class="name">Monica Ward</div>
                                             <div class="status"> <i class="zmdi zmdi-circle online"></i> online </div>
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <img src="assets/images/xs/avatar9.jpg" alt="avatar" />
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar9.jpg' %}" alt="avatar" />
                                         <div class="about">
                                             <div class="name">Dean Henry</div>
                                             <div class="status"> <i class="zmdi zmdi-circle offline"></i> offline since Oct 28 </div>
@@ -791,35 +791,35 @@
                             <div role="tabpanel" class="tab-pane slideRight" id="groups">
                                 <ul class="chat-list list-unstyled">
                                     <li class="clearfix">
-                                        <img src="assets/images/xs/avatar6.jpg" alt="avatar"/>
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar6.jpg' %}" alt="avatar"/>
                                         <div class="about">
                                             <div class="name">Sr. Doctor</div>
                                             <div class="status">6 People </div>
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <img src="assets/images/xs/avatar7.jpg" alt="avatar"/>
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar7.jpg' %}" alt="avatar"/>
                                         <div class="about">
                                             <div class="name">Nursing Staf</div>
                                             <div class="status">10 People </div>
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <img src="assets/images/xs/avatar10.jpg" alt="avatar"/>
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar10.jpg' %}" alt="avatar"/>
                                         <div class="about">
                                             <div class="name">Groups 1</div>
                                             <div class="status">2 People </div>
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <img src="assets/images/xs/avatar8.jpg" alt="avatar"/>
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar8.jpg' %}" alt="avatar"/>
                                         <div class="about">
                                             <div class="name">Groups 2</div>
                                             <div class="status">2 People </div>
                                         </div>
                                     </li>
                                     <li class="clearfix">
-                                        <img src="assets/images/xs/avatar9.jpg" alt="avatar"/>
+                                        <img src="{% static 'admin-app/assets/images/xs/avatar9.jpg' %}" alt="avatar"/>
                                         <div class="about">
                                             <div class="name">Groups 3</div>
                                             <div class="status">2 People </div>
@@ -831,7 +831,7 @@
                     </div>
                     <div class="chat">
                         <div class="chat-header clearfix">
-                            <img src="assets/images/xs/avatar2.jpg" alt="avatar" />
+                            <img src="{% static 'admin-app/assets/images/xs/avatar2.jpg' %}" alt="avatar" />
                             <div class="chat-about">
                                 <div class="chat-with">Aiden Chavez</div>
                                 <div class="chat-num-messages">already 8 messages</div>
@@ -851,9 +851,9 @@
                                     <div class="message my-message">
                                         <p>Are we meeting today? Project has been already finished and I have results to show you.</p>
                                         <div class="row">
-                                            <div class="col-sm-6 col-lg-4 m-t-10"><a href="javascript:void(0);"><img src="assets/images/image2.jpg" alt="" class="img-fluid img-thumbnail"></a> </div>
-                                            <div class="col-sm-6 col-lg-4 m-t-10"><a href="javascript:void(0);"> <img src="assets/images/image3.jpg" alt="" class="img-fluid img-thumbnail"></a> </div>
-                                            <div class="col-sm-6 col-lg-4 m-t-10"><a href="javascript:void(0);"> <img src="assets/images/image4.jpg" alt="" class="img-fluid img-thumbnail"> </a> </div>
+                                            <div class="col-sm-6 col-lg-4 m-t-10"><a href="javascript:void(0);"><img src="{% static 'admin-app/assets/images/image2.jpg' %}" alt="" class="img-fluid img-thumbnail"></a> </div>
+                                            <div class="col-sm-6 col-lg-4 m-t-10"><a href="javascript:void(0);"> <img src="{% static 'admin-app/assets/images/image3.jpg' %}" alt="" class="img-fluid img-thumbnail"></a> </div>
+                                            <div class="col-sm-6 col-lg-4 m-t-10"><a href="javascript:void(0);"> <img src="{% static 'admin-app/assets/images/image4.jpg' %}" alt="" class="img-fluid img-thumbnail"> </a> </div>
                                         </div>
                                     </div>
                                 </li>                        
@@ -878,10 +878,10 @@
         </div>
     </div>
 </section>
-<script src="assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
-<script src="assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="{% static 'admin-app/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js --> 
+<script src="{% static 'admin-app/assets/bundles/vendorscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js --> 
 
-<script src="assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+<script src="{% static 'admin-app/assets/bundles/mainscripts.bundle.js' %}"></script><!-- Custom Js -->
 
 <script>
     $(".list_btn").on('click',function(){
