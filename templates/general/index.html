@@ -163,11 +163,11 @@
                                           </ul>
                                         </li>
                                         <li><a href="about">About Us</a></li>
-                                        <li><a href="#">Land</a>
-                                          <ul>
-                                            <li><a href="#">Commercial</a></li>
-                                            <li><a href="#">Local</a></li>
-                                          </ul>
+                                        <li>
+                                          <a href="shop-right-sidebar?property_type=house_for_lease&location=none&price_range=none">Airbnb</a>
+                                        </li>
+                                        <li>
+                                          <a href="shop-right-sidebar?property_type=land_for_sale&location=none&price_range=none">Land</a>
                                         </li>
                                         <li><a href="contact">Contact Us</a></li>
                                         <li class="special-link">
@@ -294,14 +294,16 @@
                     </ul>
                   </li>
                   <li><a href="about">About Us</a></li>
-
-                  <li><a href="#">Land</a>
-                    <ul>
-                      <li><a href="#">Commercial</a></li>
-                      <li><a href="#">Local</a></li>
-                    </ul>
+                  <li>
+                    <a href="shop-right-sidebar?property_type=house_for_lease&location=none&price_range=none">Airbnb</a>
+                  </li>
+                  <li>
+                    <a href="shop-right-sidebar?property_type=land_for_sale&location=none&price_range=none">Land</a>
                   </li>
                   <li><a href="contact">Contact Us</a></li>
+                  <li class="special-link">
+                      <a href="add-listing">Add Listing</a>
+                  </li>
               </ul>
             </div>
             <div class="ltn__utilize-buttons ltn__utilize-buttons-2">
@@ -403,7 +405,7 @@
                                                                 <option value="northern">Northern Region</option>
                                                                 <option value="eastern">Eastern Region</option>
                                                                 <option value="central">Central Region</option>
-                                                               <option value="western">Western Region</option> 
+                                                               <option value="western">Western Region</option>
                                                                <option value="upper_east">Upper East Region</option>
                                                                <option value="bono">Bono Region</option>
                                                                <option value="ahafo">Ahafo Region</option>
@@ -413,7 +415,7 @@
                                                                <option value="bono_east">Bono East Region</option>
                                                                <option value="oti">Oti Region</option>
                                                                <option value="north_east">North East Region</option>
-                                                               <option value="savannah">Savannah Region</option>                                                               
+                                                               <option value="savannah">Savannah Region</option>
                                                             </select>
                                                         </div>
                                                         <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
@@ -454,7 +456,7 @@
                                                                 <option value="northern">Northern Region</option>
                                                                 <option value="eastern">Eastern Region</option>
                                                                 <option value="central">Central Region</option>
-                                                               <option value="western">Western Region</option> 
+                                                               <option value="western">Western Region</option>
                                                                <option value="upper_east">Upper East Region</option>
                                                                <option value="bono">Bono Region</option>
                                                                <option value="ahafo">Ahafo Region</option>
@@ -464,7 +466,7 @@
                                                                <option value="bono_east">Bono East Region</option>
                                                                <option value="oti">Oti Region</option>
                                                                <option value="north_east">North East Region</option>
-                                                               <option value="savannah">Savannah Region</option>                                                               
+                                                               <option value="savannah">Savannah Region</option>
                                                             </select>
                                                         </div>
                                                         <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
@@ -509,7 +511,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- LATEST LISTINGS -->
             <div class="row ltn__product-slider-item-three-active--- slick-arrow-1">
                 <!-- ltn__product-item -->
@@ -536,7 +538,7 @@
                                 </ul>
                                 {%endif%}
                             </div>
-                            
+
 
                             <h2 class="product-title"><a id="latest_listings_title_{{item.property_id}}" href="product-details/{{item.property_id}}">{{item.title|truncatechars:25}}</a></h2>
                             <div class="product-img-location">
@@ -560,14 +562,14 @@
                                 {%else%}
 
                                 {%if item.serviced == True %}
-                                <li><span>Serviced</span></li>                                
+                                <li><span>Serviced</span></li>
                                 {%endif%}
 
                                 {%if item.fenced == True %}
-                                <li><span>Fenced</span></li> 
-                                
+                                <li><span>Fenced</span></li>
+
                                 {%endif%}
-                                
+
                                 <!-- serviced = models.BooleanField()
                                 fenced = models.BooleanField() -->
 
@@ -598,7 +600,7 @@
                         </div>
                         <div class="product-info-bottom">
                             <div class="product-price">
-                                {%if item.status|slice:'-4:' == 'rent' %}              
+                                {%if item.status|slice:'-4:' == 'rent' %}
                                 <span id="latest_listings_price_{{item.property_id}}">GHS {{item.price}} / Month</span>
                                 {%else%}
                                 <span id ="latest_listings_price_{{item.property_id}}">GHS {{item.price}}</span>
@@ -634,9 +636,9 @@
                             <img src="{% static 'img/icons/icon-img/21.png' %}" alt="#">
                         </div>
                         <div class="ltn__feature-info">
-                            <h3><a href="service-details">Buy or sell a home</a></h3>
+                            <h3><a href="service-details">Buy a home</a></h3>
                             <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                            <a class="ltn__service-btn" href="service-details">Find A Home <i class="flaticon-right-arrow"></i></a>
+                            <a class="ltn__service-btn" href="shop-right-sidebar?property_type=house_for_sale&location=none&price_range=none">Find A Home <i class="flaticon-right-arrow"></i></a>
                         </div>
                     </div>
                 </div>
@@ -649,7 +651,7 @@
                         <div class="ltn__feature-info">
                             <h3><a href="service-details">Buy a land</a></h3>
                             <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                            <a class="ltn__service-btn" href="service-details">Find A Home <i class="flaticon-right-arrow"></i></a>
+                            <a class="ltn__service-btn" href="shop-right-sidebar?property_type=land_for_sale&location=none&price_range=none">Choose A Land <i class="flaticon-right-arrow"></i></a>
                         </div>
                     </div>
                 </div>
@@ -662,7 +664,7 @@
                         <div class="ltn__feature-info">
                             <h3><a href="service-details">Lease a home</a></h3>
                             <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                            <a class="ltn__service-btn" href="service-details">Find A Home <i class="flaticon-right-arrow"></i></a>
+                            <a class="ltn__service-btn" href="shop-right-sidebar?property_type=house_for_lease&location=none&price_range=none">Rent A Home <i class="flaticon-right-arrow"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1888,8 +1890,31 @@
     </div>
     <!-- MODAL AREA END -->
 
+<<<<<<< HEAD
 
     
+=======
+    <script>
+        const modal = document.getElementById("quick_view_modal")
+        modal.addEventListener('show.bs.modal', function(event){
+            const button = event.relatedTarget;
+            const buttonId = button.getAttribute("data-bs-id")
+            const modal_image = document.getElementById('quick_view_img')
+            const modal_title = document.getElementById('quick_view_title')
+            const modal_price = document.getElementById('quick_view_price')
+
+            original_image = document.getElementById(`latest_listings_img_${buttonId}`).src
+            original_title = document.getElementById(`latest_listings_title_${buttonId}`)
+            original_price = document.getElementById(`latest_listings_price_${buttonId}`)
+
+            modal_image.src = original_image
+            modal_title.innerText = original_title.innerText
+            modal_price.innerText = original_price.innerText
+        })
+
+    </script>
+
+>>>>>>> e983571b0990024f8278378564318857e8105b58
 
     <!-- MODAL AREA START (Add To Cart Modal) -->
     <div class="ltn__modal-area ltn__add-to-cart-modal-area">

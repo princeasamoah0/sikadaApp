@@ -136,14 +136,16 @@
                                         </ul>
                                       </li>
                                       <li><a href="about">About Us</a></li>
-
-                                      <li><a href="#">Land</a>
-                                        <ul>
-                                          <li><a href="#">Commercial</a></li>
-                                          <li><a href="#">Local</a></li>
-                                        </ul>
+                                      <li>
+                                        <a href="shop-right-sidebar?property_type=house_for_lease&location=none&price_range=none">Airbnb</a>
+                                      </li>
+                                      <li>
+                                        <a href="shop-right-sidebar?property_type=land_for_sale&location=none&price_range=none">Land</a>
                                       </li>
                                       <li><a href="contact">Contact Us</a></li>
+                                      <li class="special-link">
+                                          <a href="add-listing">Add Listing</a>
+                                      </li>
                                   </ul>
                                 </div>
                             </nav>
@@ -304,7 +306,7 @@
                     </ul>
                   </li>
                   <li><a href="about">About Us</a></li>
-                
+
                   <li><a href="#">Land</a>
                     <ul>
                       <li><a href="#">Commercial</a></li>
@@ -426,7 +428,7 @@
                                     </div>
                                     <!-- ltn__product-item -->
                                         {%if not data%}
-                                        <h3 class="text-center text-warning">Nothing Found</h3> 
+                                        <h3 class="text-center text-warning">Nothing Found</h3>
                                         <div style="display: flex; justify-content: center; align-items: center; ">
                                          <img  src="{% static 'img/not_found_anim.gif' %}" style="max-height: 150px; max-width: 150px;">
                                          </div>
@@ -452,7 +454,7 @@
                                                      <div class="product-img-location">
                                                          <ul>
                                                              <li>
-                                                                 
+
                                                                  <a href="locations"><i class="flaticon-pin"></i> {{i.sub_location}}, {{ i.location|capfirst }}  Region</a>
                                                              </li>
                                                          </ul>
@@ -500,8 +502,8 @@
                                          {%endfor%}
                                          {%endif%}
                                          <!--  -->
-                                    
-                                  
+
+
                                 </div>
                             </div>
                         </div>
@@ -525,12 +527,12 @@
                         <h3 class="mb-10">Advance Information</h3>
                         <label class="mb-30"><small>About 9,620 results (0.62 seconds) </small></label>
                         <!-- Advance Information widget -->
-                        
-                        
+
+
                         <div class="widget ltn__menu-widget">
-                            <h4 class="ltn__widget-title">Property Type</h4> 
-                            
-                                                    
+                            <h4 class="ltn__widget-title">Property Type</h4>
+
+
                             <ul>
                                 <li>
                                     <a href="shop">
@@ -564,9 +566,9 @@
                                 </li>
                             </ul>
                             <hr>
-                              
+
                             <h4 class="ltn__widget-title">Location</h4>
-                            
+
                             <ul>
                                 <li>
                                     <label class="checkbox-item">Ashanti Region
@@ -706,12 +708,12 @@
                                     <span class="categorey-no">GH₵30,000 Up</span>
                                 </li>
                             </ul>
-                            
-                            
-                            <script>    
+
+
+                            <script>
                                 try{document.getElementById({{context.property_type}}.id).checked = 'checked'}catch{}
-                                try{document.getElementById({{context.location}}.id).checked ='checked'}catch{} 
-                                try{document.getElementById({{context.price_range}}.id).checked ='checked' }catch{}  
+                                try{document.getElementById({{context.location}}.id).checked ='checked'}catch{}
+                                try{document.getElementById({{context.price_range}}.id).checked ='checked' }catch{}
 
                                 const radioInputs = document.querySelectorAll('input[type="radio"]')
                                 radioInputs.forEach(input => {
@@ -721,17 +723,17 @@
                                         const searchParams = new URLSearchParams(url.search)
                                         searchParams.set(input.name, input.value)
                                         window.history.replaceState({},'', `${url.origin}${url.pathname}?${searchParams}`)
-                                        
+
                                         window.location.reload()
                                         // console.log(searchParams)
                                         // console.log(input.value)
                                         // window.location.href
                                     })
                                 });
-                                console.log(radioInputs)                     
-                                
-                                                            
-                            </script> 
+                                console.log(radioInputs)
+
+
+                            </script>
 
 
                             <hr>
@@ -803,10 +805,10 @@
                                     <span class="categorey-no">2,912</span>
                                 </li>
                             </ul> -->
-                        
+
                         </div>
 
-                        
+
                         <!-- Category Widget -->
                         <div class="widget ltn__menu-widget d-none">
                             <h4 class="ltn__widget-title ltn__widget-title-border">Product categories</h4>
@@ -1341,7 +1343,7 @@
     <!-- Main JS -->
     <script src="{% static 'js/main.js' %}"></script>
 
-   
+
 
 </body>
 </html>
