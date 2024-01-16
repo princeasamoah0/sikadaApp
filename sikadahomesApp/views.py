@@ -5,10 +5,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 import re
+from django.http import JsonResponse
 
 from itertools import chain
 import random
-from .models import HouseRent,HouseSale,LandSale,AllProperties,Feedback
+from .models import HouseRent,HouseSale,LandSale,AllProperties,Feedback, Wishlist
 
 # Create your views here.
 
@@ -21,10 +22,24 @@ def index (request):
     random.shuffle(latest_listings)
     return render(request, 'general/index.html', {'context':latest_listings, 'feedback':feedback })
 
+def wishlist_Ajax(request):
+    if request.method == 'POST':
+        propety_id = request.POST.get('property_id')
+        a = Wishlist(property_id = propety_id, username = request.user.username)
+        a.save()
+        # print(request)
+        # print(number)
+        # print(request)
+    else:
+        print('GET')    
+    data = {'message': 'Hello, world!', 'data': [1, 2, 3]}  # Example data
+    return JsonResponse(data)
+    # return JsonResponse
 def page_404 (request):
+    
     return render(request, 'general/404.html')
 
-def about(request):
+def about(request):  
     return render(request, 'general/about.html')
 
 def account(request):
@@ -272,7 +287,7 @@ def shop_right_sidebar(request):
 
     all = list(chain(house_sale,house_rent,land_sale))
     random.shuffle(all)
-    print(f"chanined {all}")
+    print(f"chained {all}")
     
     context = {'property_type':property_type, 'location':location, 'price_range':price_range}
 
@@ -301,7 +316,18 @@ def team(request):
 
 @login_required
 def wishlist(request):
-    return render(request, 'general/wishlist.html')
+    data = Wishlist.objects.filter(username = request.user.username)
+    querylist = [i.property_id for i in data]
+    house_sale = HouseSale.objects.filter(property_id__in=querylist)
+    house_rent = HouseRent.objects.filter(property_id__in=querylist)
+    land_sale = LandSale.objects.filter(property_id__in=querylist)
+    
+
+    all = list(chain(house_sale,house_rent,land_sale))
+    # random.shuffle(all)
+    print(f"chained {all}")
+    # print(querylist)
+    return render(request, 'general/wishlist.html',  {'data': all})
 
 
 

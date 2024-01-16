@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('wishlist_ajax', views.wishlist_Ajax, name='wishlist_ajax'),
     path('404', views.page_404, name='404'),
     path('about', views.about, name='about'),
     path('account', views.account, name='account'),
