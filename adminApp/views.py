@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from sikadahomesApp.models import *
 
 # Create your views here.
 
@@ -15,6 +16,10 @@ def add_agent(request):
     return render(request, 'admin-app/add-agent.html')
 
 def add_property(request):
+    if request.method == "POST":
+        print('POsting')
+    # houserent = HouseRent.objects.all()
+    # print(houserent)
     return render(request, 'admin-app/add-property.html')
 
 def agent(request):
