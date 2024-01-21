@@ -15,7 +15,7 @@ from .models import HouseRent,HouseSale,LandSale,AllProperties,Feedback, Wishlis
 
 def index (request):
     houseRent = HouseRent.objects.all().order_by('-id')[:2]
-    houseSale = HouseSale.objects.all().order_by('-id')[:2]  
+    houseSale = HouseSale.objects.all().order_by('-id')[:2]
     landSale = LandSale.objects.all().order_by('-id')[:2]
     feedback = Feedback.objects.all().order_by('-id')[:4]
     latest_listings = list(chain(houseRent, houseSale,landSale))
@@ -93,25 +93,25 @@ def login_view(request):
         if re.fullmatch(regex, signIn_Param):
             try:
                 user = User.objects.get(email = signIn_Param)
-                user = authenticate(request, username=user.username, password=password) 
+                user = authenticate(request, username=user.username, password=password)
                 if user is not None:
                     login(request, user)
                     return redirect(index)
                 else:
-                    messages.error(request, "Invalid Password") 
-            except:            
-                messages.error(request, "No account associated with this email")                   
+                    messages.error(request, "Invalid Password")
+            except:
+                messages.error(request, "No account associated with this email")
         else:
-            user = authenticate(request, username=signIn_Param, password=password)        
+            user = authenticate(request, username=signIn_Param, password=password)
             if user is not None:
-                login(request, user) 
+                login(request, user)
                 if request.GET.get('next'):
                     return redirect(wishlist)
                 else:
-                    return redirect(index)    
+                    return redirect(index)
             else:
                 messages.error(request, "Invalid Login Credentials")
-    
+
     return render(request, 'general/login.html')
 
 def logoutEvent(request):
@@ -139,12 +139,15 @@ def product_details(request,property_id):
         query = HouseSale.objects.get(property_id= property_id)
     else:
         query = LandSale.objects.get(property_id= property_id)
-            
+
     print(query)
     # houseDetail = HouseSale.objects.get(product = pk)
     # print(house_detail)
     return render(request, 'general/product-details.html', {'context':query} )
 
+def land_details(request):
+    return render(request, 'general/land-details.html')
+    
 def register(request):
     if request.method == 'POST':
         firstname = request.POST['firstname']
@@ -156,27 +159,32 @@ def register(request):
         # try:
         checkUserName = User.objects.filter(Q(username=phone) | Q(email=email))
         if checkUserName.count() != 0:
-            messages.error(request, "Phone number or email already exists") 
+            messages.error(request, "Phone number or email already exists")
             return render(request, 'general/register.html')
         else:
             print('Here working')
-            
+
         # except User.DoesNotExist:
             user= User.objects.create_user(phone, email, password, backend='django.contrib.auth.backends.ModelBackend')
             user.first_name = firstname
             user.last_name = lastname
             user.save()
 
+<<<<<<< HEAD
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect(index) 
+=======
+            login(request, user)
+            return redirect(index)
+>>>>>>> 7b8c8bfb67c35f60560ebeffb4b2736860cba9b1
             # return render(request, 'general/index.html')
 
             # print('User created successfully')
 
-      
-        
+
+
         # user = User.objects.create_user(phone, email, password)
-       
+
     return render(request, 'general/register.html')
 
 def service_details(request):
@@ -204,7 +212,7 @@ def shop_right_sidebar(request):
     count_house_for_sale = AllProperties.objects.filter(property_type = 'house_for_sale').count()
     count_house_for_rent= AllProperties.objects.filter(property_type = 'house_for_rent').count()
     count_land_for_sale= AllProperties.objects.filter(property_type = 'land_for_sale').count()
-   
+
     count_greater_accra= AllProperties.objects.filter(location='greater_accra').count()
     count_ashanti= AllProperties.objects.filter(location='ashanti').count()
     count_northern= AllProperties.objects.filter(location='northern').count()
@@ -220,7 +228,7 @@ def shop_right_sidebar(request):
     count_oti= AllProperties.objects.filter(location='oti').count()
     count_north_east= AllProperties.objects.filter(location='north_east').count()
     count_savannah= AllProperties.objects.filter(location='savannah').count()
-    
+
 
     counts = {'count_house_for_sale':count_house_for_sale, 'count_house_for_rent':count_house_for_rent,'count_land_for_sale':count_land_for_sale,
             'count_greater_accra':count_greater_accra, 'count_ashanti':count_ashanti,
@@ -228,35 +236,35 @@ def shop_right_sidebar(request):
             'count_western':count_western,'count_upper_east':count_upper_east,'count_bono':count_bono,
             'count_ahafo':count_ahafo,'count_bono_west':count_bono_west,'count_volta':count_volta,'count_bono_east':count_bono_east,
             'count_oti':count_oti,'count_north_east':count_north_east,'count_savannah':count_savannah
-           
+
             }
 
     # print(count_house_for_sale,count_house_for_rent, count_land_for_sale)
     # house_sale_count = HouseSale.objects.all().count()
     # house_rent_count = HouseRent.objects.all().count()
     # land_sale.count = LandSale.objects.all().count()
-    
+
     if(property_type == 'none' and location == 'none' and price_range == 'none'):
-        query = AllProperties.objects.all()  
-        call_all = True     
+        query = AllProperties.objects.all()
+        call_all = True
     elif(property_type != 'none' and location == 'none' and price_range == 'none'):
-        query = AllProperties.objects.filter(property_type=property_type) 
-    elif(property_type == 'none' and location != 'none' and price_range == 'none'):  
-        query = AllProperties.objects.filter(location=location)  
-    elif(property_type == 'none' and location != 'none' and price_range != 'none'): 
+        query = AllProperties.objects.filter(property_type=property_type)
+    elif(property_type == 'none' and location != 'none' and price_range == 'none'):
+        query = AllProperties.objects.filter(location=location)
+    elif(property_type == 'none' and location != 'none' and price_range != 'none'):
         if price_range == 'low_budget':
             query = AllProperties.objects.filter(location=location, price__lt = 10000)
-            print(price_range) 
+            print(price_range)
         elif price_range == 'medium_budget':
             query = AllProperties.objects.filter(location=location, price__gt=10000, price__lt=30000)
-            print(price_range) 
+            print(price_range)
         elif price_range == 'high_budget':
-            query = AllProperties.objects.filter(location=location, price__gt=30000) 
-            print(price_range)   
-    elif(property_type != 'none' and location != 'none' and price_range == 'none'): 
-        print(1) 
-        query = AllProperties.objects.filter(property_type=property_type, location=location) 
-    elif(property_type == 'none' and location == 'none' and price_range != 'none'): 
+            query = AllProperties.objects.filter(location=location, price__gt=30000)
+            print(price_range)
+    elif(property_type != 'none' and location != 'none' and price_range == 'none'):
+        print(1)
+        query = AllProperties.objects.filter(property_type=property_type, location=location)
+    elif(property_type == 'none' and location == 'none' and price_range != 'none'):
         print(4, price_range)
         if price_range == 'low_budget':
             print('low')
@@ -269,8 +277,8 @@ def shop_right_sidebar(request):
             print('high')
             query = AllProperties.objects.filter(price__gt=30000)
 
-    elif(property_type != 'none' and location != 'none' and price_range != 'none'): 
-        print(2, location)  
+    elif(property_type != 'none' and location != 'none' and price_range != 'none'):
+        print(2, location)
         if price_range == 'low_budget':
             query = AllProperties.objects.filter(property_type=property_type, location=location, price__lt=10000)
         elif price_range == 'medium_budget':
@@ -283,12 +291,17 @@ def shop_right_sidebar(request):
     house_sale = HouseSale.objects.filter(property_id__in=querylist)
     house_rent = HouseRent.objects.filter(property_id__in=querylist)
     land_sale = LandSale.objects.filter(property_id__in=querylist)
-    
+
 
     all = list(chain(house_sale,house_rent,land_sale))
     random.shuffle(all)
+<<<<<<< HEAD
     print(f"chained {all}")
     
+=======
+    print(f"chanined {all}")
+
+>>>>>>> 7b8c8bfb67c35f60560ebeffb4b2736860cba9b1
     context = {'property_type':property_type, 'location':location, 'price_range':price_range}
 
     if call_all == True:
@@ -299,10 +312,10 @@ def shop_right_sidebar(request):
         return render(request, 'general/shop-right-sidebar.html', {'context':context, 'data':house_rent, 'counts':counts})
     elif land_sale.exists():
         return render(request, 'general/shop-right-sidebar.html', {'context':context, 'data':land_sale, 'counts':counts})
-    
+
     # print(f"House sale {house_sale}, Land sale {land_sale}, House rent {house_rent}")
-    
-    
+
+
     return render(request, 'general/shop-right-sidebar.html', {'context':context, 'counts':counts, 'house_sale':house_sale, 'house_rent':house_rent, 'house_sale':house_sale})
 
 def shop(request):
@@ -316,6 +329,7 @@ def team(request):
 
 @login_required
 def wishlist(request):
+<<<<<<< HEAD
     data = Wishlist.objects.filter(username = request.user.username)
     querylist = [i.property_id for i in data]
     house_sale = HouseSale.objects.filter(property_id__in=querylist)
@@ -350,3 +364,6 @@ def wishlist(request):
 
 
 
+=======
+    return render(request, 'general/wishlist.html')
+>>>>>>> 7b8c8bfb67c35f60560ebeffb4b2736860cba9b1

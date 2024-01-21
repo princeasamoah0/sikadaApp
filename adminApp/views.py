@@ -15,12 +15,20 @@ def page_500(request):
 def add_agent(request):
     return render(request, 'admin-app/add-agent.html')
 
+<<<<<<< HEAD
 def add_property(request):
     if request.method == "POST":
         print('POsting')
     # houserent = HouseRent.objects.all()
     # print(houserent)
     return render(request, 'admin-app/add-property.html')
+=======
+def add_property_house(request):
+    return render(request, 'admin-app/add-property_house.html')
+
+def add_property_land(request):
+    return render(request, 'admin-app/add-property_land.html')
+>>>>>>> 7b8c8bfb67c35f60560ebeffb4b2736860cba9b1
 
 def agent(request):
     return render(request, 'admin-app/agent.html')
@@ -56,7 +64,7 @@ def contact(request):
     return render(request, 'admin-app/contact.html')
 
 def events(request):
-    return render(request, 'admin-app/events.html')    
+    return render(request, 'admin-app/events.html')
 
 def file_dashboard(request):
     return render(request, 'admin-app/file-dashboard.html')
@@ -65,73 +73,73 @@ def file_documents(request):
     return render(request, 'admin-app/file-documents.html')
 
 def file_images(request):
-    return render(request, 'admin-app/file-images.html')  
+    return render(request, 'admin-app/file-images.html')
 
 def file_media(request):
-    return render(request, 'admin-app/file-media.html') 
+    return render(request, 'admin-app/file-media.html')
 
 def forgot_password(request):
-    return render(request, 'admin-app/forgot-password.html') 
+    return render(request, 'admin-app/forgot-password.html')
 
 def image_gallery(request):
-    return render(request, 'admin-app/image-gallery.html') 
+    return render(request, 'admin-app/image-gallery.html')
 
 def invoices(request):
-    return render(request, 'admin-app/invoices.html') 
+    return render(request, 'admin-app/invoices.html')
 
 def locked(request):
-    return render(request, 'admin-app/locked.html') 
+    return render(request, 'admin-app/locked.html')
 
 def mail_compose(request):
-    return render(request, 'admin-app/mail-compose.html') 
+    return render(request, 'admin-app/mail-compose.html')
 
 def mail_inbox(request):
-    return render(request, 'admin-app/mail-inbox.html')   
+    return render(request, 'admin-app/mail-inbox.html')
 
 def mail_single(request):
-    return render(request, 'admin-app/mail-single.html')  
+    return render(request, 'admin-app/mail-single.html')
 
 def map(request):
-    return render(request, 'admin-app/map.html')  
+    return render(request, 'admin-app/map.html')
 
 def office(request):
-    return render(request, 'admin-app/office.html')  
+    return render(request, 'admin-app/office.html')
 
 def page_offline(request):
-    return render(request, 'admin-app/page-offline.html')  
+    return render(request, 'admin-app/page-offline.html')
 
 def pricing(request):
-    return render(request, 'admin-app/pricing.html')  
+    return render(request, 'admin-app/pricing.html')
 
 def profile(request):
-    return render(request, 'admin-app/profile.html')  
+    return render(request, 'admin-app/profile.html')
 
 def property_detail(request):
-    return render(request, 'admin-app/property-detail.html')  
+    return render(request, 'admin-app/property-detail.html')
 
 def property_list(request):
-    return render(request, 'admin-app/property-list.html')  
+    return render(request, 'admin-app/property-list.html')
 
 def property_list3(request):
-    return render(request, 'admin-app/property-list3.html')  
+    return render(request, 'admin-app/property-list3.html')
 
 def property_list4(request):
-    return render(request, 'admin-app/property-list4.html')  
+    return render(request, 'admin-app/property-list4.html')
 
 def reports(request):
-    return render(request, 'admin-app/reports.html')  
+    return render(request, 'admin-app/reports.html')
 
 def search_results(request):
-    return render(request, 'admin-app/search-results.html')  
+    return render(request, 'admin-app/search-results.html')
 
 def shop(request):
-    return render(request, 'admin-app/shop.html')  
+    return render(request, 'admin-app/shop.html')
 
 def sign_in(request):
-    return render(request, 'admin-app/sign-in.html')  
+    return render(request, 'admin-app/sign-in.html')
 
 def sign_up(request):
-    return render(request, 'admin-app/sign-up.html')  
+    return render(request, 'admin-app/sign-up.html')
 
 def timeline(request):
     return render(request, 'admin-app/timeline.html')
@@ -147,5 +155,3 @@ def widgets_app(request):
 
 def widgets_data(request):
     return render(request, 'admin-app/widgets-data.html')
-
-

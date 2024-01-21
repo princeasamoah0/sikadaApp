@@ -31,13 +31,13 @@
 
 <!-- Top Bar -->
 <nav class="navbar">
-    <div class="col-12">        
+    <div class="col-12">
         <div class="navbar-header">
             <a href="javascript:void(0);" class="bars"></a>
             <a class="navbar-brand" href="/admin-app"><img src="{% static 'admin-app/assets/images/logo.svg' %}" width="30" alt="Compass"><span class="m-l-10">Estate</span></a>
         </div>
         <ul class="nav navbar-nav navbar-left">
-            <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>            
+            <li><a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"><i class="zmdi zmdi-swap"></i></a></li>
             <li class="hidden-sm-down">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search...">
@@ -195,7 +195,7 @@
                     <div class="image"><a href="profile"><img src="{% static 'admin-app/assets/images/profile_av.jpg' %}" alt="User"></a></div>
                     <div class="detail">
                         <h4>Michael</h4>
-                        <small>Agent</small>                        
+                        <small>Agent</small>
                     </div>
                     <a href="events" title="Events"><i class="zmdi zmdi-calendar"></i></a>
                     <a href="mail-inbox" title="Inbox"><i class="zmdi zmdi-email"></i></a>
@@ -205,13 +205,14 @@
                 </div>
             </li>
             <li class="header">MAIN</li>
-            <li><a href="/admin-app"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>            
+            <li><a href="/admin-app"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
             <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-city"></i><span>Property</span> </a>
                 <ul class="ml-menu">
                     <li><a href="property-list">Property List</a></li>
                     <li><a href="property-list3">3 Column</a></li>
-                    <li><a href="property-list4">4 Column</a></li>                        
-                    <li><a href="add-property">Add Property</a></li>
+                    <li><a href="property-list4">4 Column</a></li>
+                    <li><a href="add-property_house">Add Property (House)</a></li>
+                    <li><a href="add-property_land">Add Property (Land)</a></li>
                     <li><a href="property-detail">Property Detail</a></li>
                 </ul>
             </li>
@@ -219,13 +220,13 @@
                 <ul class="ml-menu">
                     <li><a href="apartment">Apartment</a></li>
                     <li><a href="office">Office</a></li>
-                    <li><a href="shop">Shop</a></li>                        
+                    <li><a href="shop">Shop</a></li>
                     <li><a href="villa">Villa</a></li>
                 </ul>
             </li><li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-accounts-outline"></i><span>Agents</span> </a>
                 <ul class="ml-menu">
                     <li><a href="agent">All Agents</a></li>
-                    <li><a href="add-agent">Add Agent</a></li>                       
+                    <li><a href="add-agent">Add Agent</a></li>
                     <li><a href="profile">Agent Profile</a></li>
                     <li><a href="invoices">Agent Invoice</a></li>
                 </ul>
@@ -309,12 +310,12 @@
                     <ul class="choose-skin list-unstyled">
                         <li data-theme="purple">
                             <div class="purple"></div>
-                        </li>                   
+                        </li>
                         <li data-theme="blue" class="active">
                             <div class="blue"></div>
                         </li>
                         <li data-theme="cyan">
-                            <div class="cyan"></div>                    
+                            <div class="cyan"></div>
                         </li>
                         <li data-theme="green">
                             <div class="green"></div>
@@ -323,9 +324,9 @@
                             <div class="orange"></div>
                         </li>
                         <li data-theme="blush">
-                            <div class="blush"></div>                    
+                            <div class="blush"></div>
                         </li>
-                    </ul>                    
+                    </ul>
                 </div>
                 <div class="card">
                     <h6>Left Menu</h6>
@@ -357,7 +358,7 @@
                             <div class="checkbox">
                                 <input id="checkbox3" type="checkbox" checked="">
                                 <label for="checkbox3">Notifications</label>
-                            </div>                        
+                            </div>
                         </li>
                         <li>
                             <div class="checkbox">
@@ -384,12 +385,12 @@
                         </li>
                     </ul>
                 </div>
-            </div>                
-        </div>       
+            </div>
+        </div>
         <div class="tab-pane right_chat pullUp" id="chat">
             <div class="slim_scroll">
                 <div class="card">
-                    <div class="search">                        
+                    <div class="search">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search...">
                             <span class="input-group-addon">
@@ -411,7 +412,7 @@
                                         <span class="badge badge-outline status"></span>
                                     </div>
                                 </div>
-                            </a>                            
+                            </a>
                         </li>
                         <li class="online">
                             <a href="javascript:void(0);">
@@ -423,7 +424,7 @@
                                         <span class="badge badge-outline status"></span>
                                     </div>
                                 </div>
-                            </a>                            
+                            </a>
                         </li>
                         <li class="offline">
                             <a href="javascript:void(0);">
@@ -435,7 +436,7 @@
                                         <span class="badge badge-outline status"></span>
                                     </div>
                                 </div>
-                            </a>                            
+                            </a>
                         </li>
                         <li class="me">
                             <a href="javascript:void(0);">
@@ -447,7 +448,7 @@
                                         <span class="badge badge-outline status"></span>
                                     </div>
                                 </div>
-                            </a>                            
+                            </a>
                         </li>
                         <li class="online">
                             <a href="javascript:void(0);">
@@ -459,8 +460,8 @@
                                         <span class="badge badge-outline status"></span>
                                     </div>
                                 </div>
-                            </a>                            
-                        </li>                        
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="card">
@@ -577,9 +578,9 @@
                     <ul class="list-unstyled activity">
                         <li>
                             <a href="javascript:void(0)">
-                                <i class="zmdi zmdi-cake bg-blue"></i>                    
+                                <i class="zmdi zmdi-cake bg-blue"></i>
                                 <div class="info">
-                                    <h4>Admin Birthday</h4>                    
+                                    <h4>Admin Birthday</h4>
                                     <small>Will be Jan 01</small>
                                 </div>
                             </a>
@@ -621,7 +622,7 @@
                             <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" style="width: 86%;">
                                 <span class="progress-value">86%</span>
                             </div>
-                        </div>                        
+                        </div>
                         <ul class="list-unstyled team-info">
                             <li class="m-r-15"><small>Team</small></li>
                             <li>
@@ -632,7 +633,7 @@
                             </li>
                             <li>
                                 <img src="{% static 'admin-app/assets/images/xs/avatar4.jpg' %}" alt="Avatar">
-                            </li>                            
+                            </li>
                         </ul>
                     </div>
                     <div class="progress-container">
@@ -678,7 +679,7 @@
                             </li>
                             <li>
                                 <img src="{% static 'admin-app/assets/images/xs/avatar7.jpg' %}" alt="Avatar">
-                            </li>                            
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -709,7 +710,7 @@
                 <li>
                     <a href="javascript:void(0);" title="Add Member"><i class="zmdi zmdi-plus-circle"></i></a>
                 </li>
-            </ul>                       
+            </ul>
         </div>
         <div class="body">
             <div class="chat-widget">
@@ -718,7 +719,7 @@
                     <img src="{% static 'admin-app/assets/images/xs/avatar3.jpg' %}" class="rounded-circle" alt="">
                     <div class="chat-info">
                         <a class="name" href="#">Alexander</a>
-                        <span class="datetime">6:12</span>                            
+                        <span class="datetime">6:12</span>
                         <span class="message">Hello, John </span>
                     </div>
                 </li>
@@ -778,7 +779,7 @@
                                     <label for="deleteall">
                                         All
                                     </label>
-                                </div>                                
+                                </div>
                             </div>
                             <div class="col-lg-5 col-md-5 col-6">
                                 <div class="input-group search">
@@ -825,7 +826,7 @@
                         </div>
                     </div>
                 </div>
-            </div>           
+            </div>
         </div>
         <div class="row clearfix">
             <div class="col-lg-12">
@@ -835,7 +836,7 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Name</th>                                    
+                                    <th>Name</th>
                                     <th data-breakpoints="xs">Phone</th>
                                     <th data-breakpoints="xs sm md">Email</th>
                                     <th data-breakpoints="xs sm md">Address</th>
@@ -1048,7 +1049,7 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="body">                            
+                    <div class="body">
                         <ul class="pagination pagination-primary m-b-0">
                             <li class="page-item"><a class="page-link" href="#"><i class="zmdi zmdi-arrow-left"></i></a></li>
                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
