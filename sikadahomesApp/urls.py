@@ -38,5 +38,5 @@ urlpatterns = [
     path('team-details', views.team_details, name='team-details'),
     path('team', views.team, name='team'),
     path('wishlist', views.wishlist, name='wishlist'),
+    path('land-details', views.land_details, name='land-details'),
 ]
-
