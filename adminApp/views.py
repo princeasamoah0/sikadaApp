@@ -15,20 +15,69 @@ def page_500(request):
 def add_agent(request):
     return render(request, 'admin-app/add-agent.html')
 
-<<<<<<< HEAD
-def add_property(request):
-    if request.method == "POST":
-        print('POsting')
-    # houserent = HouseRent.objects.all()
-    # print(houserent)
-    return render(request, 'admin-app/add-property.html')
-=======
 def add_property_house(request):
+    if request.method == 'POST':
+        region = request.POST.get('region')
+        budget = request.POST.get('budget')
+        img_listing = request.FILES.get('img_listing')
+        img_front = request.FILES.get('img_front')
+        status = request.POST.get('status')
+        price = request.POST.get('price')
+        date = request.POST.get('date')
+        property_title = request.POST.get('property_title')
+        property_address = request.POST.get('property_address')
+        description = request.POST.get('description')
+        property_name = request.POST.get('property_name')
+        home_area = request.POST.get('home_area')
+        rooms = request.POST.get('rooms')
+        baths = request.POST.get('baths')
+        year_built = request.POST.get('year_built')
+        neigbourhood = request.POST.get('neigbourhood')
+        lot_dimensions = request.POST.get('lot_dimensions')
+        beds = request.POST.get('beds')
+        balcony = request.POST.get('balcony')
+        furnished = request.POST.get('furnished')
+        completed = request.POST.get('completed')
+        living_room = request.POST.get('living_room')
+        dining_area = request.POST.get('dining_area')
+        garden = request.POST.get('garden')
+        gym = request.POST.get('gym')
+        img_gallery_1 = request.FILES.get('img_gallery_1')
+        img_gallery_2 = request.FILES.get('img_gallery_2')
+        img_gallery_3 = request.FILES.get('img_gallery_3')
+        air_conditioner = request.POST.get('air_conditioner') == 'on'
+        pool = request.POST.get('pool') == 'on'
+        wifi = request.POST.get('wifi') == 'on'
+        near_church = request.POST.get('near_church') == 'on'
+        near_estate = request.POST.get('near_estate') == 'on'
+        dish_washer = request.POST.get('dish_washer') == 'on'
+        security = request.POST.get('security') == 'on'
+        indoor_game = request.POST.get('indoor_game') == 'on'
+        cable_tv = request.POST.get('cable_tv') == 'on'
+        microwave = request.POST.get('microwave') == 'on'
+
+        # print(request.FILES.get('img_listing'))
+        # img_listing = request.POST.get('img_front')
+        print(f''' Region = {region}, budget = {budget}, img_listing = {img_listing}, img_front = {img_front}, status = {status},
+             price = {price}, date = {date} , property_title = {property_title},
+             property_address = {property_address},  description = {description} , property_name = {property_name} ,
+             home_area = {home_area}, rooms = {rooms}, baths = {baths},
+             year_built = {year_built}, neigbourhood = {neigbourhood}, lot_dimensions={lot_dimensions},
+             beds={beds},  balcony={balcony}, furnished={furnished}, completed={completed},
+             living_room={living_room}, dining_area={dining_area}, garden={garden}, gym={gym}, img_gallery_1={img_gallery_1},
+             img_gallery_2={img_gallery_2}, img_gallery_3={img_gallery_3}, air_conditioner={air_conditioner},     
+             pool={pool}, wifi={wifi}, near_church={near_church}, near_estate={near_estate}, dish_washer={dish_washer}, security={security},
+             indoor_game={indoor_game}, cable_tv={cable_tv}, microwave={microwave}
+            ''')                                                                                                                             
+    #     region = request.POST.get('region')
+    #     budget = request.POST.get('budget')
+    #     file = request.POST.get('file')
+    #     print(region, budget, file)
+        # print('Posting')
     return render(request, 'admin-app/add-property_house.html')
 
 def add_property_land(request):
     return render(request, 'admin-app/add-property_land.html')
->>>>>>> 7b8c8bfb67c35f60560ebeffb4b2736860cba9b1
 
 def agent(request):
     return render(request, 'admin-app/agent.html')

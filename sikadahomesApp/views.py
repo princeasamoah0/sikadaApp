@@ -170,13 +170,8 @@ def register(request):
             user.last_name = lastname
             user.save()
 
-<<<<<<< HEAD
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect(index) 
-=======
-            login(request, user)
-            return redirect(index)
->>>>>>> 7b8c8bfb67c35f60560ebeffb4b2736860cba9b1
             # return render(request, 'general/index.html')
 
             # print('User created successfully')
@@ -295,13 +290,8 @@ def shop_right_sidebar(request):
 
     all = list(chain(house_sale,house_rent,land_sale))
     random.shuffle(all)
-<<<<<<< HEAD
     print(f"chained {all}")
     
-=======
-    print(f"chanined {all}")
-
->>>>>>> 7b8c8bfb67c35f60560ebeffb4b2736860cba9b1
     context = {'property_type':property_type, 'location':location, 'price_range':price_range}
 
     if call_all == True:
@@ -329,7 +319,6 @@ def team(request):
 
 @login_required
 def wishlist(request):
-<<<<<<< HEAD
     data = Wishlist.objects.filter(username = request.user.username)
     querylist = [i.property_id for i in data]
     house_sale = HouseSale.objects.filter(property_id__in=querylist)
@@ -364,6 +353,3 @@ def wishlist(request):
 
 
 
-=======
-    return render(request, 'general/wishlist.html')
->>>>>>> 7b8c8bfb67c35f60560ebeffb4b2736860cba9b1
