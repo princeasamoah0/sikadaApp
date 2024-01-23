@@ -791,7 +791,7 @@
                         
                         <div class="col-sm-3">
                             <select name="region" class="form-control form-control-outline-info show-tick">
-                                <option value="">-- Region --</option>
+                                <option value="no_selection">-- Region --</option>
                                 <option value="greater_accra">Greater Accra </option>
                                 <option value="ashanti">Ashanti   </option>
                                 <option value="northern">Northern  </option>
@@ -811,13 +811,18 @@
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            <select name="budget" class="form-control form-control-outline-info show-tick">
-                                <option value="">-- Price Range --</option>
+                            <select name="location" class="form-control form-control-outline-info show-tick">
+                                <option value="no_selection">-- Price Range --</option>
                                 <option value="low">Low Budget (GH₵5000- GH₵10,000)</option>
                                 <option value="medium">Medium Budget (GH₵10,000 - GH₵30,000)</option>
                                 <option value="high">High Budget (GH₵30,000 Up)</option>
                             </select>
                         </div>
+                        <div class="col-sm-3">
+                            <div class="form-group form-group-outline-info">
+                                <input type="text" name="location" class="form-control form-control-outline-info" placeholder="Location">
+                            </div>
+                      </div>
                     </div>
                 </div>
                 <div class="card">
@@ -983,21 +988,21 @@
                             </div>
                             <div class="col-sm-6">
                               <select name="balcony" class="form-control form-control-outline-info show-tick">
-                                  <option value="">-- With Balcony --</option>
+                                  <option value="no_selection">-- With Balcony --</option>
                                   <option value="yes">Yes</option>
                                   <option value="no">No</option>
                               </select>
                             </div>
                             <div class="col-sm-6">
                               <select name="furnished" class="form-control form-control-outline-info show-tick">
-                                  <option value="">-- Fully furnished --</option>
+                                  <option value="no_selection">-- Fully furnished --</option>
                                   <option value="yes">Yes</option>
                                   <option value="no">No</option>
                               </select>
                             </div>
                             <div class="col-sm-6">
                               <select name="completed" class="form-control form-control-outline-info show-tick">
-                                  <option value="">-- Fully completed --</option>
+                                  <option value="no_selection">-- Fully completed --</option>
                                   <option value="yes">Yes</option>
                                   <option value="no">No</option>
                               </select>
@@ -1031,14 +1036,14 @@
                         <div class="row clearfix">
                           <div class="col-sm-6">
                             <select name="living_room" class="form-control form-control-outline-info show-tick">
-                                <option value="">-- Living Room --</option>
+                                <option value="no_selection">-- Living Room --</option>
                                 <option value="yes">Available</option>
                                 <option value="no">Not Available</option>
                             </select>
                           </div>
                           <div class="col-sm-6">
                             <select name="dining_area" class="form-control form-control-outline-info show-tick">
-                                <option value="">-- Dining Area --</option>
+                                <option value="no_selection">-- Dining Area --</option>
                                 <option value="yes">Available</option>
                                 <option value="no">Not Available</option>
                             </select>
@@ -1052,14 +1057,14 @@
                           </div> -->
                           <div class="col-sm-6">
                             <select name="garden" class="form-control form-control-outline-info show-tick">
-                                <option value="">-- Garden --</option>
+                                <option value="no_selection">-- Garden --</option>
                                 <option value="yes">Available</option>
                                 <option value="no">Not Available</option>
                             </select>
                           </div>
                           <div class="col-sm-6">
                             <select name="garage" class="form-control form-control-outline-info show-tick">
-                                <option value="">-- Garage --</option>
+                                <option value="no_selection">-- Garage --</option>
                                 <option value="yes">Available</option>
                                 <option value="no">Not Available</option>
                             </select>
@@ -1073,14 +1078,14 @@
                           </div> -->
                           <div class="col-sm-6">
                             <select name="gym" class="form-control form-control-outline-info show-tick">
-                                <option value="">-- Gymn Area --</option>
+                                <option value="no_selection">-- Gymn Area --</option>
                                 <option value="yes">Available</option>
                                 <option value="no">Not Available</option>
                             </select>
                           </div>
                           <div class="col-sm-6">
                             <select name="parking" class="form-control form-control-outline-info show-tick">
-                                <option value="">-- Parking --</option>
+                                <option value="no_selection">-- Parking --</option>
                                 <option value="yes">Available</option>
                                 <option value="no">Not Available</option>
                             </select>

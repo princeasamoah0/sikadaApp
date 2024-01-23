@@ -15,8 +15,16 @@ def page_500(request):
 def add_agent(request):
     return render(request, 'admin-app/add-agent.html')
 
-def add_property_house(request):
-    if request.method == 'POST':
+
+def generate_random_id(length=10):
+        import random
+        import string
+        characters = string.ascii_letters + string.digits
+        return ''.join(random.choice(characters) for _ in range(length))
+
+
+
+def SaveFunction(request, param):    
         region = request.POST.get('region')
         budget = request.POST.get('budget')
         img_listing = request.FILES.get('img_listing')
@@ -55,20 +63,61 @@ def add_property_house(request):
         indoor_game = request.POST.get('indoor_game') == 'on'
         cable_tv = request.POST.get('cable_tv') == 'on'
         microwave = request.POST.get('microwave') == 'on'
+        # print(f''' Region = {region}, budget = {budget}, img_listing = {img_listing}, img_front = {img_front}, status = {status},
+        #      price = {price}, date = {date} , property_title = {property_title},
+        #      property_address = {property_address},  description = {description} , property_name = {property_name} ,
+        #      home_area = {home_area}, rooms = {rooms}, baths = {baths},
+        #      year_built = {year_built}, neigbourhood = {neigbourhood}, lot_dimensions={lot_dimensions},
+        #      beds={beds},  balcony={balcony}, furnished={furnished}, completed={completed},
+        #      living_room={living_room}, dining_area={dining_area}, garden={garden}, gym={gym}, img_gallery_1={img_gallery_1},
+        #      img_gallery_2={img_gallery_2}, img_gallery_3={img_gallery_3}, air_conditioner={air_conditioner},     
+        #      pool={pool}, wifi={wifi}, near_church={near_church}, near_estate={near_estate}, dish_washer={dish_washer}, security={security},
+        #      indoor_game={indoor_game}, cable_tv={cable_tv}, microwave={microwave}
+        #     ''') 
+        property_id = generate_random_id()
+        if param == 'for_sale':          
+            a = HouseSale(property_id=property_id,
+                          region=region,budget=budget,img_listing=img_listing,img_front=img_front,
+                          status=status,price=price,date=date,property_title=property_title,property_address=property_address,description=description,
+                          property_name=property_name,home_area=home_area,rooms=rooms,baths=baths,year_built=year_built,neigbourhood=neigbourhood,
+                          lot_dimensions=lot_dimensions,beds=beds,balcony=balcony,furnished=furnished,completed=completed,living_room=living_room,
+                          dining_area=dining_area,garden=garden,gym=gym,img_gallery_1=img_gallery_1,img_gallery_2=img_gallery_2,img_gallery_3=img_gallery_3,
+                          air_conditioner=air_conditioner,pool=pool,wifi=wifi,near_church=near_church,near_estate=near_estate,dish_washer=dish_washer,
+                          security=security,indoor_game=indoor_game,cable_tv=cable_tv,microwave=microwave,
+                          )            
+            a.save()
+            
+        elif param == 'for_rent':    
+            a = HouseRent(property_id=property_id,
+                          region=region,budget=budget,img_listing=img_listing,img_front=img_front,
+                          status=status,price=price,date=date,property_title=property_title,property_address=property_address,description=description,
+                          property_name=property_name,home_area=home_area,rooms=rooms,baths=baths,year_built=year_built,neigbourhood=neigbourhood,
+                          lot_dimensions=lot_dimensions,beds=beds,balcony=balcony,furnished=furnished,completed=completed,living_room=living_room,
+                          dining_area=dining_area,garden=garden,gym=gym,img_gallery_1=img_gallery_1,img_gallery_2=img_gallery_2,img_gallery_3=img_gallery_3,
+                          air_conditioner=air_conditioner,pool=pool,wifi=wifi,near_church=near_church,near_estate=near_estate,dish_washer=dish_washer,
+                          security=security,indoor_game=indoor_game,cable_tv=cable_tv,microwave=microwave,
+                          )
+            a.save()
+        else:    
+            a = HouseLease(property_id=property_id,
+                          region=region,budget=budget,img_listing=img_listing,img_front=img_front,
+                          status=status,price=price,date=date,property_title=property_title,property_address=property_address,description=description,
+                          property_name=property_name,home_area=home_area,rooms=rooms,baths=baths,year_built=year_built,neigbourhood=neigbourhood,
+                          lot_dimensions=lot_dimensions,beds=beds,balcony=balcony,furnished=furnished,completed=completed,living_room=living_room,
+                          dining_area=dining_area,garden=garden,gym=gym,img_gallery_1=img_gallery_1,img_gallery_2=img_gallery_2,img_gallery_3=img_gallery_3,
+                          air_conditioner=air_conditioner,pool=pool,wifi=wifi,near_church=near_church,near_estate=near_estate,dish_washer=dish_washer,
+                          security=security,indoor_game=indoor_game,cable_tv=cable_tv,microwave=microwave,
+                          )
+            a.save()
+        b = AllProperties(property_id = property_id , property_type=f'house_{param}', price=price, location=region)
+        b.save()    
 
-        # print(request.FILES.get('img_listing'))
-        # img_listing = request.POST.get('img_front')
-        print(f''' Region = {region}, budget = {budget}, img_listing = {img_listing}, img_front = {img_front}, status = {status},
-             price = {price}, date = {date} , property_title = {property_title},
-             property_address = {property_address},  description = {description} , property_name = {property_name} ,
-             home_area = {home_area}, rooms = {rooms}, baths = {baths},
-             year_built = {year_built}, neigbourhood = {neigbourhood}, lot_dimensions={lot_dimensions},
-             beds={beds},  balcony={balcony}, furnished={furnished}, completed={completed},
-             living_room={living_room}, dining_area={dining_area}, garden={garden}, gym={gym}, img_gallery_1={img_gallery_1},
-             img_gallery_2={img_gallery_2}, img_gallery_3={img_gallery_3}, air_conditioner={air_conditioner},     
-             pool={pool}, wifi={wifi}, near_church={near_church}, near_estate={near_estate}, dish_washer={dish_washer}, security={security},
-             indoor_game={indoor_game}, cable_tv={cable_tv}, microwave={microwave}
-            ''')                                                                                                                             
+def add_property_house(request):
+    if request.method == 'POST':
+        status = request.POST.get('status')
+        # status_text = status.split('_')[1].capitalize()
+        SaveFunction(request, status)
+                                                                                                                                        
     #     region = request.POST.get('region')
     #     budget = request.POST.get('budget')
     #     file = request.POST.get('file')
