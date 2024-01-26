@@ -237,7 +237,7 @@ class LandSale(models.Model):
     location = models.CharField(max_length=100) 
     description = models.TextField()
     gps_address = models.CharField(max_length=20)
-    img_listing = models.ImageField(upload_to='houseRent')
+    img_listing = models.ImageField(upload_to='houseRent', null=True, blank=True)
     img_front = models.ImageField(upload_to='houseRent', null=True, blank=True)
     # image_3 = models.ImageField(upload_to='houseRent', null=True, blank=True)
     # image_4 = models.ImageField(upload_to='houseRent', null=True, blank=True)
@@ -251,7 +251,7 @@ class LandSale(models.Model):
     land_size = models.CharField(max_length=10,null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.property_title
 
 # LandRent
     
