@@ -389,8 +389,8 @@
             <div class="row ltn__image-slider-5-active slick-arrow-1 slick-arrow-1-inner ltn__no-gutter-all">
                 <div class="col-lg-12">
                     <div class="ltn__img-slide-item-4">
-                        <a href="img/img-slide/31.jpg' %}" data-rel="lightcase:myCollection">
-                            <img src="{% static 'img/img-slide/31.jpg' %}" alt="Image">
+                        <a href="{{context.img_front.url}}" data-rel="lightcase:myCollection">
+                            <img src="{{context.img_front.url}}" alt="Image">
                         </a>
                     </div>
                 </div>
@@ -439,10 +439,14 @@
                                     <a href="#">Featured</a>
                                 </li>
                                 <li class="ltn__blog-category">
+                                    {%if context.status|slice:"-4:" == 'sale' %}
+                                    <a class="bg-orange" href="#">For Sale</a>
+                                    {%else%}
                                     <a class="bg-orange" href="#">For Rent</a>
+                                    {%endif%}
                                 </li>
                                 <li class="ltn__blog-date">
-                                    <i class="far fa-calendar-alt"></i>May 19, 2021
+                                    <i class="far fa-calendar-alt"></i>{{context.date_time|date:"jS F Y"}}
                                 </li>
                                 <li>
                                     <a href="#"><i class="far fa-comments"></i>35 Comments</a>
@@ -450,35 +454,50 @@
                             </ul>
                         </div>
                         <h1>{{context.title}}</h1>
-                        <label><span class="ltn__secondary-color"><i class="flaticon-pin"></i></span> {{context.sub_location}}, {{context.location}}</label>
+                        <label><span class="ltn__secondary-color"><i class="flaticon-pin"></i></span> {{context.region}}, {{context.location}}</label>
                         <h4 class="title-2">Description</h4>
                         <p>
                            {{context.description}}
                         </p>
-                        <p>To the left is the modern kitchen with central island, leading through to the unique breakfast family room which feature glass walls and doors out onto the garden and access to the separate utility room.</p>
+                        <!-- <p>To the left is the modern kitchen with central island, leading through to the unique breakfast family room which feature glass walls and doors out onto the garden and access to the separate utility room.</p> -->
 
                         <h4 class="title-2">Property Detail</h4>
                         <div class="property-detail-info-list section-bg-1 clearfix mb-60">
                             <ul>
-                                <li><label>Property Name:</label> <span>Legato House</span></li>
-                                <li><label>Home Area: </label> <span>120m2</span></li>
-                                <li><label>Rooms:</label> <span>7</span></li>
-                                <li><label>Baths:</label> <span>2</span></li>
-                                <li><label>Year built:</label> <span>1992</span></li>
+                                <li><label>Property Name:</label> <span>{{context.property_name}}</span></li>
+                                <li><label>Home Area: </label> <span>120m<sup>2</sup></span></li>
+                                <li><label>Rooms:</label> <span>{{context.rooms}}</span></li>
+                                <li><label>Baths:</label> <span>{{context.baths}}</span></li>
+                                <li><label>Year built:</label> <span>{{context.year_built}}</span></li>
                             </ul>
                             <ul>
-                                <li><label>Neighbourhood:</label> <span>Aburi</span></li>
-                                <li><label>With Balcony:</label> <span>No</span></li>
-                                <li><label>Fully furnished</label> <span>No</span></li>
-                                <li><label>Fully completed:</label> <span>No</span></li>
+                                <li><label>Neighbourhood:</label> <span>{{context.neighbourhood}}</span></li>
+                                <li><label>With Balcony:</label> <span>{{context.balcony}}</span></li>
+                                <li><label>Fully furnished</label> <span>{{context.furnished}}</span></li>
+                                <li><label>Fully completed:</label> <span>{{context.completed}}</span></li>
                             </ul>
                             <ul>
-                                <li><label>Lot dimensions:</label> <span>120m2</span></li>
-                                <li><label>Beds:</label> <span>7</span></li>
-                                <li><label>Price:</label> <span>2</span></li>
-                                <li><label>Property Status:</label> <span>For Sale</span></li>
+                                <li><label>Lot dimensions:</label> <span>120m<sup>2</sup></span></li>
+                                <li><label>Beds:</label> <span>{{context.beds}}</span></li>
+                                <li><label>Price:</label> <span>GHS {{context.price}}</span></li>
+                                <li><label>Property Status:</label> 
+                                   
+                                    {%if context.status|slice:"-4:" == 'sale' %}
+                                    <span>For Sale</span>
+                                    {% elif context.status|slice:"-4:" == 'rent' %}
+                                    <span>For Rent</span>
+                                    {%else%}
+                                    <span>For Lease</span>
+                                    {%endif%}
+                                </li>
                             </ul>
                         </div>
+
+                        {%if context.status|slice:"-4:" == 'sale' %}
+                                    <a class="bg-orange" href="#">For Sale</a>
+                                    {%else%}
+                                    <a class="bg-orange" href="#">For Rent</a>
+                                    {%endif%}
 
                         <h4 class="title-2">Facts and Features</h4>
                         <div class="property-detail-feature-list clearfix mb-45">
@@ -562,16 +581,16 @@
                         <div class="ltn__property-details-gallery mb-30">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <a href="img/others/14.jpg' %}" data-rel="lightcase:myCollection">
-                                        <img class="mb-30" src="{% static 'img/others/14.jpg' %}" alt="Image">
+                                    <a href="{{context.img_gallery_1.url}}" data-rel="lightcase:myCollection">
+                                        <img class="mb-30" src="{{context.img_gallery_1.url}}" alt="Image">
                                     </a>
-                                    <a href="img/others/15.jpg' %}" data-rel="lightcase:myCollection">
-                                        <img class="mb-30" src="{% static 'img/others/15.jpg' %}" alt="Image">
+                                    <a href="{{context.img_gallery_2.url}}" data-rel="lightcase:myCollection">
+                                        <img class="mb-30" src="{{context.img_gallery_2.url}}" alt="Image">
                                     </a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="img/others/16.jpg' %}" data-rel="lightcase:myCollection">
-                                        <img class="mb-30" src="{% static 'img/others/16.jpg' %}" alt="Image">
+                                    <a href="{{context.img_gallery_3.url}}" data-rel="lightcase:myCollection">
+                                        <img class="mb-30" src="{{context.img_gallery_3.url}}" alt="Image">
                                     </a>
                                 </div>
                             </div>
@@ -584,34 +603,69 @@
                                     <div class="ltn__menu-widget">
                                         <ul>
                                             <li>
+                                                {% if context.air_conditioner == 'True' %}
                                                 <label class="checkbox-item">Air Conditioning
                                                     <input type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
+                                                {%else%}
+                                                <label class="checkbox-item">Air Conditioning
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                {%endif%}
                                             </li>
                                             <li>
+                                                {% if context.pool == 'True' %}
                                                 <label class="checkbox-item">Swimming pool
                                                     <input type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
+                                                {%else%}
+                                                <label class="checkbox-item">Swimming pool
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                {%endif%}
                                             </li>
                                             <li>
+                                                {% if context.wifi == 'True' %}
                                                 <label class="checkbox-item">Wifi
                                                     <input type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
+                                                {%else%}
+                                                <label class="checkbox-item">Wifi
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                {%endif%}
                                             </li>
                                             <li>
+                                                {% if context.near_church == 'True' %}
                                                 <label class="checkbox-item">Near church
                                                     <input type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
+                                                {%else%}
+                                                <label class="checkbox-item">Near church
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                {%endif%}
                                             </li>
                                             <li>
+                                                {% if context.near_estate == 'True' %}
                                                 <label class="checkbox-item">Near Estate
                                                     <input type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
+                                                {%else%}
+                                                <label class="checkbox-item">Near Estate
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                {%endif%}
                                             </li>
                                         </ul>
                                     </div>
@@ -620,34 +674,69 @@
                                     <div class="ltn__menu-widget">
                                         <ul>
                                             <li>
+                                                {% if context.dish_washer == 'True' %}
                                                 <label class="checkbox-item">Dish washer
                                                     <input type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
+                                                {%else%}
+                                                <label class="checkbox-item">Dish washer
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                {%endif%}
                                             </li>
                                             <li>
+                                                {% if context.security == 'True' %}
                                                 <label class="checkbox-item">24/7 security
                                                     <input type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
+                                                {%else%}
+                                                <label class="checkbox-item">24/7 security
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                {%endif%}
                                             </li>
                                             <li>
+                                                {% if context.indoor_game == 'True' %}
                                                 <label class="checkbox-item">Indoor Game
                                                     <input type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
+                                                {%else%}
+                                                <label class="checkbox-item">Indoor Game
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                {%endif%}
                                             </li>
                                             <li>
+                                                {% if context.cable_tv == 'True' %}
                                                 <label class="checkbox-item">Cable TV
                                                     <input type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
+                                                {%else%}
+                                                <label class="checkbox-item">Cable TV
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                {%endif%}
                                             </li>
                                             <li>
+                                                {% if context.microwave == 'True' %}
                                                 <label class="checkbox-item">Microwave
                                                     <input type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
+                                                {%else%}
+                                                <label class="checkbox-item">Microwave
+                                                    <input type="checkbox">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                {%endif%}
                                             </li>
                                         </ul>
                                     </div>

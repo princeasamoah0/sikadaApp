@@ -517,9 +517,9 @@
                 <!-- ltn__product-item -->
                 {% for item in context %}
                 <div class="col-xl-4 col-sm-6 col-12">
-                    <div id="latest_listings_{{item.product_id}}" class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
+                    <div id="latest_listings_{{item.property_id}}" class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                         <div class="product-img">
-                            <a href="product-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.image_1.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
+                            <a href="product-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.img_listing.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
                             <div class="real-estate-agent">
                                 <div class="agent-img">
                                     <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
@@ -540,23 +540,24 @@
                             </div>
 
 
-                            <h2 class="product-title"><a id="latest_listings_title_{{item.property_id}}" href="product-details/{{item.property_id}}">{{item.title|truncatechars:25}}</a></h2>
+                            <h2 class="product-title"><a id="latest_listings_title_{{item.property_id}}" href="product-details/{{item.property_id}}">{{item.property_title|truncatechars:25}}</a></h2>
                             <div class="product-img-location">
                                 <ul>
                                     <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> {{item.sub_location}}, {{item.location}}</a>
+                                        <a href="locations"><i class="flaticon-pin"></i> {{item.region}}, {{item.location}}</a>
                                     </li>
                                 </ul>
                             </div>
                             <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                {%if item.status|slice:"-5" == 'house' %}
-                                <li><span>{{item.bed}} </span>
+                                <!-- {{item.status|slice:"5"}} -->
+                                {%if item.status|slice:"5" == 'house' %}
+                                <li><span>{{item.beds}} </span>
                                     Bed
                                 </li>
                                 <li><span>{{item.rooms}} </span>
                                     Room
                                 </li>
-                                <li><span>{{item.bath}} </span>
+                                <li><span>{{item.baths}} </span>
                                     Bath
                                 </li>
                                 {%else%}
@@ -574,7 +575,7 @@
                                 fenced = models.BooleanField() -->
 
                                 {%endif%}
-                                <li><span>{{item.land_size}} </span>
+                                <li><span>{{item.lot_dimensions}} </span>
                                     Square Ft
                                 </li>
 

@@ -14,10 +14,11 @@ from .models import HouseRent,HouseSale,LandSale,AllProperties,Feedback, Wishlis
 # Create your views here.
 
 def index (request):
-    houseRent = HouseRent.objects.all().order_by('-id')[:2]
+    houseRent = HouseRent.objects.all().order_by('-id')[:1]
     houseSale = HouseSale.objects.all().order_by('-id')[:2]
     landSale = LandSale.objects.all().order_by('-id')[:2]
     feedback = Feedback.objects.all().order_by('-id')[:4]
+
     latest_listings = list(chain(houseRent, houseSale,landSale))
     random.shuffle(latest_listings)
     return render(request, 'general/index.html', {'context':latest_listings, 'feedback':feedback })
@@ -139,10 +140,7 @@ def product_details(request,property_id):
         query = HouseSale.objects.get(property_id= property_id)
     else:
         query = LandSale.objects.get(property_id= property_id)
-
-    print(query)
-    # houseDetail = HouseSale.objects.get(product = pk)
-    # print(house_detail)
+    print(query.img_front)
     return render(request, 'general/product-details.html', {'context':query} )
 
 def land_details(request):

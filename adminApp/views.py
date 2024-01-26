@@ -33,6 +33,7 @@ def SaveFunction(request, param):
         price = request.POST.get('price')
         date = request.POST.get('date')
         property_title = request.POST.get('property_title')
+        location = request.POST.get('location')
         property_address = request.POST.get('property_address')
         description = request.POST.get('description')
         property_name = request.POST.get('property_name')
@@ -75,8 +76,8 @@ def SaveFunction(request, param):
         #      indoor_game={indoor_game}, cable_tv={cable_tv}, microwave={microwave}
         #     ''') 
         property_id = generate_random_id()
-        if param == 'for_sale':          
-            a = HouseSale(property_id=property_id,
+        if param == 'house_for_sale':          
+            a = HouseSale(property_id=property_id,location=location,
                           region=region,budget=budget,img_listing=img_listing,img_front=img_front,
                           status=status,price=price,date=date,property_title=property_title,property_address=property_address,description=description,
                           property_name=property_name,home_area=home_area,rooms=rooms,baths=baths,year_built=year_built,neigbourhood=neigbourhood,
@@ -87,8 +88,8 @@ def SaveFunction(request, param):
                           )            
             a.save()
             
-        elif param == 'for_rent':    
-            a = HouseRent(property_id=property_id,
+        elif param == 'house_for_rent':    
+            a = HouseRent(property_id=property_id,location=location,
                           region=region,budget=budget,img_listing=img_listing,img_front=img_front,
                           status=status,price=price,date=date,property_title=property_title,property_address=property_address,description=description,
                           property_name=property_name,home_area=home_area,rooms=rooms,baths=baths,year_built=year_built,neigbourhood=neigbourhood,
@@ -99,7 +100,7 @@ def SaveFunction(request, param):
                           )
             a.save()
         else:    
-            a = HouseLease(property_id=property_id,
+            a = HouseLease(property_id=property_id,location=location,
                           region=region,budget=budget,img_listing=img_listing,img_front=img_front,
                           status=status,price=price,date=date,property_title=property_title,property_address=property_address,description=description,
                           property_name=property_name,home_area=home_area,rooms=rooms,baths=baths,year_built=year_built,neigbourhood=neigbourhood,
