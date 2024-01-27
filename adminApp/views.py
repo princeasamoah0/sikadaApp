@@ -127,6 +127,8 @@ def add_property_house(request):
     return render(request, 'admin-app/add-property_house.html')
 
 def add_property_land(request):
+    if request.method == "POST":
+        print('Post method executed')
     return render(request, 'admin-app/add-property_land.html')
 
 def agent(request):

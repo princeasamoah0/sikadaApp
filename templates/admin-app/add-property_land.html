@@ -775,9 +775,11 @@
                 <div class="header">
                     <h2><strong>Add features for listing</strong></h2>
                 </div>
-                <div class="body">
+            <form enctype="multipart/form-data" method="POST"> 
+                {% csrf_token %}               
+                <div class="body">                
                     <div class="row clearfix">
-                        <div class="col-sm-3">
+                        <!-- <div class="col-sm-3">
                             <select class="form-control form-control-outline-info show-tick " multiple>
                                 <option value="">-- Property Type --</option>
                                 <option value="10">Commercial</option>
@@ -786,92 +788,44 @@
                                 <option value="40">Fenced</option>
                                 <option value="50">Unfenced</option>
                             </select>
-                        </div>
-                        <!--<div class="col-sm-3">
-                            <select class="form-control form-control-outline-info show-tick">
-                                <option value="10">Any Type</option>
-                                <option value="10">Apartments</option>
-                                <option value="20">Houses</option>
-                                <option value="20">Commercial</option>
-                                <option value="20">Garages</option>
-                                <option value="20">Lots</option>
-                            </select>
                         </div> -->
+                        
                         <div class="col-sm-3">
-                            <select class="form-control form-control-outline-info show-tick">
-                                <option value="">-- Region --</option>
-                                <option value="greater_accra">Greater Accra </option>
-                                <option value="ashanti">Ashanti   </option>
-                                <option value="northern">Northern  </option>
-                                <option value="eastern">Eastern   </option>
-                                <option value="central">Central   </option>
-                               <option value="western">Western   </option>
-                               <option value="upper_east">Upper East   </option>
-                               <option value="western-north">Western North   </option>
-                               <option value="ahafo">Ahafo  </option>
-                               <option value="upper_west">Upper West   </option>
-                               <option value="volta">Volta   </option>
-                               <option value="bono">Bono Ahafo   </option>
-                               <option value="bono_east">Bono East  </option>
-                               <option value="oti">Oti  </option>
-                               <option value="north_east">North East   </option>
-                               <option value="savannah">Savannah  </option>
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
-                            <select class="form-control form-control-outline-info show-tick">
-                                <option value="">-- Price Range --</option>
-                                <option value="10">Low Budget (GH₵5000- GH₵10,000)</option>
-                                <option value="20">Medium Budget (GH₵10,000 - GH₵30,000)</option>
-                                <option value="20">High Budget (GH₵30,000 Up)</option>
-                            </select>
-                        </div>
-                        <!--<div class="col-sm-3">
-                            <select class="form-control form-control-outline-info show-tick">
-                                <option value="">-- All States --</option>
-                                <option value="10">Alaska</option>
-                                <option value="20">California</option>
-                                <option value="20">Colorado</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-2">
-                            <select class="form-control form-control-outline-info show-tick">
-                                <option value="">-- All Cities --</option>
-                                <option value="10">New York</option>
-                                <option value="20">Los Angeles</option>
-                                <option value="20">Chicago</option>
-                                <option value="20">Houston</option>
-                                <option value="20">Phoenix</option>
-                                <option value="20">San Antonio</option>
-                                <option value="20">Queens</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-2">
-                            <select class="form-control form-control-outline-info show-tick">
-                                <option value="">-- Beds --</option>
-                                <option value="20">1</option>
-                                <option value="20">2</option>
-                                <option value="20">3</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-2">
-                            <select class="form-control form-control-outline-info show-tick">
-                                <option value="">-- Baths --</option>
-                                <option value="20">1</option>
-                                <option value="20">2</option>
-                                <option value="20">3</option>
+                            <select name="region" class="form-control form-control-outline-info show-tick">
+                                <option value="no_selection">-- Region --</option>
+                                <option value="Greater Accra">Greater Accra </option>
+                                <option value="Ashanti Region">Ashanti   </option>
+                                <option value="Northern Region">Northern  </option>
+                                <option value="Eastern Region">Eastern   </option>
+                                <option value="Central Region">Central   </option>
+                               <option value="Western Region">Western   </option>
+                               <option value="Upper East">Upper East   </option>
+                               <option value="Western North">Western North   </option>
+                               <option value="Ahafo Region">Ahafo  </option>
+                               <option value="Upper West">Upper West   </option>
+                               <option value="Volta Region">Volta   </option>
+                               <option value="Brong Ahafo">Brong Ahafo  </option>
+                               <option value="Bono East">Bono East  </option>
+                               <option value="Oti Region">Oti  </option>
+                               <option value="North East">North East   </option>
+                               <option value="Savannah Region">Savannah  </option>
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            <div class="form-group form-group-outline-info m-t-5">
-                                <input type="text" class="form-control form-control-outline-info" placeholder="Area Range">
+                            <select name="location" class="form-control form-control-outline-info show-tick">
+                                <option value="no_selection">-- Price Range --</option>
+                                <option value="low">Low Budget (GH₵5000- GH₵10,000)</option>
+                                <option value="medium">Medium Budget (GH₵10,000 - GH₵30,000)</option>
+                                <option value="high">High Budget (GH₵30,000 Up)</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group form-group-outline-info">
+                                <input type="text" name="location" class="form-control form-control-outline-info" placeholder="Location">
                             </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group form-group-outline-info m-t-5">
-                                <input type="text" class="form-control form-control-outline-info" placeholder="Price Range">
-                            </div>
-                        </div> -->
+                      </div>
+                        
                     </div>
                 </div>
                 <div class="card">
@@ -881,20 +835,12 @@
                   <div class="body">
                     <div class="row clearfix">
                       <div class="col-sm-12">
-                        <form action="/" id="frmFileUpload" class="dropzone m-b-15 m-t-15" method="post">
-                            <div class="dz-message">
-                                <div class="drag-icon-cph"> <i class="material-icons">touch_app</i> </div>
-                                <h3>Drop files here or click to upload.</h3>
-                                <input name="file" type="file" multiple />
-                        </form>
-                        </div>
-                        <div class="col-sm-12">
-                          <button type="submit" class="btn btn-primary btn-round">Submit</button>
-                          <button type="submit" class="btn btn-default btn-round btn-simple">Cancel</button>
-                        </div>
+                            <input name="img_listing" type="file" multiple />                       
+                      </div>
                       </div>
                     </div>
                   </div>
+                  
             </div>
           </div>
           <div class="col-lg-12">
@@ -905,16 +851,7 @@
                 <div class="body">
                     <div class="row clearfix">
                         <div class="col-sm-12">
-                          <form action="/" id="frmFileUpload" class="dropzone m-b-15 m-t-15" method="post">
-                              <div class="dz-message">
-                                  <div class="drag-icon-cph"> <i class="material-icons">touch_app</i> </div>
-                                  <h3>Drop files here or click to upload.</h3>
-                                  <input name="file" type="file" multiple />
-                          </form>
-                        </div>
-                        <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary btn-round">Submit</button>
-                            <button type="submit" class="btn btn-default btn-round btn-simple">Cancel</button>
+                            <input name="img_front" type="file" multiple />
                         </div>
                     </div>
                 </div>
@@ -939,28 +876,29 @@
                         <div class="col-sm-6">
                           <select class="form-control form-control-outline-info show-tick">
                               <option value="">-- Property status --</option>
-                              <option value="10">Sold</option>
-                              <option value="20">For Sale</option>
+                              <!-- <option value="10">Sold</option> -->
+                              <option value="land_for_sale">For Sale</option>
+                              <option value="land_for_rent">For Rent</option>
                           </select>
                         </div>
                           <div class="col-sm-6">
                               <div class="form-group form-group-outline-info">
-                                  <input type="text" class="form-control form-control-outline-info" placeholder="Price">
+                                  <input type="text" name="price" class="form-control form-control-outline-info" placeholder="Price">
                               </div>
                           </div>
                           <div class="col-sm-6">
                               <div class="form-group form-group-outline-info">
-                                  <input type="date" class="form-control form-control-outline-info" placeholder="Date">
+                                  <input type="date" name="date" class="form-control form-control-outline-info" placeholder="Date">
                               </div>
                           </div>
                           <div class="col-sm-6">
                               <div class="form-group form-group-outline-info">
-                                  <input type="text" class="form-control form-control-outline-info" placeholder="Property Title">
+                                  <input type="text" name="property_title" class="form-control form-control-outline-info" placeholder="Property Title">
                               </div>
                           </div>
                           <div class="col-sm-12">
                               <div class="form-group form-group-outline-info">
-                                  <textarea rows="4" class="form-control form-control-outline-info no-resize" placeholder="Property Address"></textarea>
+                                  <textarea rows="4" name="property_address" class="form-control form-control-outline-info no-resize" placeholder="Property Address"></textarea>
                               </div>
                           </div>
                       </div>
@@ -984,7 +922,7 @@
                           <div class="col-sm-12">
                               <div class="form-group">
                                   <div class="form-line">
-                                      <textarea rows="4" class="form-control no-resize" placeholder="Property Description"></textarea>
+                                      <textarea rows="4" name="description" class="form-control no-resize" placeholder="Property Description"></textarea>
                                   </div>
                               </div>
                           </div>
@@ -1003,25 +941,16 @@
                                 </ul>
                             </li>
                         </ul>
-                    </div>
-                    <script>
-                    fetch("{% static 'admin-app/assets/js/data.json' %}")
-                    .then(response => response.json())
-                    .then(data => {
-                    // The JSON data is now available in the 'data' variable
-                    console.log(data);  // Log it to the console
-                    });
-                     </script>
-                                       
-                    <form>
+                    </div>                                       
+                    
                     <div class="body">
                         <div class="row clearfix">
                             <div class="col-sm-6">
                                 <div class="form-group form-group-outline-info">
-                                    <input type="text" class="form-control form-control-outline-info" placeholder="Property Name">
+                                    <input type="text" name="property_name" class="form-control form-control-outline-info" placeholder="Property Name">
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <!-- <div class="col-sm-6">
                                 <div class="form-group form-group-outline-info">
                                     <input type="text" class="form-control form-control-outline-info" placeholder="Home Area">
                                 </div>
@@ -1040,47 +969,87 @@
                                 <div class="form-group form-group-outline-info">
                                     <input type="text" class="form-control form-control-outline-info" placeholder="Year Built">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-sm-6">
                                 <div class="form-group form-group-outline-info">
-                                    <input type="text" class="form-control form-control-outline-info" placeholder="Neigbourhood">
+                                    <input type="text" name="neigbourhood" class="form-control form-control-outline-info" placeholder="Neigbourhood">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group form-group-outline-info">
-                                    <input type="text" class="form-control form-control-outline-info" placeholder="Lot Dimensions (meter squared)">
+                                    <input type="text" name="lot_dimesions" class="form-control form-control-outline-info" placeholder="Lot Dimensions (meter squared)">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group form-group-outline-info">
-                                    <input type="text" class="form-control form-control-outline-info" placeholder="Beds">
+                                    <input type="text" name="no_of_plots" class="form-control form-control-outline-info" placeholder="Number of plots">
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <!-- <div class="col-sm-6">
                                 <div class="form-group form-group-outline-info">
-                                    <input type="text" class="form-control form-control-outline-info" placeholder="Price">
+                                    <input type="text" name="" class="form-control form-control-outline-info" placeholder="Price">
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
+                            </div> -->
+                            <!-- <div class="col-sm-6">
                               <select class="form-control form-control-outline-info show-tick">
                                   <option value="">-- With Balcony --</option>
                                   <option value="10">Yes</option>
                                   <option value="20">No</option>
                               </select>
-                            </div>
-                            <div class="col-sm-6">
+                            </div> -->
+                            <!-- <div class="col-sm-6">
                               <select class="form-control form-control-outline-info show-tick">
                                   <option value="">-- Fully furnished --</option>
                                   <option value="10">Yes</option>
                                   <option value="20">No</option>
                               </select>
-                            </div>
-                            <div class="col-sm-6">
+                            </div> -->
+                            <!-- <div class="col-sm-6">
                               <select class="form-control form-control-outline-info show-tick">
                                   <option value="">-- Fully completed --</option>
                                   <option value="10">Yes</option>
                                   <option value="20">No</option>
                               </select>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="header">
+                        <h2><strong>Specific</strong> Land Info<small>Description text here...</small> </h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                                    <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                    <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="checkbox inlineblock m-r-20">
+                                    <input id="serviced" name="serviced" type="checkbox">
+                                    <label for="serviced">Serviced</label>
+                                </div>
+                                <div class="checkbox inlineblock m-r-20">
+                                    <input name="commercial" id="commercial" type="checkbox">
+                                    <label for="commercial">Commercial</label>
+                                </div>
+                                <div class="checkbox inlineblock m-r-20">
+                                    <input id="fenced" name="fenced" type="checkbox" checked="">
+                                    <label for="fenced">Fenced</label>
+                                </div>
+                                <div class="checkbox inlineblock m-r-20">
+                                    <input id="water" name="water" type="checkbox" checked="">
+                                    <label for="water">Water</label>
+                                </div>
+                                <div class="checkbox inlineblock m-r-20">
+                                    <input id="electricity" name="electricity" type="checkbox">
+                                    <label for="electricity">Electricity</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1092,17 +1061,7 @@
                       </div>
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                                <form action="/" id="frmFileUpload" class="dropzone m-b-15 m-t-15" method="post">
-                                    <div class="dz-message">
-                                        <div class="drag-icon-cph"> <i class="material-icons">touch_app</i> </div>
-                                        <h3>Drop files here or click to upload.</h3>
-                                        <input name="file" type="file" multiple />
-                                </form>
-                            </div>
-                            <div class="col-sm-12">
-                                <button type="submit" class="btn btn-primary btn-round">Submit</button>
-                                <button type="submit" class="btn btn-default btn-round btn-simple">Cancel</button>
-                                <input type="submit" placeholder="help">
+                                <input name="file" type="file" multiple />
                             </div>
                         </div>
                         <div class="header">
@@ -1110,22 +1069,18 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                              <form action="/" id="frmFileUpload" class="dropzone m-b-15 m-t-15" method="post">
-                                  <div class="dz-message">
-                                      <div class="drag-icon-cph"> <i class="material-icons">touch_app</i> </div>
-                                      <h3>Drop files here or click to upload.</h3>
-                                      <input name="file" type="file" multiple />
-                              </form>
-                            </div>
-                            <div class="col-sm-12">
-                                <button type="submit" class="btn btn-primary btn-round">Submit</button>
-                                <button type="submit" class="btn btn-default btn-round btn-simple">Cancel</button>
+                                <input name="file" type="file" multiple />                              
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+           
+                <div style="display: flex; padding:10px 0; background-color: white; justify-content: center" >
+                    <button type="submit" style="width: 30%;" class="btn btn-primary btn-round">Submit</button>
+                    <button type="reset" style="width: 30%;" class="btn btn-default btn-round btn-simple">Cancel</button>
+                </div>
             </div>
+        </form>    
         </div>
     </div>
 </section>

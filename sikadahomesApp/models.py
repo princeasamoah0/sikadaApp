@@ -228,17 +228,31 @@ class HouseLease(models.Model):
 
     
 class LandSale(models.Model):
+    def image_upload_path(instance, filename):
+        return "LandSale"+"/"+str(instance.property_id)+"/"+filename
     property_id = models.CharField(max_length=20, null=True, blank=True)
+    region = models.CharField(max_length=100, null=True, blank=True) 
+    location = models.CharField(max_length=100, blank = True, null = True) 
     property_title = models.CharField(null=True, blank=True, max_length=30)
-    # type = models.CharField(choices=TYPE_CHOICES, max_length=50) 
-    status = models.CharField(default='land_for_sale', max_length=100, null=True, blank=True)
+    budget = models.CharField(max_length=30, null=True, blank=True)
+    img_listing = models.ImageField(upload_to=image_upload_path, null=True, blank=True)
+    img_front = models.ImageField(upload_to=image_upload_path, null=True, blank=True)
+    date = models.CharField(max_length=100,null=True, blank=True)
+    property_address = models.CharField(max_length=60, null=True, blank=True)
     price = models.CharField(max_length=100, null=True, blank=True) 
-    region = models.CharField(max_length=100) 
-    location = models.CharField(max_length=100) 
-    description = models.TextField()
-    gps_address = models.CharField(max_length=20)
-    img_listing = models.ImageField(upload_to='houseRent', null=True, blank=True)
-    img_front = models.ImageField(upload_to='houseRent', null=True, blank=True)
+    property_name = models.CharField(max_length=100, null=True, blank=True)
+    commercial = models.CharField(max_length=100, null=True, blank=True)
+    serviced = models.CharField(max_length=100, null=True, blank=True)
+    fenced = models.CharField(max_length=100, null=True, blank=True)
+    plot_dimensions = models.CharField(max_length=100, null=True, blank=True)
+    no_of_plots = models.CharField(max_length=100, null=True, blank=True) 
+    status = models.CharField(max_length=100, null=True, blank=True)
+    description = models.TextField(blank = True, null = True)
+    date_time = models.DateTimeField(default = timezone.now)
+    admin = models.CharField(max_length=100, blank = True, null = True)
+    gps_address = models.CharField(max_length=20, blank = True, null = True)
+    
+    
     # image_3 = models.ImageField(upload_to='houseRent', null=True, blank=True)
     # image_4 = models.ImageField(upload_to='houseRent', null=True, blank=True)
     # image_5 = models.ImageField(upload_to='houseRent', null=True, blank=True)
