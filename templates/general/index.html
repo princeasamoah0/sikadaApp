@@ -519,7 +519,13 @@
                 <div class="col-xl-4 col-sm-6 col-12">
                     <div id="latest_listings_{{item.property_id}}" class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                         <div class="product-img">
+                            <!-- {{item.status}}
+                            Hello -->
+                            {%if item.status == 'land_for_sale' %}
+                            <a href="land-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.img_listing.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
+                            {%else%}
                             <a href="product-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.img_listing.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
+                            {%endif%}
                             <div class="real-estate-agent">
                                 <div class="agent-img">
                                     <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
@@ -539,8 +545,11 @@
                                 {%endif%}
                             </div>
 
-
+                            {%if item.status == 'land_for_sale' %}
+                            <h2 class="product-title"><a id="latest_listings_title_{{item.property_id}}" href="land-details/{{item.property_id}}">{{item.property_title|truncatechars:25}}</a></h2>
+                            {%else%}
                             <h2 class="product-title"><a id="latest_listings_title_{{item.property_id}}" href="product-details/{{item.property_id}}">{{item.property_title|truncatechars:25}}</a></h2>
+                            {%endif%}
                             <div class="product-img-location">
                                 <ul>
                                     <li>
@@ -592,9 +601,15 @@
                                             <i class="flaticon-heart-1"></i></a>
                                     </li>
                                     <li>
+                                        {%if item.status == 'land_for_sale' %}
+                                        <a href="land-details/{{item.property_id}}" title="Product Details">
+                                            <i class="flaticon-add"></i>
+                                        </a>
+                                        {%else%}
                                         <a href="product-details/{{item.property_id}}" title="Product Details">
                                             <i class="flaticon-add"></i>
                                         </a>
+                                        {%endif%}
                                     </li>
                                 </ul>
                             </div>

@@ -812,7 +812,7 @@
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            <select name="location" class="form-control form-control-outline-info show-tick">
+                            <select name="budget" class="form-control form-control-outline-info show-tick">
                                 <option value="no_selection">-- Price Range --</option>
                                 <option value="low">Low Budget (GH₵5000- GH₵10,000)</option>
                                 <option value="medium">Medium Budget (GH₵10,000 - GH₵30,000)</option>
@@ -874,9 +874,8 @@
                   <div class="body">
                       <div class="row clearfix">
                         <div class="col-sm-6">
-                          <select class="form-control form-control-outline-info show-tick">
-                              <option value="">-- Property status --</option>
-                              <!-- <option value="10">Sold</option> -->
+                          <select name="status" class="form-control form-control-outline-info show-tick">
+                              <option value="no_selection">-- Property status --</option>
                               <option value="land_for_sale">For Sale</option>
                               <option value="land_for_rent">For Rent</option>
                           </select>
@@ -977,12 +976,17 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group form-group-outline-info">
-                                    <input type="text" name="lot_dimesions" class="form-control form-control-outline-info" placeholder="Lot Dimensions (meter squared)">
+                                    <input type="text" name="plot_dimensions" class="form-control form-control-outline-info" placeholder="Lot Dimensions (meter squared)">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group form-group-outline-info">
                                     <input type="text" name="no_of_plots" class="form-control form-control-outline-info" placeholder="Number of plots">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group form-group-outline-info">
+                                    <input type="text" name="gps_address" class="form-control form-control-outline-info" placeholder="GPS Address">
                                 </div>
                             </div>
                             <!-- <div class="col-sm-6">
@@ -1061,7 +1065,7 @@
                       </div>
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                                <input name="file" type="file" multiple />
+                                <input name="video_land" type="file" multiple />
                             </div>
                         </div>
                         <div class="header">
@@ -1069,7 +1073,7 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                                <input name="file" type="file" multiple />                              
+                                <input name="video_thumbnail" type="file" multiple />                              
                             </div>
                         </div>
                     </div>

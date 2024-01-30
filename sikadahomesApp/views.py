@@ -14,7 +14,7 @@ from .models import HouseRent,HouseSale,LandSale,AllProperties,Feedback, Wishlis
 # Create your views here.
 
 def index (request):
-    houseRent = HouseRent.objects.all().order_by('-id')[:1]
+    houseRent = HouseRent.objects.all().order_by('-id')[:2]
     houseSale = HouseSale.objects.all().order_by('-id')[:2]
     landSale = LandSale.objects.all().order_by('-id')[:2]
     feedback = Feedback.objects.all().order_by('-id')[:4]
@@ -136,15 +136,28 @@ def product_details(request,property_id):
     query = ''
     if HouseRent.objects.filter(property_id = property_id):
         query = HouseRent.objects.get(property_id = property_id)
-    elif HouseSale.objects.filter(property_id= property_id):
-        query = HouseSale.objects.get(property_id= property_id)
     else:
-        query = LandSale.objects.get(property_id= property_id)
-    print(query.img_front)
-    return render(request, 'general/product-details.html', {'context':query} )
+        # HouseSale.objects.filter(property_id= property_id)
+        query = HouseSale.objects.get(property_id= property_id)
+    
+    if query.status == 'house_for_rent':
+        related_properties = HouseRent.objects.all().order_by('-id')[:2]
+    else:
+        related_properties = HouseSale.objects.all().order_by('-id')[:2]
 
-def land_details(request):
-    return render(request, 'general/land-details.html')
+    # else:
+    #     query = LandSale.objects.get(property_id= property_id)
+
+         
+    print(query.status)
+    return render(request, 'general/product-details.html', {'context':query, 'related_properties':related_properties} )
+
+def land_details(request,pk):
+    land_details = LandSale.objects.get(property_id = pk)
+    related_properties = LandSale.objects.all().order_by('-id')[:2]
+    # print(land_details.location)
+
+    return render(request, 'general/land-details.html', {'context':land_details, 'related_properties':related_properties}, )
     
 def register(request):
     if request.method == 'POST':

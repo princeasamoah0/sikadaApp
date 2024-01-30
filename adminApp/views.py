@@ -128,7 +128,44 @@ def add_property_house(request):
 
 def add_property_land(request):
     if request.method == "POST":
-        print('Post method executed')
+        property_id = generate_random_id()
+        region = request.POST.get('region')
+        location = request.POST.get('location')  
+        property_title = request.POST.get('property_title') 
+        budget = request.POST.get('budget') 
+        img_listing = request.FILES.get('img_listing') 
+        img_front = request.FILES.get('img_front') 
+        date = request.POST.get('date') 
+        property_address = request.POST.get('property_address') 
+        price = request.POST.get('price') 
+        property_name = request.POST.get('property_name')
+        commercial = request.POST.get('commercial') == 'on' 
+        serviced = request.POST.get('serviced') == 'on'
+        fenced = request.POST.get('fenced') == 'on'
+        water = request.POST.get('water') == 'on'
+        electricity = request.POST.get('electricity') == 'on'
+        plot_dimensions = request.POST.get('plot_dimensions')
+        no_of_plots = request.POST.get('no_of_plots') 
+        status = request.POST.get('property_status')
+        description = request.POST.get('description') 
+        # date_time = request.POST.get('date_time')
+        video_land = request.FILES.get('video_land')
+        video_thumbnail = request.FILES.get('video_thumbnail')
+        # admin = request.POST.get('admin') 
+        gps_address = request.POST.get('gps_address') 
+
+        # print(f'''property_id = {property_id}, region ={region}, location={location}, property_title={property_title}, budget={budget},
+        #       img_listing={img_listing}, img_front={img_front}, date={date}, property_address={property_address}, price={price},
+        #        property_name={property_name}, commercial={commercial}, serviced={serviced}, fenced={fenced}, water={water}, electricity={electricity},
+        #        plot_dimensions ={plot_dimensions}, no_of_plots={no_of_plots}, status={heyy}, description={description}, video_land={video_land},
+        #        video_thumbnail ={video_thumbnail}, gps_address = {gps_address}
+        #        ''')
+        a = LandSale(property_id=property_id,region=region,location=location,property_title=property_title,budget=budget,img_listing=img_listing,img_front=img_front,
+            date=date,property_address=property_address,price=price,property_name=property_name, commercial=commercial,serviced=serviced,fenced=fenced,water=water,electricity=electricity,
+            plot_dimensions=plot_dimensions,no_of_plots=no_of_plots,status=status,description=description, video_land=video_land,video_thumbnail=video_thumbnail,gps_address=gps_address                  )
+        a.save()
+        b = AllProperties(property_id = property_id , property_type='land_for_sale', price=price, location=region)
+        b.save()
     return render(request, 'admin-app/add-property_land.html')
 
 def agent(request):

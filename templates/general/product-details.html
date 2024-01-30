@@ -760,10 +760,11 @@
                         <h4 class="title-2">Related Properties</h4>
                         <div class="row">
                             <!-- ltn__product-item -->
+                            {% for item in related_properties %}
                             <div class="col-xl-6 col-sm-6 col-12">
                                 <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                                     <div class="product-img">
-                                        <a href="product-details"><img src="{% static 'img/product-3/1.jpg' %}" alt="#"></a>
+                                        <a href="/product-details/{{item.property_id}}"><img src="{{item.img_listing.url}}" alt="#"></a>
                                         <div class="real-estate-agent">
                                             <div class="agent-img">
                                                 <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
@@ -776,11 +777,11 @@
                                                 <li class="sale-badg">For Rent</li>
                                             </ul>
                                         </div>
-                                        <h2 class="product-title"><a href="product-details">New Apartment Nice View</a></h2>
+                                        <h2 class="product-title"><a href="/product-details/{{item.property_id}}">{{item.property_title}}</a></h2>
                                         <div class="product-img-location">
                                             <ul>
                                                 <li>
-                                                    <a href="product-details"><i class="flaticon-pin"></i> Belmont Gardens, Chicago</a>
+                                                    <a href="product-details"><i class="flaticon-pin"></i> {{item.location}}, {{item.region}}</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -821,8 +822,9 @@
                                     </div>
                                 </div>
                             </div>
+                            {%endfor%}
                             <!-- ltn__product-item -->
-                            <div class="col-xl-6 col-sm-6 col-12">
+                            <!-- <div class="col-xl-6 col-sm-6 col-12">
                                 <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                                     <div class="product-img">
                                         <a href="product-details"><img src="{% static 'img/product-3/2.jpg' %}" alt="#"></a>
@@ -882,7 +884,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
