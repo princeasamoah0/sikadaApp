@@ -146,7 +146,7 @@ def add_property_land(request):
         electricity = request.POST.get('electricity') == 'on'
         plot_dimensions = request.POST.get('plot_dimensions')
         no_of_plots = request.POST.get('no_of_plots') 
-        status = request.POST.get('property_status')
+        status = request.POST.get('status')
         description = request.POST.get('description') 
         # date_time = request.POST.get('date_time')
         video_land = request.FILES.get('video_land')

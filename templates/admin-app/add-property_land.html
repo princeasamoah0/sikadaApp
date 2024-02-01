@@ -873,12 +873,26 @@
                   </div>
                   <div class="body">
                       <div class="row clearfix">
-                        <div class="col-sm-6">
+                        <!-- <div class="col-sm-6">
                           <select name="status" class="form-control form-control-outline-info show-tick">
                               <option value="no_selection">-- Property status --</option>
                               <option value="land_for_sale">For Sale</option>
                               <option value="land_for_rent">For Rent</option>
                           </select>
+                        </div> -->
+                        <div class="col-sm-6">
+                            <div class="radio inlineblock m-r-25">
+                                <input type="radio" name="status" id="status_radio" value="land_for_sale" checked="">
+                                <label for="radio1">For Sale</label>
+                            </div>
+                            <div class="radio inlineblock">
+                                <input type="radio" name="status" id="radio2" value="land_for_rent">
+                                <label for="radio2">For Rent</label>
+                            </div>
+                            <!-- <div class="radio inlineblock">
+                                <input type="radio" name="status" id="radio3"  value="house_for_lease">
+                                <label for="radio3">For Lease</label>
+                            </div> -->
                         </div>
                           <div class="col-sm-6">
                               <div class="form-group form-group-outline-info">
@@ -892,7 +906,7 @@
                           </div>
                           <div class="col-sm-6">
                               <div class="form-group form-group-outline-info">
-                                  <input type="text" name="property_title" class="form-control form-control-outline-info" placeholder="Property Title">
+                                  <input type="text" name="property_title" required class="form-control form-control-outline-info" placeholder="Property Title">
                               </div>
                           </div>
                           <div class="col-sm-12">

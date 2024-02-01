@@ -212,6 +212,7 @@ def shop_right_sidebar(request):
     property_type = request.GET.get('property_type')
     location = request.GET.get('location')
     price_range = request.GET.get('price_range')
+    print(property_type, location, price_range)
     call_all = ''
 
     # COUNTS
