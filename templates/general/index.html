@@ -521,7 +521,7 @@
                         <div class="product-img">
                             <!-- {{item.status}}
                             Hello -->
-                            {%if item.status == 'land_for_sale' %}
+                            {%if item.status == 'land_for_sale' %}                         
                             <a href="land-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.img_listing.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
                             {%else%}
                             <a href="product-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.img_listing.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
@@ -592,7 +592,7 @@
                             <div class="product-hover-action">
                                 <ul>
                                     <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-id="{{item.property_id}}" data-bs-target="#quick_view_modal">
+                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-id="{{item.property_id}}" data-bs-type="{{item.status}}" data-bs-target="#quick_view_modal">
                                             <i class="flaticon-expand"></i>
                                         </a>
                                     </li>
@@ -1893,7 +1893,7 @@
 
                                                 </ul>
                                             </div>
-                                            <label class="float-end mb-0"><a class="text-decoration" href="product-details"><small>View Details</small></a></label>
+                                            <label class="float-end mb-0"><a class="text-decoration" id="modal_view_details_link"><small>View Details</small></a></label>
                                         </div>
                                     </div>
                                 </div>
@@ -2038,9 +2038,12 @@
         modal.addEventListener('show.bs.modal', function(event){
             const button = event.relatedTarget;
             const buttonId = button.getAttribute("data-bs-id")
+            const buttonModality = button.getAttribute("data-bs-type")
+            
             const modal_image = document.getElementById('quick_view_img')
             const modal_title = document.getElementById('quick_view_title')
             const modal_price = document.getElementById('quick_view_price')
+            const modal_view_details_link = document.getElementById('modal_view_details_link')
             
             original_image = document.getElementById(`latest_listings_img_${buttonId}`).src
             original_title = document.getElementById(`latest_listings_title_${buttonId}`)
@@ -2049,6 +2052,22 @@
             modal_image.src = original_image
             modal_title.innerText = original_title.innerText
             modal_price.innerText = original_price.innerText
+            
+            console.log(buttonModality.slice(0,5))
+            if (buttonModality.slice(0,5) == 'house')  {
+                modal_view_details_link.setAttribute('href', `product-details/${buttonId}`)
+            }else{
+                modal_view_details_link.setAttribute('href', `land-details/${buttonId}`)    
+            }
+            // console.log(document.getElementById('modality').getAttribute('href'))// if (modality == 'land'){
+            
+                // console.log(modality , 1)
+            // }else{
+                // modal_view_details_link.setAttribute('href', `product-details/${buttonId}`)   
+                // console.log(modality, 2)
+            // } 
+            
+            // .href = 'hello'
         })
 
         const wishlistModal = document.getElementById('wish_list_modal')
