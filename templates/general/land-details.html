@@ -394,7 +394,7 @@
                 <div class="col-lg-8 col-md-12">
                     <div class="ltn__page-details-inner ltn__service-details-inner">
                       <div class="ltn__blog-img">
-                        <img src="{% static 'img/service/21.jpg' %}" alt="Image">
+                        <img src="{{context.img_front.url}}" alt="Image">
                       </div>
                     </div>
                     <div class="ltn__shop-details-inner ltn__page-details-inner mb-60">
@@ -407,53 +407,78 @@
                                     <a class="bg-orange" href="#">For Sale</a>
                                 </li>
                                 <li class="ltn__blog-date">
-                                    <i class="far fa-calendar-alt"></i>May 19, 2021
+                                    <i class="far fa-calendar-alt"></i>{{context.date_time|date:"jS F Y"}}
                                 </li>
                                 <li>
                                     <a href="#"><i class="far fa-comments"></i>35 Comments</a>
                                 </li>
                             </ul>
                         </div>
-                        <h1>Large Flat Land at Obuase</h1>
-                        <label><span class="ltn__secondary-color"><i class="flaticon-pin"></i></span> {{context.sub_location}}, Prampram, Greater Accra</label>
+                        <h1>{{context.property_title}}</h1>
+                        <label><span class="ltn__secondary-color"><i class="flaticon-pin"></i></span> {{context.location}}, {{context.region}}</label>
                         <h4 class="title-2">Description</h4>
                         <p>
                            {{context.description}}
                         </p>
-                        <p>To the left is the modern kitchen with central island, leading through to the unique breakfast family room which feature glass walls and doors out onto the garden and access to the separate utility room.</p>
+                        <!-- <p>To the left is the modern kitchen with central island, leading through to the unique breakfast family room which feature glass walls and doors out onto the garden and access to the separate utility room.</p> -->
 
                         <h4 class="title-2">Land Detail</h4>
                         <div class="col-lg-4 col-md-6">
                             <div class="ltn__menu-widget">
                                 <ul>
                                     <li>
-                                        <label class="checkbox-item">Air Conditioning
+                                        <label class="checkbox-item">Serviced
+                                            {% if context.serviced == 'True' %}
                                             <input type="checkbox" checked="checked">
                                             <span class="checkmark"></span>
+                                            {%else%}
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                            {%endif%}
                                         </label>
                                     </li>
                                     <li>
-                                        <label class="checkbox-item">Swimming pool
+                                        <label class="checkbox-item">Commercial
+                                            {% if context.commercial == 'True' %}
                                             <input type="checkbox" checked="checked">
                                             <span class="checkmark"></span>
+                                            {%else%}
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                            {%endif%}
                                         </label>
                                     </li>
                                     <li>
-                                        <label class="checkbox-item">Wifi
+                                        <label class="checkbox-item">Fenced
+                                            {% if context.fenced == 'True' %}
                                             <input type="checkbox" checked="checked">
                                             <span class="checkmark"></span>
+                                            {%else%}
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                            {%endif%}
                                         </label>
                                     </li>
                                     <li>
-                                        <label class="checkbox-item">Near church
-                                            <input type="checkbox" checked="checked">
+                                        <label class="checkbox-item">Water
+                                            {% if context.water == 'True' %}
+                                            <input type="checkbox" checked="checked" readonly>
                                             <span class="checkmark"></span>
+                                            {%else%}
+                                            <input type="checkbox" readonly="">
+                                            <span class="checkmark" ></span>
+                                            {%endif%}
                                         </label>
                                     </li>
                                     <li>
-                                        <label class="checkbox-item">Near Estate
+                                        <label class="checkbox-item">Electricity
+                                            {% if context.electricity == 'True' %}
                                             <input type="checkbox" checked="checked">
                                             <span class="checkmark"></span>
+                                            {%else%}
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                            {%endif%}
                                         </label>
                                     </li>
                                 </ul>
@@ -466,7 +491,7 @@
 
                         <h4 class="title-2">Land Video</h4>
                         <div class="ltn__video-bg-img ltn__video-popup-height-500 bg-overlay-black-50 bg-image mb-60" data-bs-bg="img/others/5.jpg">
-                            <a class="ltn__video-icon-2 ltn__video-icon-2-border---" href="https://www.youtube.com/embed/eWUxqVFBq74?autoplay=1&showinfo=0" data-rel="lightcase:myCollection">
+                            <a class="ltn__video-icon-2 ltn__video-icon-2-border---" href="{{context.video_land.url}}" data-rel="lightcase:myCollection">
                                 <i class="fa fa-play"></i>
                             </a>
                         </div>
@@ -474,10 +499,11 @@
                         <h4 class="title-2">Related Properties</h4>
                         <div class="row">
                             <!-- ltn__product-item -->
+                            {% for item in related_properties %}
                             <div class="col-xl-6 col-sm-6 col-12">
                                 <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                                     <div class="product-img">
-                                        <a href="product-details"><img src="{% static 'img/product-3/1.jpg' %}" alt="#"></a>
+                                        <a href="/land-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.img_listing.url}}" alt="#"></a>
                                         <div class="real-estate-agent">
                                             <div class="agent-img">
                                                 <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
@@ -487,41 +513,41 @@
                                     <div class="product-info">
                                         <div class="product-badge">
                                             <ul>
-                                                <li class="sale-badg">For Rent</li>
+                                                <li class="sale-badg">For Sale</li>
                                             </ul>
                                         </div>
-                                        <h2 class="product-title"><a href="product-details">New Apartment Nice View</a></h2>
+                                        <h2 class="product-title"><a href="/land-details/{{item.property_id}}"  id="latest_listings_title_{{item.property_id}}">{{item.property_title}}</a></h2>
                                         <div class="product-img-location">
                                             <ul>
                                                 <li>
-                                                    <a href="product-details"><i class="flaticon-pin"></i> Belmont Gardens, Chicago</a>
+                                                    <a href="/land-details/{{item.property_id}}"><i class="flaticon-pin"></i>{{item.location}}, {{item.region}}</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                            <li><span>3 </span>
-                                                Bedrooms
+                                            <li>
+                                                Serviced
                                             </li>
-                                            <li><span>2 </span>
-                                                Bathrooms
+                                            <li><span>{{item.no_of_plots}} </span>
+                                                Plots
                                             </li>
-                                            <li><span>3450 </span>
-                                                square Ft
+                                            <li><span>{{item.plot_dimensions}} </span>
+                                                Dimensions
                                             </li>
                                         </ul>
                                         <div class="product-hover-action">
                                             <ul>
                                                 <li>
-                                                    <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                    <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-id="{{item.property_id}}" data-bs-target="#quick_view_modal">
                                                         <i class="flaticon-expand"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-wishlist="{{item.property_id}}" data-bs-target="#wish_list_modal">
                                                         <i class="flaticon-heart-1"></i></a>
                                                 </li>
                                                 <li>
-                                                    <a href="portfolio-details" title="Compare">
+                                                    <a href="/land-details/{{item.property_id}}" title="Compare">
                                                         <i class="flaticon-add"></i>
                                                     </a>
                                                 </li>
@@ -530,13 +556,14 @@
                                     </div>
                                     <div class="product-info-bottom">
                                         <div class="product-price">
-                                            <span>$349,00<label>/Month</label></span>
+                                            <span id="latest_listings_price_{{item.property_id}}">GHS {{item.price}}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            {%endfor%}
                             <!-- ltn__product-item -->
-                            <div class="col-xl-6 col-sm-6 col-12">
+                            <!-- <div class="col-xl-6 col-sm-6 col-12">
                                 <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                                     <div class="product-img">
                                         <a href="product-details"><img src="{% static 'img/product-3/2.jpg' %}" alt="#"></a>
@@ -596,7 +623,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -1382,7 +1409,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
                                         <div class="modal-product-img">
-                                            <img src="{% static 'img/product/4.png' %}" alt="#">
+                                            <img id="quick_view_img" src="{% static 'img/product/4.png' %}" alt="#">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-12">
@@ -1397,10 +1424,10 @@
                                                     <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
                                                 </ul>
                                             </div>
-                                            <h3>3 Rooms Manhattan</h3>
+                                            <h3 id="quick_view_title">4 Rooms Manhattan</h3>
                                             <div class="product-price">
-                                                <span>$149.00</span>
-                                                <del>$165.00</del>
+                                                <span id="quick_view_price">$149.00</span>
+                                                <!-- <del>$165.00</del> -->
                                             </div>
                                             <div class="modal-product-meta ltn__product-details-menu-1">
                                                 <ul>
@@ -1515,7 +1542,7 @@
 
     <!-- MODAL AREA START (Wishlist Modal) -->
     <div class="ltn__modal-area ltn__add-to-cart-modal-area">
-        <div class="modal fade" id="liton_wishlist_modal" tabindex="-1">
+        <div class="modal fade" id="wish_list_modal"  tabindex="-1">
             <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -1529,10 +1556,10 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="modal-product-img">
-                                            <img src="{% static 'img/product/7.png' %}" alt="#">
+                                            <img id="wish_list_img" src="{% static 'img/product/7.png' %}" alt="#">
                                         </div>
                                          <div class="modal-product-info">
-                                            <h5><a href="product-details">3 Rooms Manhattan</a></h5>
+                                            <h5><a id="wish_list_title" href="product-details">3 Rooms Manhattan</a></h5>
                                             <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Wishlist</p>
                                             <div class="btn-wrapper">
                                                 <a href="wishlist" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
@@ -1563,6 +1590,73 @@
     <script src="{% static 'js/plugins.js' %}"></script>
     <!-- Main JS -->
     <script src="{% static 'js/main.js' %}"></script>
+
+    <script>
+        var modal = document.getElementById("quick_view_modal")
+        
+        modal.addEventListener('show.bs.modal', function(event){
+            const button = event.relatedTarget;
+            const buttonId = button.getAttribute("data-bs-id")
+            const modal_image = document.getElementById('quick_view_img')
+            const modal_title = document.getElementById('quick_view_title')
+            const modal_price = document.getElementById('quick_view_price')
+            
+            original_image = document.getElementById(`latest_listings_img_${buttonId}`).src
+            original_title = document.getElementById(`latest_listings_title_${buttonId}`)
+            original_price = document.getElementById(`latest_listings_price_${buttonId}`)
+            
+            console.log(original_image)
+            modal_image.src = original_image
+            modal_title.innerText = original_title.innerText
+            modal_price.innerText = original_price.innerText
+        })
+
+        const wishlistModal = document.getElementById('wish_list_modal')
+        console.log(wishlistModal)
+        wishlistModal.addEventListener('show.bs.modal', function(event){
+            const button = event.relatedTarget;
+            // console.log('Hello')
+            const buttonId = button.getAttribute('data-bs-wishlist')
+            const modal_image = document.getElementById('wish_list_img')
+            const modal_title = document.getElementById('wish_list_title')
+            // const modal_price = document.getElementById('wish_list_price')
+            
+            original_image = document.getElementById(`latest_listings_img_${buttonId}`).src
+            original_title = document.getElementById(`latest_listings_title_${buttonId}`)
+            // original_price = document.getElementById(`latest_listings_price_${buttonId}`)
+            
+            modal_image.src = original_image
+            modal_title.innerText = original_title.innerText
+            // modal_price.innerText = original_price.innerText
+
+            // document.getElementById(buttonId)
+            // console.log(buttonId)
+            
+            $.ajax({
+            url: "wishlist_ajax",
+            // url: "",
+            type: "POST", // http method
+            data: {
+                property_id: buttonId,
+                csrfmiddlewaretoken: '{{ csrf_token }}', 
+            }, 
+
+            // handle a successful response
+            success: function (response) {           
+                // alert(`hello, ${response["name"]}`);
+                console.log(response)
+            },
+
+            // handle a non-successful response
+            error: function (e) {
+                alert("Error", e)
+            }
+        });
+
+            
+        });
+       
+    </script>
 
 </body>
 </html>

@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('wishlist_ajax', views.wishlist_Ajax, name='wishlist_ajax'),
     path('404', views.page_404, name='404'),
     path('about', views.about, name='about'),
     path('account', views.account, name='account'),
@@ -38,5 +39,5 @@ urlpatterns = [
     path('team-details', views.team_details, name='team-details'),
     path('team', views.team, name='team'),
     path('wishlist', views.wishlist, name='wishlist'),
-    path('land-details', views.land_details, name='land-details'),
+    path('land-details/<str:pk>', views.land_details, name='land-details'),
 ]

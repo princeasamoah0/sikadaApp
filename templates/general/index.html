@@ -400,22 +400,22 @@
                                                         <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-meter col-lg-3 col-md-6">
                                                             <select name="location" class="nice-select">
                                                                 <option value="none">Region</option>
-                                                                <option value="greater_accra">Greater Accra </option>
-                                                                <option value="ashanti">Ashanti   </option>
-                                                                <option value="northern">Northern  </option>
-                                                                <option value="eastern">Eastern   </option>
-                                                                <option value="central">Central   </option>
-                                                               <option value="western">Western   </option>
-                                                               <option value="upper_east">Upper East   </option>
-                                                               <option value="western-north">Western North   </option>
-                                                               <option value="ahafo">Ahafo  </option>
-                                                               <option value="upper_west">Upper West   </option>
-                                                               <option value="volta">Volta   </option>
-                                                               <option value="bono">Bono Ahafo   </option>
-                                                               <option value="bono_east">Bono East  </option>
-                                                               <option value="oti">Oti  </option>
-                                                               <option value="north_east">North East   </option>
-                                                               <option value="savannah">Savannah  </option>
+                                                                <option value="Greater Accra">Greater Accra </option>
+                                                                <option value="Ashanti Region">Ashanti   </option>
+                                                                <option value="Northern Region">Northern  </option>
+                                                                <option value="Eastern Region">Eastern   </option>
+                                                                <option value="Central Region">Central   </option>
+                                                               <option value="Western Region">Western   </option>
+                                                               <option value="Upper East">Upper East   </option>
+                                                               <option value="Western North">Western North   </option>
+                                                               <option value="Ahafo Region">Ahafo  </option>
+                                                               <option value="Upper West">Upper West   </option>
+                                                               <option value="Volta Region">Volta   </option>
+                                                               <option value="Brong Ahafo">Brong Ahafo   </option>
+                                                               <option value="Bono East">Bono East  </option>
+                                                               <option value="Oti Region">Oti  </option>
+                                                               <option value="North East">North East   </option>
+                                                               <option value="Savannah Region">Savannah  </option>
                                                             </select>
                                                         </div>
                                                         <div class="ltn__car-dealer-form-item ltn__custom-icon ltn__icon-calendar col-lg-3 col-md-6">
@@ -517,9 +517,15 @@
                 <!-- ltn__product-item -->
                 {% for item in context %}
                 <div class="col-xl-4 col-sm-6 col-12">
-                    <div id="latest_listings_{{item.product_id}}" class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
+                    <div id="latest_listings_{{item.property_id}}" class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                         <div class="product-img">
-                            <a href="product-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.image_1.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
+                            <!-- {{item.status}}
+                            Hello -->
+                            {%if item.status == 'land_for_sale' %}                         
+                            <a href="land-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.img_listing.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
+                            {%else%}
+                            <a href="product-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.img_listing.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
+                            {%endif%}
                             <div class="real-estate-agent">
                                 <div class="agent-img">
                                     <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
@@ -539,24 +545,28 @@
                                 {%endif%}
                             </div>
 
-
-                            <h2 class="product-title"><a id="latest_listings_title_{{item.property_id}}" href="product-details/{{item.property_id}}">{{item.title|truncatechars:25}}</a></h2>
+                            {%if item.status == 'land_for_sale' %}
+                            <h2 class="product-title"><a id="latest_listings_title_{{item.property_id}}" href="land-details/{{item.property_id}}">{{item.property_title|truncatechars:25}}</a></h2>
+                            {%else%}
+                            <h2 class="product-title"><a id="latest_listings_title_{{item.property_id}}" href="product-details/{{item.property_id}}">{{item.property_title|truncatechars:25}}</a></h2>
+                            {%endif%}
                             <div class="product-img-location">
                                 <ul>
                                     <li>
-                                        <a href="locations"><i class="flaticon-pin"></i> {{item.sub_location}}, {{item.location}}</a>
+                                        <a href="locations"><i class="flaticon-pin"></i>  {{item.location}}, {{item.region}}</a>
                                     </li>
                                 </ul>
                             </div>
                             <ul class="ltn__list-item-2--- ltn__list-item-2-before--- ltn__plot-brief">
-                                {%if item.status|slice:"-5" == 'house' %}
-                                <li><span>{{item.bed}} </span>
+                                <!-- {{item.status|slice:"5"}} -->
+                                {%if item.status|slice:"5" == 'house' %}
+                                <li><span>{{item.beds}} </span>
                                     Bed
                                 </li>
                                 <li><span>{{item.rooms}} </span>
                                     Room
                                 </li>
-                                <li><span>{{item.bath}} </span>
+                                <li><span>{{item.baths}} </span>
                                     Bath
                                 </li>
                                 {%else%}
@@ -574,7 +584,7 @@
                                 fenced = models.BooleanField() -->
 
                                 {%endif%}
-                                <li><span>{{item.land_size}} </span>
+                                <li><span>{{item.lot_dimensions}} </span>
                                     Square Ft
                                 </li>
 
@@ -582,18 +592,24 @@
                             <div class="product-hover-action">
                                 <ul>
                                     <li>
-                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-id="{{item.property_id}}" data-bs-target="#quick_view_modal">
+                                        <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-id="{{item.property_id}}" data-bs-type="{{item.status}}" data-bs-target="#quick_view_modal">
                                             <i class="flaticon-expand"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-info="Hi" data-bs-target="#liton_wishlist_modal">
+                                        <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-wishlist="{{item.property_id}}" data-bs-target="#wish_list_modal">
                                             <i class="flaticon-heart-1"></i></a>
                                     </li>
                                     <li>
+                                        {%if item.status == 'land_for_sale' %}
+                                        <a href="land-details/{{item.property_id}}" title="Product Details">
+                                            <i class="flaticon-add"></i>
+                                        </a>
+                                        {%else%}
                                         <a href="product-details/{{item.property_id}}" title="Product Details">
                                             <i class="flaticon-add"></i>
                                         </a>
+                                        {%endif%}
                                     </li>
                                 </ul>
                             </div>
@@ -1877,7 +1893,7 @@
 
                                                 </ul>
                                             </div>
-                                            <label class="float-end mb-0"><a class="text-decoration" href="product-details"><small>View Details</small></a></label>
+                                            <label class="float-end mb-0"><a class="text-decoration" id="modal_view_details_link"><small>View Details</small></a></label>
                                         </div>
                                     </div>
                                 </div>
@@ -1955,9 +1971,9 @@
     </div>
     <!-- MODAL AREA END -->
 
-    <!-- MODAL AREA START (Wishlist Modal) -->
+    <!-- MODAL AREA START (Wishlist Modal) liton_wishlist_modal -->
     <div class="ltn__modal-area ltn__add-to-cart-modal-area">
-        <div class="modal fade" id="liton_wishlist_modal" tabindex="-1">
+        <div class="modal fade" id="wish_list_modal" tabindex="-1">
             <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -1971,10 +1987,10 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="modal-product-img">
-                                            <img src="{% static 'img/product/7.png' %}" alt="#">
+                                            <img id="wish_list_img"  alt="#">
                                         </div>
                                          <div class="modal-product-info">
-                                            <h5><a href="product-details">4 Rooms Manhattan</a></h5>
+                                            <h5><a id="wish_list_title" href="product-details"></a></h5>
                                             <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Wishlist</p>
                                             <div class="btn-wrapper">
                                                 <a href="wishlist" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
@@ -2016,6 +2032,126 @@
     <script src="{% static 'js/plugins.js' %}"></script>
     <!-- Main JS -->
     <script src="{% static 'js/main.js' %}"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
+    <script>
+        // var modal = document.getElementById("quick_view_modal")
+        modal.addEventListener('show.bs.modal', function(event){
+            const button = event.relatedTarget;
+            const buttonId = button.getAttribute("data-bs-id")
+            const buttonModality = button.getAttribute("data-bs-type")
+            
+            const modal_image = document.getElementById('quick_view_img')
+            const modal_title = document.getElementById('quick_view_title')
+            const modal_price = document.getElementById('quick_view_price')
+            const modal_view_details_link = document.getElementById('modal_view_details_link')
+            
+            original_image = document.getElementById(`latest_listings_img_${buttonId}`).src
+            original_title = document.getElementById(`latest_listings_title_${buttonId}`)
+            original_price = document.getElementById(`latest_listings_price_${buttonId}`)
+            
+            modal_image.src = original_image
+            modal_title.innerText = original_title.innerText
+            modal_price.innerText = original_price.innerText
+            
+            console.log(buttonModality.slice(0,5))
+            if (buttonModality.slice(0,5) == 'house')  {
+                modal_view_details_link.setAttribute('href', `product-details/${buttonId}`)
+            }else{
+                modal_view_details_link.setAttribute('href', `land-details/${buttonId}`)    
+            }
+            // console.log(document.getElementById('modality').getAttribute('href'))// if (modality == 'land'){
+            
+                // console.log(modality , 1)
+            // }else{
+                // modal_view_details_link.setAttribute('href', `product-details/${buttonId}`)   
+                // console.log(modality, 2)
+            // } 
+            
+            // .href = 'hello'
+        })
 
+        const wishlistModal = document.getElementById('wish_list_modal')
+        // console.log(wishlistModal)
+        wishlistModal.addEventListener('show.bs.modal', function(event){
+            const button = event.relatedTarget;
+            // console.log('Hello')
+            const buttonId = button.getAttribute('data-bs-wishlist')
+            const modal_image = document.getElementById('wish_list_img')
+            const modal_title = document.getElementById('wish_list_title')
+            // const modal_price = document.getElementById('wish_list_price')
+            
+            original_image = document.getElementById(`latest_listings_img_${buttonId}`).src
+            original_title = document.getElementById(`latest_listings_title_${buttonId}`)
+            // original_price = document.getElementById(`latest_listings_price_${buttonId}`)
+            
+            modal_image.src = original_image
+            modal_title.innerText = original_title.innerText
+            // modal_price.innerText = original_price.innerText
+
+            // document.getElementById(buttonId)
+            // console.log(buttonId)
+            
+            $.ajax({
+            url: "wishlist_ajax",
+            // url: "",
+            type: "POST", // http method
+            data: {
+                property_id: buttonId,
+                csrfmiddlewaretoken: '{{ csrf_token }}', 
+            }, 
+
+            // handle a successful response
+            success: function (response) {           
+                // alert(`hello, ${response["name"]}`);
+                console.log(response)
+            },
+
+            // handle a non-successful response
+            error: function (e) {
+                alert("Error", e)
+            }
+        });
+
+
+            
+    // const csrftoken = "{{ csrf_token }}"
+    // fetch("{% url 'wishlist_ajax' %}", {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',  // Set content type for JSON data
+    //         'X-CSRFToken': csrftoken, 
+    //         'topic': 'samuel'
+    //     },
+    //     body: JSON.stringify({'number': '23'}),
+    //     // body: JSON.stringify({ number: 35 })  // Send the number as JSON data
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //     // Handle successful insertion
+    //     console.log(data);
+    //     // Update the UI accordingly
+    // })
+    // .catch(error => {
+    //     // Handle errors
+    //     console.error(error);
+    // });
+
+            // var xhr = new XMLHttpRequest();
+            // xhr.open('POST', 'about');
+            // xhr.setRequestHeader('X-Request-With', 'XMLHttpRequest');
+            // // {% csrf_token %}
+            // // xhr.setRequestHeader('X-CSRFToken', getCookie('cs'))
+            // xhr.onload = function(){
+            //     if(xhr.status === 200){
+            //         var response = JSON.parse(xhr.responseText);
+            //         // 'Hello' = response.likes;
+            //     }
+            // };
+            // xhr.send();
+
+            
+        });
+       
+    </script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from sikadahomesApp.models import *
 
 # Create your views here.
 
@@ -14,10 +15,157 @@ def page_500(request):
 def add_agent(request):
     return render(request, 'admin-app/add-agent.html')
 
+
+def generate_random_id(length=10):
+        import random
+        import string
+        characters = string.ascii_letters + string.digits
+        return ''.join(random.choice(characters) for _ in range(length))
+
+
+
+def SaveFunction(request, param):    
+        region = request.POST.get('region')
+        budget = request.POST.get('budget')
+        img_listing = request.FILES.get('img_listing')
+        img_front = request.FILES.get('img_front')
+        status = request.POST.get('status')
+        price = request.POST.get('price')
+        date = request.POST.get('date')
+        property_title = request.POST.get('property_title')
+        location = request.POST.get('location')
+        property_address = request.POST.get('property_address')
+        description = request.POST.get('description')
+        property_name = request.POST.get('property_name')
+        home_area = request.POST.get('home_area')
+        rooms = request.POST.get('rooms')
+        baths = request.POST.get('baths')
+        year_built = request.POST.get('year_built')
+        neigbourhood = request.POST.get('neigbourhood')
+        lot_dimensions = request.POST.get('lot_dimensions')
+        beds = request.POST.get('beds')
+        balcony = request.POST.get('balcony')
+        furnished = request.POST.get('furnished')
+        completed = request.POST.get('completed')
+        living_room = request.POST.get('living_room')
+        dining_area = request.POST.get('dining_area')
+        garden = request.POST.get('garden')
+        gym = request.POST.get('gym')
+        img_gallery_1 = request.FILES.get('img_gallery_1')
+        img_gallery_2 = request.FILES.get('img_gallery_2')
+        img_gallery_3 = request.FILES.get('img_gallery_3')
+        air_conditioner = request.POST.get('air_conditioner') == 'on'
+        pool = request.POST.get('pool') == 'on'
+        wifi = request.POST.get('wifi') == 'on'
+        near_church = request.POST.get('near_church') == 'on'
+        near_estate = request.POST.get('near_estate') == 'on'
+        dish_washer = request.POST.get('dish_washer') == 'on'
+        security = request.POST.get('security') == 'on'
+        indoor_game = request.POST.get('indoor_game') == 'on'
+        cable_tv = request.POST.get('cable_tv') == 'on'
+        microwave = request.POST.get('microwave') == 'on'
+        # print(f''' Region = {region}, budget = {budget}, img_listing = {img_listing}, img_front = {img_front}, status = {status},
+        #      price = {price}, date = {date} , property_title = {property_title},
+        #      property_address = {property_address},  description = {description} , property_name = {property_name} ,
+        #      home_area = {home_area}, rooms = {rooms}, baths = {baths},
+        #      year_built = {year_built}, neigbourhood = {neigbourhood}, lot_dimensions={lot_dimensions},
+        #      beds={beds},  balcony={balcony}, furnished={furnished}, completed={completed},
+        #      living_room={living_room}, dining_area={dining_area}, garden={garden}, gym={gym}, img_gallery_1={img_gallery_1},
+        #      img_gallery_2={img_gallery_2}, img_gallery_3={img_gallery_3}, air_conditioner={air_conditioner},     
+        #      pool={pool}, wifi={wifi}, near_church={near_church}, near_estate={near_estate}, dish_washer={dish_washer}, security={security},
+        #      indoor_game={indoor_game}, cable_tv={cable_tv}, microwave={microwave}
+        #     ''') 
+        property_id = generate_random_id()
+        if param == 'house_for_sale':          
+            a = HouseSale(property_id=property_id,location=location,
+                          region=region,budget=budget,img_listing=img_listing,img_front=img_front,
+                          status=status,price=price,date=date,property_title=property_title,property_address=property_address,description=description,
+                          property_name=property_name,home_area=home_area,rooms=rooms,baths=baths,year_built=year_built,neigbourhood=neigbourhood,
+                          lot_dimensions=lot_dimensions,beds=beds,balcony=balcony,furnished=furnished,completed=completed,living_room=living_room,
+                          dining_area=dining_area,garden=garden,gym=gym,img_gallery_1=img_gallery_1,img_gallery_2=img_gallery_2,img_gallery_3=img_gallery_3,
+                          air_conditioner=air_conditioner,pool=pool,wifi=wifi,near_church=near_church,near_estate=near_estate,dish_washer=dish_washer,
+                          security=security,indoor_game=indoor_game,cable_tv=cable_tv,microwave=microwave,
+                          )            
+            a.save()
+            
+        elif param == 'house_for_rent':    
+            a = HouseRent(property_id=property_id,location=location,
+                          region=region,budget=budget,img_listing=img_listing,img_front=img_front,
+                          status=status,price=price,date=date,property_title=property_title,property_address=property_address,description=description,
+                          property_name=property_name,home_area=home_area,rooms=rooms,baths=baths,year_built=year_built,neigbourhood=neigbourhood,
+                          lot_dimensions=lot_dimensions,beds=beds,balcony=balcony,furnished=furnished,completed=completed,living_room=living_room,
+                          dining_area=dining_area,garden=garden,gym=gym,img_gallery_1=img_gallery_1,img_gallery_2=img_gallery_2,img_gallery_3=img_gallery_3,
+                          air_conditioner=air_conditioner,pool=pool,wifi=wifi,near_church=near_church,near_estate=near_estate,dish_washer=dish_washer,
+                          security=security,indoor_game=indoor_game,cable_tv=cable_tv,microwave=microwave,
+                          )
+            a.save()
+        else:    
+            a = HouseLease(property_id=property_id,location=location,
+                          region=region,budget=budget,img_listing=img_listing,img_front=img_front,
+                          status=status,price=price,date=date,property_title=property_title,property_address=property_address,description=description,
+                          property_name=property_name,home_area=home_area,rooms=rooms,baths=baths,year_built=year_built,neigbourhood=neigbourhood,
+                          lot_dimensions=lot_dimensions,beds=beds,balcony=balcony,furnished=furnished,completed=completed,living_room=living_room,
+                          dining_area=dining_area,garden=garden,gym=gym,img_gallery_1=img_gallery_1,img_gallery_2=img_gallery_2,img_gallery_3=img_gallery_3,
+                          air_conditioner=air_conditioner,pool=pool,wifi=wifi,near_church=near_church,near_estate=near_estate,dish_washer=dish_washer,
+                          security=security,indoor_game=indoor_game,cable_tv=cable_tv,microwave=microwave,
+                          )
+            a.save()
+        b = AllProperties(property_id = property_id , property_type=f'house_{param}', price=price, location=region)
+        b.save()    
+
 def add_property_house(request):
+    if request.method == 'POST':
+        status = request.POST.get('status')
+        # status_text = status.split('_')[1].capitalize()
+        SaveFunction(request, status)
+                                                                                                                                        
+    #     region = request.POST.get('region')
+    #     budget = request.POST.get('budget')
+    #     file = request.POST.get('file')
+    #     print(region, budget, file)
+        # print('Posting')
     return render(request, 'admin-app/add-property_house.html')
 
 def add_property_land(request):
+    if request.method == "POST":
+        property_id = generate_random_id()
+        region = request.POST.get('region')
+        location = request.POST.get('location')  
+        property_title = request.POST.get('property_title') 
+        budget = request.POST.get('budget') 
+        img_listing = request.FILES.get('img_listing') 
+        img_front = request.FILES.get('img_front') 
+        date = request.POST.get('date') 
+        property_address = request.POST.get('property_address') 
+        price = request.POST.get('price') 
+        property_name = request.POST.get('property_name')
+        commercial = request.POST.get('commercial') == 'on' 
+        serviced = request.POST.get('serviced') == 'on'
+        fenced = request.POST.get('fenced') == 'on'
+        water = request.POST.get('water') == 'on'
+        electricity = request.POST.get('electricity') == 'on'
+        plot_dimensions = request.POST.get('plot_dimensions')
+        no_of_plots = request.POST.get('no_of_plots') 
+        status = request.POST.get('status')
+        description = request.POST.get('description') 
+        # date_time = request.POST.get('date_time')
+        video_land = request.FILES.get('video_land')
+        video_thumbnail = request.FILES.get('video_thumbnail')
+        # admin = request.POST.get('admin') 
+        gps_address = request.POST.get('gps_address') 
+
+        # print(f'''property_id = {property_id}, region ={region}, location={location}, property_title={property_title}, budget={budget},
+        #       img_listing={img_listing}, img_front={img_front}, date={date}, property_address={property_address}, price={price},
+        #        property_name={property_name}, commercial={commercial}, serviced={serviced}, fenced={fenced}, water={water}, electricity={electricity},
+        #        plot_dimensions ={plot_dimensions}, no_of_plots={no_of_plots}, status={heyy}, description={description}, video_land={video_land},
+        #        video_thumbnail ={video_thumbnail}, gps_address = {gps_address}
+        #        ''')
+        a = LandSale(property_id=property_id,region=region,location=location,property_title=property_title,budget=budget,img_listing=img_listing,img_front=img_front,
+            date=date,property_address=property_address,price=price,property_name=property_name, commercial=commercial,serviced=serviced,fenced=fenced,water=water,electricity=electricity,
+            plot_dimensions=plot_dimensions,no_of_plots=no_of_plots,status=status,description=description, video_land=video_land,video_thumbnail=video_thumbnail,gps_address=gps_address                  )
+        a.save()
+        b = AllProperties(property_id = property_id , property_type='land_for_sale', price=price, location=region)
+        b.save()
     return render(request, 'admin-app/add-property_land.html')
 
 def agent(request):
