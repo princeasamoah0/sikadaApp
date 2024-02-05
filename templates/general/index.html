@@ -521,7 +521,7 @@
                         <div class="product-img">
                             <!-- {{item.status}}
                             Hello -->
-                            {%if item.status == 'land_for_sale' %}                         
+                            {%if item.status == 'land_for_sale' %}
                             <a href="land-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.img_listing.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
                             {%else%}
                             <a href="product-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.img_listing.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
@@ -533,7 +533,7 @@
                             </div>
                         </div>
                         <div class="product-info">
-                            <div class="product-badge">
+                            <<div class="product-badge">
                                 {%if item.status|slice:"-4:" == 'sale' %}
                                 <ul>
                                     <li class="sale-badg">For Sale</li>
@@ -653,8 +653,8 @@
                         </div>
                         <div class="ltn__feature-info">
                             <h3><a href="service-details">Buy a home</a></h3>
-                            <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                            <a class="ltn__service-btn" href="shop-right-sidebar?property_type=house_for_sale&location=none&price_range=none">Find A Home <i class="flaticon-right-arrow"></i></a>
+                            <p>Explore a variety of homes suited to your lifestyle. From charming cottages to modern condos, find the perfect place to call your own and start making memories</p>
+                            <a class="ltn__service-btn" href="shop-right-sidebar?property_type=house_for_sale&location=none&price_range=none">Find Your Ideal Home <i class="flaticon-right-arrow"></i></a>
                         </div>
                     </div>
                 </div>
@@ -662,12 +662,12 @@
                     <div class="ltn__feature-item ltn__feature-item-6 text-center bg-white  box-shadow-1 active">
                         <div class="ltn__feature-icon">
                             <!-- <span><i class="flaticon-house-3"></i></span> -->
-                            <img src="{% static 'img/icons/icon-img/22.png' %}" alt="#">
+                            <img src="{% static 'img/icons/icon-img/24.png' %}" alt="#">
                         </div>
                         <div class="ltn__feature-info">
                             <h3><a href="service-details">Buy a land</a></h3>
-                            <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                            <a class="ltn__service-btn" href="shop-right-sidebar?property_type=land_for_sale&location=none&price_range=none">Choose A Land <i class="flaticon-right-arrow"></i></a>
+                            <p>Explore diverse land parcels for your dream home or investment. From rural retreats to urban opportunities, find the perfect plot to build your vision</p>
+                            <a class="ltn__service-btn" href="shop-right-sidebar?property_type=land_for_sale&location=none&price_range=none">Discover Your Ideal Land <i class="flaticon-right-arrow"></i></a>
                         </div>
                     </div>
                 </div>
@@ -679,8 +679,8 @@
                         </div>
                         <div class="ltn__feature-info">
                             <h3><a href="service-details">Lease a home</a></h3>
-                            <p>over 1 million+ homes for sale available on the website, we can match you with a house you will want to call home.</p>
-                            <a class="ltn__service-btn" href="shop-right-sidebar?property_type=house_for_lease&location=none&price_range=none">Rent A Home <i class="flaticon-right-arrow"></i></a>
+                            <p>Discover a range of rental properties tailored to your lifestyle. From cozy apartments to spacious homes, find your ideal lease and make it your own.</p>
+                            <a class="ltn__service-btn" href="shop-right-sidebar?property_type=house_for_lease&location=none&price_range=none">Lease Your Ideal Home <i class="flaticon-right-arrow"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1117,7 +1117,7 @@
     </div>
     <!-- PRODUCT SLIDER AREA END -->
 
-    <!-- APARTMENTS PLAN AREA START -->
+    <!-- APARTMENTS PLAN AREA START
     <div class="ltn__apartments-plan-area pt-115--- pb-70">
         <div class="container">
             <div class="row">
@@ -1286,7 +1286,7 @@
             </div>
         </div>
     </div>
-    <!-- APARTMENTS PLAN AREA END -->
+     APARTMENTS PLAN AREA END -->
 
     <!-- VIDEO AREA START -->
     <div class="ltn__video-popup-area ltn__video-popup-margin---">
@@ -1404,7 +1404,7 @@
     </div>
     <!-- CATEGORY AREA END -->
 
-    <!-- CATEGORY AREA START -->
+    <!-- CATEGORY AREA START
     <div class="ltn__category-area ltn__product-gutter section-bg-1--- pt-115 pb-90 ">
         <div class="container">
             <div class="row">
@@ -1715,8 +1715,8 @@
                             <div class="footer-menu">
                                 <ul>
                                     <li><a href="about">About</a></li>
-                                    <li><a href="blog">Blog</a></li>
-                                    <li><a href="shop">All Products</a></li>
+                                    <!--<li><a href="blog">Blog</a></li>-->
+                                    <li><a href="hop-right-sidebar">All Products</a></li>
                                     <li><a href="locations">Locations Map</a></li>
                                     <li><a href="faq">FAQ</a></li>
                                     <li><a href="contact">Contact us</a></li>
@@ -2039,34 +2039,34 @@
             const button = event.relatedTarget;
             const buttonId = button.getAttribute("data-bs-id")
             const buttonModality = button.getAttribute("data-bs-type")
-            
+
             const modal_image = document.getElementById('quick_view_img')
             const modal_title = document.getElementById('quick_view_title')
             const modal_price = document.getElementById('quick_view_price')
             const modal_view_details_link = document.getElementById('modal_view_details_link')
-            
+
             original_image = document.getElementById(`latest_listings_img_${buttonId}`).src
             original_title = document.getElementById(`latest_listings_title_${buttonId}`)
             original_price = document.getElementById(`latest_listings_price_${buttonId}`)
-            
+
             modal_image.src = original_image
             modal_title.innerText = original_title.innerText
             modal_price.innerText = original_price.innerText
-            
+
             console.log(buttonModality.slice(0,5))
             if (buttonModality.slice(0,5) == 'house')  {
                 modal_view_details_link.setAttribute('href', `product-details/${buttonId}`)
             }else{
-                modal_view_details_link.setAttribute('href', `land-details/${buttonId}`)    
+                modal_view_details_link.setAttribute('href', `land-details/${buttonId}`)
             }
             // console.log(document.getElementById('modality').getAttribute('href'))// if (modality == 'land'){
-            
+
                 // console.log(modality , 1)
             // }else{
-                // modal_view_details_link.setAttribute('href', `product-details/${buttonId}`)   
+                // modal_view_details_link.setAttribute('href', `product-details/${buttonId}`)
                 // console.log(modality, 2)
-            // } 
-            
+            // }
+
             // .href = 'hello'
         })
 
@@ -2079,29 +2079,29 @@
             const modal_image = document.getElementById('wish_list_img')
             const modal_title = document.getElementById('wish_list_title')
             // const modal_price = document.getElementById('wish_list_price')
-            
+
             original_image = document.getElementById(`latest_listings_img_${buttonId}`).src
             original_title = document.getElementById(`latest_listings_title_${buttonId}`)
             // original_price = document.getElementById(`latest_listings_price_${buttonId}`)
-            
+
             modal_image.src = original_image
             modal_title.innerText = original_title.innerText
             // modal_price.innerText = original_price.innerText
 
             // document.getElementById(buttonId)
             // console.log(buttonId)
-            
+
             $.ajax({
             url: "wishlist_ajax",
             // url: "",
             type: "POST", // http method
             data: {
                 property_id: buttonId,
-                csrfmiddlewaretoken: '{{ csrf_token }}', 
-            }, 
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
 
             // handle a successful response
-            success: function (response) {           
+            success: function (response) {
                 // alert(`hello, ${response["name"]}`);
                 console.log(response)
             },
@@ -2113,13 +2113,13 @@
         });
 
 
-            
+
     // const csrftoken = "{{ csrf_token }}"
     // fetch("{% url 'wishlist_ajax' %}", {
     //     method: 'POST',
     //     headers: {
     //         'Content-Type': 'application/json',  // Set content type for JSON data
-    //         'X-CSRFToken': csrftoken, 
+    //         'X-CSRFToken': csrftoken,
     //         'topic': 'samuel'
     //     },
     //     body: JSON.stringify({'number': '23'}),
@@ -2149,9 +2149,9 @@
             // };
             // xhr.send();
 
-            
+
         });
-       
+
     </script>
 </body>
 </html>
