@@ -1,10 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import login,logout,authenticate
+from django.contrib import messages
 from sikadahomesApp.models import *
 
 # Create your views here.
 
 def index(request):
-    return render(request, 'admin-app/index.html')
+    if request.user.is_authenticated:
+        return render(request, 'admin-app/index.html')
+    else:
+        return redirect('sign-in')
+    
 
 def page_404(request):
     return render(request, 'admin-app/404.html')
@@ -110,7 +116,7 @@ def SaveFunction(request, param):
                           security=security,indoor_game=indoor_game,cable_tv=cable_tv,microwave=microwave,
                           )
             a.save()
-        b = AllProperties(property_id = property_id , property_type=f'house_{param}', price=price, location=region)
+        b = AllProperties(property_id = property_id , property_type=f'{param}', price=price, location=region)
         b.save()    
 
 def add_property_house(request):
@@ -274,6 +280,23 @@ def shop(request):
     return render(request, 'admin-app/shop.html')
 
 def sign_in(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect(index)
+        else:
+            messages.error(request, "Invalid Credentials")    
+        # try:
+        #     print(user)
+        # except:
+        #     user = authenticate(request, username=username, password=password)
+        #     print(user)
+        #     print('Nor dey work ooo')
+        # print(username, password)
     return render(request, 'admin-app/sign-in.html')
 
 def sign_up(request):

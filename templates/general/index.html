@@ -534,7 +534,7 @@
                             </div>
                         </div>
                         <div class="product-info">
-                            <<div class="product-badge">
+                            <div class="product-badge">
                                 {%if item.status|slice:"-4:" == 'sale' %}
                                 <ul>
                                     <li class="sale-badg">For Sale</li>
@@ -580,9 +580,6 @@
                                 <li><span>Fenced</span></li>
 
                                 {%endif%}
-
-                                <!-- serviced = models.BooleanField()
-                                fenced = models.BooleanField() -->
 
                                 {%endif%}
                                 <li><span>{{item.lot_dimensions}} </span>
