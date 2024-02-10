@@ -67,29 +67,33 @@
     <div class="container">
         <div class="col-md-12 content-center">
             <div class="card-plain">
-                <form class="form" method="" action="">
+                <form class="form" method="POST">
+                    {% csrf_token %}
                     <div class="header">
                         <div class="logo-container">
                             <img src="{% static 'admin-app/assets/images/logo.svg' %}" alt="">
                         </div>
                         <h5>Log in</h5>
                     </div>
+                    {% for message in messages %}
+                    <p style="color:rgb(207, 212, 52)">{{message}}</p>
+                    {%endfor%}
                     <div class="content">                                                
                         <div class="input-group input-lg">
-                            <input type="text" class="form-control" placeholder="Enter User Name">
+                            <input name="username" type="text" class="form-control" placeholder="Enter User Name">
                             <span class="input-group-addon">
                                 <i class="zmdi zmdi-account-circle"></i>
                             </span>
                         </div>
                         <div class="input-group input-lg">
-                            <input type="password" placeholder="Password" class="form-control" />
+                            <input name="password" type="password" placeholder="Password" class="form-control" />
                             <span class="input-group-addon">
                                 <i class="zmdi zmdi-lock"></i>
                             </span>
                         </div>
                     </div>
                     <div class="footer text-center">
-                        <a href="/admin-app" class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light">SIGN IN</a>
+                        <button type="submit"   class="btn l-cyan btn-round btn-lg btn-block waves-effect waves-light">SIGN IN</button>
                         <h6 class="m-t-20"><a href="forgot-password" class="link">Forgot Password?</a></h6>
                     </div>
                 </form>

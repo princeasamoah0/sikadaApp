@@ -9,7 +9,7 @@ from django.http import JsonResponse
 
 from itertools import chain
 import random
-from .models import HouseRent,HouseSale,LandSale,AllProperties,Feedback, Wishlist
+from .models import HouseRent,HouseSale,HouseLease,LandSale,AllProperties,Feedback, Wishlist
 
 # Create your views here.
 
@@ -41,7 +41,8 @@ def page_404 (request):
     return render(request, 'general/404.html')
 
 def about(request):  
-    return render(request, 'general/about.html')
+    feedback = Feedback.objects.all().order_by('-id')[:4]
+    return render(request, 'general/about.html', {'feedback':feedback})
 
 def account(request):
     return render(request, 'general/account.html')
@@ -212,37 +213,40 @@ def shop_right_sidebar(request):
     property_type = request.GET.get('property_type')
     location = request.GET.get('location')
     price_range = request.GET.get('price_range')
-    print(property_type, location, price_range)
+    # print(property_type, location, price_range)
     call_all = ''
 
     # COUNTS
     count_house_for_sale = AllProperties.objects.filter(property_type = 'house_for_sale').count()
     count_house_for_rent= AllProperties.objects.filter(property_type = 'house_for_rent').count()
+    count_house_for_lease= AllProperties.objects.filter(property_type = 'house_for_lease').count()
     count_land_for_sale= AllProperties.objects.filter(property_type = 'land_for_sale').count()
 
-    count_greater_accra= AllProperties.objects.filter(location='greater_accra').count()
-    count_ashanti= AllProperties.objects.filter(location='ashanti').count()
-    count_northern= AllProperties.objects.filter(location='northern').count()
-    count_eastern= AllProperties.objects.filter(location='eastern').count()
-    count_central= AllProperties.objects.filter(location='central').count()
-    count_western= AllProperties.objects.filter(location='western').count()
-    count_upper_east= AllProperties.objects.filter(location='upper_east').count()
-    count_bono= AllProperties.objects.filter(location='bono').count()
-    count_ahafo= AllProperties.objects.filter(location='ahafo').count()
-    count_bono_west= AllProperties.objects.filter(location='bono_west').count()
-    count_volta= AllProperties.objects.filter(location='volta').count()
-    count_bono_east= AllProperties.objects.filter(location='bono_east').count()
-    count_oti= AllProperties.objects.filter(location='oti').count()
-    count_north_east= AllProperties.objects.filter(location='north_east').count()
-    count_savannah= AllProperties.objects.filter(location='savannah').count()
+    count_greater_accra= AllProperties.objects.filter(location='Greater Accra').count()
+    count_ashanti= AllProperties.objects.filter(location='Ashanti Region').count()
+    count_northern= AllProperties.objects.filter(location='Northern Region').count()
+    count_eastern= AllProperties.objects.filter(location='Eastern Region').count()
+    count_central= AllProperties.objects.filter(location='Central Region').count()
+    count_western= AllProperties.objects.filter(location='Western Region').count()
+    count_upper_east= AllProperties.objects.filter(location='Upper East').count()
+    count_bono= AllProperties.objects.filter(location='Bono Region').count()
+    count_ahafo= AllProperties.objects.filter(location='Ahafo Region').count()
+    count_upper_west= AllProperties.objects.filter(location='Upper West').count()
+    count_volta= AllProperties.objects.filter(location='Volta Region').count()
+    count_bono_east= AllProperties.objects.filter(location='Bono East').count()
+    count_oti= AllProperties.objects.filter(location='Oti Region').count()
+    count_north_east= AllProperties.objects.filter(location='North East').count()
+    count_western_north= AllProperties.objects.filter(location='Western North').count()
+    count_savannah= AllProperties.objects.filter(location='Savannah Region').count()
 
 
-    counts = {'count_house_for_sale':count_house_for_sale, 'count_house_for_rent':count_house_for_rent,'count_land_for_sale':count_land_for_sale,
+    counts = {'count_house_for_sale':count_house_for_sale, 'count_house_for_rent':count_house_for_rent,'count_house_for_lease':count_house_for_lease,
+            'count_land_for_sale':count_land_for_sale,
             'count_greater_accra':count_greater_accra, 'count_ashanti':count_ashanti,
             'count_northern':count_northern,'count_eastern':count_eastern,'count_central':count_central,
             'count_western':count_western,'count_upper_east':count_upper_east,'count_bono':count_bono,
-            'count_ahafo':count_ahafo,'count_bono_west':count_bono_west,'count_volta':count_volta,'count_bono_east':count_bono_east,
-            'count_oti':count_oti,'count_north_east':count_north_east,'count_savannah':count_savannah
+            'count_ahafo':count_ahafo,'count_upper_west':count_upper_west,'count_volta':count_volta,'count_bono_east':count_bono_east,
+            'count_oti':count_oti,'count_north_east':count_north_east,'count_savannah':count_savannah, 'count_western_north':count_western_north,
 
             }
 
@@ -297,10 +301,11 @@ def shop_right_sidebar(request):
 
     house_sale = HouseSale.objects.filter(property_id__in=querylist)
     house_rent = HouseRent.objects.filter(property_id__in=querylist)
+    house_lease = HouseLease.objects.filter(property_id__in=querylist)
     land_sale = LandSale.objects.filter(property_id__in=querylist)
 
 
-    all = list(chain(house_sale,house_rent,land_sale))
+    all = list(chain(house_sale,house_rent,land_sale, house_lease))
     random.shuffle(all)
     print(f"chained {all}")
     
@@ -310,6 +315,8 @@ def shop_right_sidebar(request):
         return render(request, 'general/shop-right-sidebar.html', {'context':context, 'data':all, 'counts':counts})
     elif house_sale.exists():
         return render(request, 'general/shop-right-sidebar.html', {'context':context, 'data':house_sale, 'counts':counts})
+    elif house_lease.exists():
+        return render(request, 'general/shop-right-sidebar.html', {'context':context, 'data':house_lease, 'counts':counts})
     elif house_rent.exists():
         return render(request, 'general/shop-right-sidebar.html', {'context':context, 'data':house_rent, 'counts':counts})
     elif land_sale.exists():

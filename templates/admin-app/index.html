@@ -191,8 +191,8 @@
                 <div class="user-info">
                     <div class="image"><a href="profile"><img src="{% static 'admin-app/assets/images/profile_av.jpg' %}" alt="User"></a></div>
                     <div class="detail">
-                        <h4>Michael</h4>
-                        <small>Agent</small>
+                        <h4>{{request.user.username}}</h4>
+                        <small>Administrator</small>
                     </div>
                     <a href="events" title="Events"><i class="zmdi zmdi-calendar"></i></a>
                     <a href="mail-inbox" title="Inbox"><i class="zmdi zmdi-email"></i></a>
