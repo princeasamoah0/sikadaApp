@@ -436,7 +436,7 @@
                                          {%else%}
                                          {% for i in data %}
                                          <div  class="col-xl-6 col-sm-6 col-12">
-                                             <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
+                                             <div id="latest_listings_{{i.property_id}}" class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                                                  <div class="product-img">
                                                     {%if i.status == 'land_for_sale' %}
                                                         <a href="land-details/{{i.property_id}}"><img id="latest_listings_img_{{i.property_id}}" src="{{i.img_listing.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
@@ -751,14 +751,9 @@
                                         window.history.replaceState({},'', `${url.origin}${url.pathname}?${searchParams}`)
 
                                         window.location.reload()
-                                        // console.log(searchParams)
-                                        // console.log(input.value)
-                                        // window.location.href
                                     })
                                 });
-                                console.log(radioInputs)
-
-
+                                
                             </script>
 
 

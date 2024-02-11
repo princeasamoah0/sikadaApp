@@ -520,8 +520,6 @@
                 <div class="col-xl-4 col-sm-6 col-12">
                     <div id="latest_listings_{{item.property_id}}" class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                         <div class="product-img">
-                            <!-- {{item.status}}
-                            Hello -->
                             {%if item.status == 'land_for_sale' %}
                             <a href="land-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.img_listing.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
                             {%else%}
