@@ -44,6 +44,7 @@ def about(request):
     feedback = Feedback.objects.all().order_by('-id')[:4]
     return render(request, 'general/about.html', {'feedback':feedback})
 
+@login_required
 def account(request):
     return render(request, 'general/account.html')
 
@@ -108,7 +109,9 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 if request.GET.get('next'):
-                    return redirect(wishlist)
+                    query = (request.GET.get('next'))[1:]
+                    # print(f"The print statement is, {(request.GET.get('next'))[1:]}")
+                    return redirect(query)
                 else:
                     return redirect(index)
             else:
@@ -177,13 +180,21 @@ def register(request):
             print('Here working')
 
         # except User.DoesNotExist:
-            user= User.objects.create_user(phone, email, password, backend='django.contrib.auth.backends.ModelBackend')
-            user.first_name = firstname
-            user.last_name = lastname
-            user.save()
-
-            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect(index) 
+        # try:    
+        #     user= User.objects.create_user(phone, email, password, backend='django.contrib.auth.backends.ModelBackend')
+        #     user.first_name = firstname
+        #     user.last_name = lastname
+        #     user.save()
+        #     login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        #     return redirect(index) 
+                
+        # except:
+        user= User.objects.create_user(phone, email, password)
+        user.first_name = firstname
+        user.last_name = lastname
+        user.save()
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        return redirect(index) 
             # return render(request, 'general/index.html')
 
             # print('User created successfully')
