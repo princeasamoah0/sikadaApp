@@ -436,7 +436,7 @@
                                          {%else%}
                                          {% for i in data %}
                                          <div  class="col-xl-6 col-sm-6 col-12">
-                                             <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
+                                             <div id="latest_listings_{{i.property_id}}" class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                                                  <div class="product-img">
                                                     {%if i.status == 'land_for_sale' %}
                                                         <a href="land-details/{{i.property_id}}"><img id="latest_listings_img_{{i.property_id}}" src="{{i.img_listing.url}}" style="min-height: 250px; max-height: 300px;" alt="#"></a>
@@ -499,7 +499,7 @@
                                                      <div class="product-hover-action">
                                                          <ul>
                                                              <li>
-                                                                 <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                                 <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-id="{{i.property_id}}" data-bs-type="{{i.status}}" data-bs-target="#quick_view_modal">
                                                                      <i class="flaticon-expand"></i>
                                                                  </a>
                                                              </li>
@@ -508,16 +508,22 @@
                                                                      <i class="flaticon-heart-1"></i></a>
                                                              </li>
                                                              <li>
-                                                                 <a href="product-details" title="Product Details">
+                                                                 {%if i.status == 'land_for_sale' %}
+                                                                 <a href="land-details/{{i.property_id}}" title="Product Details">
                                                                      <i class="flaticon-add"></i>
                                                                  </a>
+                                                                 {%else%}
+                                                                 <a href="product-details/{{i.property_id}}" title="Product Details">
+                                                                    <i class="flaticon-add"></i>
+                                                                </a>
+                                                                {%endif%}
                                                              </li>
                                                          </ul>
                                                      </div>
                                                  </div>
                                                  <div class="product-info-bottom">
                                                      <div class="product-price">
-                                                         <span>GHS {{i.price}}</span>
+                                                         <span id="latest_listings_price_{{i.property_id}}">GHS {{i.price}}</span>
                                                      </div>
                                                      <!-- <div class="product-price">
                                                          <span>GHS {{i.price}}<label>/Month</label></span>
@@ -598,77 +604,77 @@
                             <ul>
                                 <li>
                                     <label class="checkbox-item">Ashanti Region
-                                        <input type="radio" value="Ashanti region" id="ashanti" name="location">
+                                        <input type="radio" value="Ashanti_Region" id="Ashanti_Region" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_ashanti}}</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">Greater Accra Region
-                                        <input type="radio" value="Greater Accra" id="Greater Accra" name="location">
+                                        <input type="radio" value="Greater_Accra" id="Greater_Accra" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_greater_accra}}</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">Northern Region
-                                        <input type="radio" value="Northern Region" id="northern" name="location">
+                                        <input type="radio" value="Northern_Region" id="Northern_Region" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_northern}}</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">Eastern Region
-                                        <input type="radio" value="Eastern Region" id="eastern" name="location">
+                                        <input type="radio" value="Eastern_Region" id="Eastern_Region" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_eastern}}</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">Central Region
-                                        <input type="radio" value="Central Region" id="central" name="location">
+                                        <input type="radio" value="Central_Region" id="Central_Region" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_central}}</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">Western Region
-                                        <input type="radio" value="Western Region" id="western" name="location">
+                                        <input type="radio" value="Western_Region" id="Western_Region" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_western}}</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">Upper East Region
-                                        <input type="radio" value="Upper East" id="upper_east" name="location">
+                                        <input type="radio" value="Upper_East" id="Upper_East" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_upper_east}}</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">Bono Region
-                                        <input type="radio" value="Bono Region" id="bono" name="location">
+                                        <input type="radio" value="Bono_Region" id="Bono_Region" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_bono}}</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">Ahafo Region
-                                        <input type="radio" value="Ahafo Region" id="ahafo" name="location">
+                                        <input type="radio" value="Ahafo_Region" id="Ahafo_Region" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_ahafo}}</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">Western North Region
-                                        <input type="radio" value="Western North" id="bono_west" name="location">
+                                        <input type="radio" value="Western_North" id="Western_North" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_bono_west}}</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">Volta Region
-                                        <input type="radio" value="Volta Region" id="volta" name="location">
+                                        <input type="radio" value="Volta_Region" id="Volta_Region" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_volta}}</span>
@@ -682,28 +688,28 @@
                                 </li> -->
                                 <li>
                                     <label class="checkbox-item">Bono East Region
-                                        <input type="radio" value="Bono East" id="bono_east" name="location">
+                                        <input type="radio" value="Bono_East" id="Bono_East" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_bono_east}}</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">Oti Region
-                                        <input type="radio" value="Oti Region" id="oti" name="location">
+                                        <input type="radio" value="Oti_Region" id="Oti_Region" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_oti}}</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">North East Region
-                                        <input type="radio" value="North East" id="north_east" name="location">
+                                        <input type="radio" value="North_East" id="North_East" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_north_east}}</span>
                                 </li>
                                 <li>
                                     <label class="checkbox-item">Savannah Region
-                                        <input type="radio" value="Savannah Region" id="savannah" name="location">
+                                        <input type="radio" value="Savannah_Region" id="Savannah_Region" name="location">
                                         <span class="checkmark"></span>
                                     </label>
                                     <span class="categorey-no">{{counts.count_savannah}}</span>
@@ -737,28 +743,34 @@
 
 
                             <script>
-                                try{document.getElementById({{context.property_type}}.id).checked = 'checked'}catch{}
-                                try{document.getElementById({{context.location}}.id).checked ='checked'}catch{}
-                                try{document.getElementById({{context.price_range}}.id).checked ='checked' }catch{}
+                                try{document.getElementById({{context.property_type}}.id).checked = 'checked'
+                                    console.log('Property type work well')
+                                }catch{console.log('Property type Not work')};
+
+                                try{document.getElementById({{context.price_range}}.id).checked ='checked'
+                                    console.log('Price work well')
+                                }catch{console.log('Price Not work')};
+                                
+                                try{document.getElementById({{context.location}}.id).checked ='checked'
+                                    console.log('LOcation work well')
+                                }catch{console.log('Location Not work')};
+                                // console.log({{context.location}})
+                                // try{document.getElementById({{context.region}}.id).checked ='checked'}catch{console.log('location Not work')};
+                                // try{document.getElementById({{context.price_range}}.id).checked ='checked' }catch{console.log('Price range Not work')};
 
                                 const radioInputs = document.querySelectorAll('input[type="radio"]')
                                 radioInputs.forEach(input => {
                                     input.addEventListener('click', function() {
                                         const url = new URL(window.location.href)
-
+                                        console.log(this)
                                         const searchParams = new URLSearchParams(url.search)
                                         searchParams.set(input.name, input.value)
                                         window.history.replaceState({},'', `${url.origin}${url.pathname}?${searchParams}`)
 
                                         window.location.reload()
-                                        // console.log(searchParams)
-                                        // console.log(input.value)
-                                        // window.location.href
                                     })
                                 });
-                                console.log(radioInputs)
-
-
+                                
                             </script>
 
 
@@ -1188,7 +1200,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
                                         <div class="modal-product-img">
-                                            <img src="{% static 'img/product/4.png' %}" alt="#">
+                                            <img id="quick_view_img" src="{% static 'img/product/4.png' %}" alt="#">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-12">
@@ -1203,10 +1215,10 @@
                                                     <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
                                                 </ul>
                                             </div>
-                                            <h3>3 Rooms Manhattan</h3>
+                                            <h3><a id="quick_view_title" href="product-details">10 Rooms Manhattan</a></h3>
                                             <div class="product-price">
-                                                <span>$149.00</span>
-                                                <del>$165.00</del>
+                                                <span id="quick_view_price">$149.00</span>
+                                                <!-- <del>$165.00</del> -->
                                             </div>
                                             <div class="modal-product-meta ltn__product-details-menu-1">
                                                 <ul>
@@ -1274,6 +1286,26 @@
         </div>
     </div>
     <!-- MODAL AREA END -->
+
+    <script>
+        const modal = document.getElementById("quick_view_modal")
+        modal.addEventListener('show.bs.modal', function(event){
+            const button = event.relatedTarget;
+            const buttonId = button.getAttribute("data-bs-id")
+            const modal_image = document.getElementById('quick_view_img')
+            const modal_title = document.getElementById('quick_view_title')
+            const modal_price = document.getElementById('quick_view_price')
+
+            original_image = document.getElementById(`latest_listings_img_${buttonId}`).src
+            original_title = document.getElementById(`latest_listings_title_${buttonId}`)
+            original_price = document.getElementById(`latest_listings_price_${buttonId}`)
+
+            modal_image.src = original_image
+            modal_title.innerText = original_title.innerText
+            modal_price.innerText = original_price.innerText
+        })
+
+    </script>
 
     <!-- MODAL AREA START (Add To Cart Modal) -->
     <div class="ltn__modal-area ltn__add-to-cart-modal-area">
