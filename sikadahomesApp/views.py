@@ -44,6 +44,7 @@ def about(request):
     feedback = Feedback.objects.all().order_by('-id')[:4]
     return render(request, 'general/about.html', {'feedback':feedback})
 
+@login_required
 def account(request):
     return render(request, 'general/account.html')
 
@@ -108,7 +109,9 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 if request.GET.get('next'):
-                    return redirect(wishlist)
+                    query = (request.GET.get('next'))[1:]
+                    # print(f"The print statement is, {(request.GET.get('next'))[1:]}")
+                    return redirect(query)
                 else:
                     return redirect(index)
             else:
