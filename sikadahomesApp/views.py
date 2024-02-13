@@ -211,7 +211,9 @@ def shop_list(request):
 
 def shop_right_sidebar(request):
     property_type = request.GET.get('property_type')
-    location = request.GET.get('location')
+    location = request.GET.get('location') 
+    # location = location.replace("_", " ") 
+    # print(f"Location is {location}")
     price_range = request.GET.get('price_range')
     # print(property_type, location, price_range)
     call_all = ''
@@ -222,22 +224,22 @@ def shop_right_sidebar(request):
     count_house_for_lease= AllProperties.objects.filter(property_type = 'house_for_lease').count()
     count_land_for_sale= AllProperties.objects.filter(property_type = 'land_for_sale').count()
 
-    count_greater_accra= AllProperties.objects.filter(location='Greater Accra').count()
-    count_ashanti= AllProperties.objects.filter(location='Ashanti Region').count()
-    count_northern= AllProperties.objects.filter(location='Northern Region').count()
-    count_eastern= AllProperties.objects.filter(location='Eastern Region').count()
-    count_central= AllProperties.objects.filter(location='Central Region').count()
-    count_western= AllProperties.objects.filter(location='Western Region').count()
-    count_upper_east= AllProperties.objects.filter(location='Upper East').count()
-    count_bono= AllProperties.objects.filter(location='Bono Region').count()
-    count_ahafo= AllProperties.objects.filter(location='Ahafo Region').count()
-    count_upper_west= AllProperties.objects.filter(location='Upper West').count()
-    count_volta= AllProperties.objects.filter(location='Volta Region').count()
-    count_bono_east= AllProperties.objects.filter(location='Bono East').count()
-    count_oti= AllProperties.objects.filter(location='Oti Region').count()
-    count_north_east= AllProperties.objects.filter(location='North East').count()
-    count_western_north= AllProperties.objects.filter(location='Western North').count()
-    count_savannah= AllProperties.objects.filter(location='Savannah Region').count()
+    count_greater_accra= AllProperties.objects.filter(location='Greater_Accra').count()
+    count_ashanti= AllProperties.objects.filter(location='Ashanti_Region').count()
+    count_northern= AllProperties.objects.filter(location='Northern_Region').count()
+    count_eastern= AllProperties.objects.filter(location='Eastern_Region').count()
+    count_central= AllProperties.objects.filter(location='Central_Region').count()
+    count_western= AllProperties.objects.filter(location='Western_Region').count()
+    count_upper_east= AllProperties.objects.filter(location='Upper_East').count()
+    count_bono= AllProperties.objects.filter(location='Bono_Region').count()
+    count_ahafo= AllProperties.objects.filter(location='Ahafo_Region').count()
+    count_upper_west= AllProperties.objects.filter(location='Upper_West').count()
+    count_volta= AllProperties.objects.filter(location='Volta_Region').count()
+    count_bono_east= AllProperties.objects.filter(location='Bono_East').count()
+    count_oti= AllProperties.objects.filter(location='Oti_Region').count()
+    count_north_east= AllProperties.objects.filter(location='North_East').count()
+    count_western_north= AllProperties.objects.filter(location='Western_North').count()
+    count_savannah= AllProperties.objects.filter(location='Savannah_Region').count()
 
 
     counts = {'count_house_for_sale':count_house_for_sale, 'count_house_for_rent':count_house_for_rent,'count_house_for_lease':count_house_for_lease,
@@ -309,6 +311,8 @@ def shop_right_sidebar(request):
     random.shuffle(all)
     print(f"chained {all}")
     
+    print(property_type, location, price_range)
+
     context = {'property_type':property_type, 'location':location, 'price_range':price_range}
 
     if call_all == True:
