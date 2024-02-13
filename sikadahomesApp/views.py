@@ -177,13 +177,21 @@ def register(request):
             print('Here working')
 
         # except User.DoesNotExist:
-            user= User.objects.create_user(phone, email, password, backend='django.contrib.auth.backends.ModelBackend')
-            user.first_name = firstname
-            user.last_name = lastname
-            user.save()
-
-            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-            return redirect(index) 
+        # try:    
+        #     user= User.objects.create_user(phone, email, password, backend='django.contrib.auth.backends.ModelBackend')
+        #     user.first_name = firstname
+        #     user.last_name = lastname
+        #     user.save()
+        #     login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        #     return redirect(index) 
+                
+        # except:
+        user= User.objects.create_user(phone, email, password)
+        user.first_name = firstname
+        user.last_name = lastname
+        user.save()
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        return redirect(index) 
             # return render(request, 'general/index.html')
 
             # print('User created successfully')
