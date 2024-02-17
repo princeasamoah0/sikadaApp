@@ -1,0 +1,23 @@
+{% load static %}
+
+index.html
+/admin-app
+
+.html
+
+
+assets/
+{% static 'admin-app/assets/
+
+
+.css
+.css' %}
+
+.js
+.js' %}
+
+.jpg
+.jpg' %}
+
+.svg
+.svg' %}

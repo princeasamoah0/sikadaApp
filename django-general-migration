@@ -1,0 +1,32 @@
+{% load static %}
+
+src="
+src="{% static '
+
+href="css
+href="{% static 'css
+
+data-bs-bg="
+data-bs-bg="{% static '
+
+
+.png
+.png' %}
+
+.css
+.css' %}
+
+.js
+.js' %}
+
+.jpg
+.jpg' %}
+
+
+
+(some)
+index
+-will be replaced with nuin
+
+.html
+-all will be replaced with nuin
