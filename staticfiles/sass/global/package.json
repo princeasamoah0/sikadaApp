@@ -1,0 +1,11 @@
+{
+  "name": "global",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "compile": "sass --watch _global.scss style.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

@@ -1,0 +1,32 @@
+.footer-top-area {
+  background-color: #00292f;
+}
+
+.before-bg-bottom:before {
+  background-color: #00292f;
+}
+
+.section-bg-7 {
+  background-color: #071c1f;
+}
+
+
+/* LOGIN */
+
+.social-login-wrapper{
+  display: flex;
+  justify-content: space-around;
+  
+}
+.social-login-icon{
+  border:2px solid rgb(142, 137, 137);
+  padding: 8px;
+  border-radius: 50%; 
+}
+.social-login-icon:hover{
+  background-color: #ff7802;
+}
+
+#Password_Validator{
+  color:red;                               
+}    
