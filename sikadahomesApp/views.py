@@ -9,11 +9,23 @@ from django.http import JsonResponse
 
 from itertools import chain
 import random
-from .models import HouseRent,HouseSale,HouseLease,LandSale,AllProperties,Feedback, Wishlist
+from .models import ( HouseRent,HouseSale,HouseLease,LandSale,
+                      AllProperties,Feedback, Wishlist,
+                      MailingList,Message
 
+                    )
 # Create your views here.
 
 def index (request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        a = MailingList(email = email)
+        a.save()
+        print(email)
+        messages.info(request, "Email added to mailing list.")
+        # messages.error(request, "Invalid Login Credentials")
+        # messages.error(request, "Phone number or email already exists")
+        
     houseRent = HouseRent.objects.all().order_by('-id')[:2]
     houseSale = HouseSale.objects.all().order_by('-id')[:2]
     landSale = LandSale.objects.all().order_by('-id')[:2]
@@ -21,6 +33,7 @@ def index (request):
 
     latest_listings = list(chain(houseRent, houseSale,landSale))
     random.shuffle(latest_listings)
+    
     return render(request, 'general/index.html', {'context':latest_listings, 'feedback':feedback })
 
 def wishlist_Ajax(request):
@@ -137,6 +150,19 @@ def portfolio(request):
     return render(request, 'general/portfolio.html')
 
 def product_details(request,property_id):
+    
+    #if request.method == 'POST' and 'messageForm' in request.POST.get('messageForm'):    
+    #         name = request.POST['yourname']
+    #         email = request.POST['youremail']
+    #         message = request.POST['yourmessage']
+    #         a = Message(email=email, name = name, message=message)
+    #         a.save()
+    # elif request.method == 'POST':
+
+        # request.method == 'POST' and 'mailingListForm' in request.POST.get('mailingListForm'):    
+    email = request.POST['email'] 
+    print(f'My email is {email}')
+
     query = ''
     if HouseRent.objects.filter(property_id = property_id):
         query = HouseRent.objects.get(property_id = property_id)
@@ -221,6 +247,13 @@ def shop_list(request):
     return render(request, 'general/shop-list.html')
 
 def shop_right_sidebar(request):
+    # if request.method == 'POST':
+    #     name = request.POST['yourname']
+    #     email = request.POST['youremail']
+    #     message = request.POST['yourmessage']
+    #     print("Working now")
+    #     print(name, email, message)
+
     property_type = request.GET.get('property_type')
     location = request.GET.get('location') 
     # location = location.replace("_", " ") 

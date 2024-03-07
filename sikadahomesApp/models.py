@@ -286,3 +286,20 @@ class Wishlist(models.Model):
     property_id = models.CharField(max_length=20, null=True, blank=True)
     username = models.CharField(max_length = 100, null=True, blank=True)
     date_time = models.DateTimeField(default = timezone.now)
+
+class Message(models.Model):
+    name = models.CharField(max_length = 100, null=True, blank=True)
+    email = models.CharField(max_length = 100, null=True, blank=True)
+    message = models.TextField(null=True, blank = True)
+    datetime = models.DateTimeField(default = timezone.now)  
+    def __str__ (self):
+        return self.email 
+
+
+class MailingList(models.Model):
+    email = models.CharField(max_length = 100, null=True, blank=True)
+    name = models.CharField(max_length = 100, null=True, blank=True)
+    isActive = models.CharField(max_length = 50, null=True, blank=True)
+    datetime = models.DateTimeField(default = timezone.now)  
+    def __str__ (self):
+        return self.email 
