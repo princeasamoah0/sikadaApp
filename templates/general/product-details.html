@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% load static %}
 
-    <!-- Place favicon.png' %} in the root directory -->
+    <!-- Place favicon.png in the root directory -->
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon" />
     <!-- Font Icons css -->
     <link rel="stylesheet" href="{% static 'css/font-icons.css' %}">
@@ -606,12 +606,12 @@
                                             <li>
                                                 {% if context.air_conditioner == 'True' %}
                                                 <label class="checkbox-item">Air Conditioning
-                                                    <input type="checkbox" checked="checked">
+                                                    <input disabled  type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%else%}
                                                 <label class="checkbox-item">Air Conditioning
-                                                    <input type="checkbox">
+                                                    <input disabled type="checkbox">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%endif%}
@@ -619,12 +619,12 @@
                                             <li>
                                                 {% if context.pool == 'True' %}
                                                 <label class="checkbox-item">Swimming pool
-                                                    <input type="checkbox" checked="checked">
+                                                    <input disabled type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%else%}
                                                 <label class="checkbox-item">Swimming pool
-                                                    <input type="checkbox">
+                                                    <input disabled type="checkbox">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%endif%}
@@ -632,12 +632,12 @@
                                             <li>
                                                 {% if context.wifi == 'True' %}
                                                 <label class="checkbox-item">Wifi
-                                                    <input type="checkbox" checked="checked">
+                                                    <input disabled type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%else%}
                                                 <label class="checkbox-item">Wifi
-                                                    <input type="checkbox">
+                                                    <input disabled type="checkbox">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%endif%}
@@ -645,12 +645,12 @@
                                             <li>
                                                 {% if context.near_church == 'True' %}
                                                 <label class="checkbox-item">Near church
-                                                    <input type="checkbox" checked="checked">
+                                                    <input disabled type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%else%}
                                                 <label class="checkbox-item">Near church
-                                                    <input type="checkbox">
+                                                    <input disabled type="checkbox">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%endif%}
@@ -658,12 +658,12 @@
                                             <li>
                                                 {% if context.near_estate == 'True' %}
                                                 <label class="checkbox-item">Near Estate
-                                                    <input type="checkbox" checked="checked">
+                                                    <input disabled type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%else%}
                                                 <label class="checkbox-item">Near Estate
-                                                    <input type="checkbox">
+                                                    <input disabled type="checkbox">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%endif%}
@@ -677,12 +677,12 @@
                                             <li>
                                                 {% if context.dish_washer == 'True' %}
                                                 <label class="checkbox-item">Dish washer
-                                                    <input type="checkbox" checked="checked">
+                                                    <input disabled type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%else%}
                                                 <label class="checkbox-item">Dish washer
-                                                    <input type="checkbox">
+                                                    <input disabled type="checkbox">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%endif%}
@@ -690,12 +690,12 @@
                                             <li>
                                                 {% if context.security == 'True' %}
                                                 <label class="checkbox-item">24/7 security
-                                                    <input type="checkbox" checked="checked">
+                                                    <input disabled type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%else%}
                                                 <label class="checkbox-item">24/7 security
-                                                    <input type="checkbox">
+                                                    <input disabled type="checkbox">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%endif%}
@@ -703,12 +703,12 @@
                                             <li>
                                                 {% if context.indoor_game == 'True' %}
                                                 <label class="checkbox-item">Indoor Game
-                                                    <input type="checkbox" checked="checked">
+                                                    <input disabled type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%else%}
                                                 <label class="checkbox-item">Indoor Game
-                                                    <input type="checkbox">
+                                                    <input disabled type="checkbox">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%endif%}
@@ -716,12 +716,12 @@
                                             <li>
                                                 {% if context.cable_tv == 'True' %}
                                                 <label class="checkbox-item">Cable TV
-                                                    <input type="checkbox" checked="checked">
+                                                    <input disabled type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%else%}
                                                 <label class="checkbox-item">Cable TV
-                                                    <input type="checkbox">
+                                                    <input disabled type="checkbox">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%endif%}
@@ -729,12 +729,12 @@
                                             <li>
                                                 {% if context.microwave == 'True' %}
                                                 <label class="checkbox-item">Microwave
-                                                    <input type="checkbox" checked="checked">
+                                                    <input disabled type="checkbox" checked="checked">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%else%}
                                                 <label class="checkbox-item">Microwave
-                                                    <input type="checkbox">
+                                                    <input disabled type="checkbox">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 {%endif%}
@@ -894,9 +894,9 @@
                         <!-- Author Widget -->
                         <div class="widget ltn__author-widget">
                             <div class="ltn__author-widget-inner text-center">
-                                <img src="{% static 'img/team/4.jpg' %}" alt="Image">
-                                <h5>Rosalina D. Willaimson</h5>
-                                <small>Traveller/Photographer</small>
+                                <img src="{% static 'img/logo.png' %}" alt="Logo">
+                                <h5>Sikadahomes</h5>
+                                <small>Admin</small>
                                 <div class="product-ratting">
                                     <ul>
                                         <li><a href="#"><i class="fas fa-star"></i></a></li>
@@ -930,7 +930,9 @@
                         <!-- Form Widget -->
                         <div class="widget ltn__form-widget">
                             <h4 class="ltn__widget-title ltn__widget-title-border-2">Drop Messege For Book</h4>
-                            <form action="#">
+                            <form  method="POST">
+                                {% csrf_token %}
+                                <input style="display: none;" value="messageForm" name="messageForm">
                                 <input type="text" name="yourname" placeholder="Your Name*">
                                 <input type="text" name="youremail" placeholder="Your e-Mail*">
                                 <textarea name="yourmessage" placeholder="Write Message..."></textarea>
@@ -1507,7 +1509,7 @@
                             <p>We can help you realize your dream of a new home</p>
                         </div>
                         <div class="btn-wrapper">
-                            <a class="btn btn-effect-3 btn-white" href="contact">Explore Properties <i class="icon-next"></i></a>
+                            <a class="btn btn-effect-3 btn-white" href="/shop-right-sidebar?property_type=none&location=none&price_range=none">Explore Properties <i class="icon-next"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1618,7 +1620,9 @@
                             <h4 class="footer-title">Newsletter</h4>
                             <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
                             <div class="footer-newsletter">
-                                <form action="#">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input name="mailingListForm" value="mailingListForm" style="display: none;">
                                     <input type="email" name="email" placeholder="Email*">
                                     <div class="btn-wrapper">
                                         <button class="theme-btn-1 btn" type="submit"><i class="fas fa-location-arrow"></i></button>

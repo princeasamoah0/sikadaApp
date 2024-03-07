@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import HouseRent,HouseSale,HouseLease,LandSale, AllProperties, Feedback, Wishlist
+from .models import (HouseRent,HouseSale,HouseLease,LandSale, AllProperties, Feedback, Wishlist,
+                        MailingList, Message)
 
 # Register your models here.
 
@@ -16,7 +17,9 @@ class RenderingLandSale(admin.ModelAdmin):
     list_display = ('property_id', 'property_title') 
 
 class RenderingFeedback(admin.ModelAdmin):
-    list_display = ("message", "status", "name")        
+    list_display = ("message", "status", "name")  
+
+          
 
 
 admin.site.register(AllProperties, RenderingAllProperties)
@@ -26,3 +29,5 @@ admin.site.register(HouseLease)
 admin.site.register(LandSale, RenderingLandSale)
 admin.site.register(Feedback, RenderingFeedback)
 admin.site.register(Wishlist)
+admin.site.register(MailingList)
+admin.site.register(Message)

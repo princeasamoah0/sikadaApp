@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    
+    <link ref="stylesheet" type="text/css" href="{% static 'css/snackbar.min.css' %}" /> 
+    
 </head>
 
 <body >
@@ -195,6 +198,7 @@
         </div>
         <!-- ltn__header-middle-area end -->
     </header>
+    
     <!-- HEADER AREA END -->
 
     <!-- Utilize Cart Menu Start -->
@@ -499,6 +503,7 @@
             </div>
         </div>
     </div>
+ 
     <!-- SLIDER AREA END -->
 
     <!-- PRODUCT SLIDER AREA START -->
@@ -1756,8 +1761,9 @@
                             <h4 class="footer-title">Newsletter</h4>
                             <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
                             <div class="footer-newsletter">
-                                <form action="#">
-                                    <input type="email" name="email" placeholder="Email*">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <input type="email" required name="email" placeholder="Email*">
                                     <div class="btn-wrapper">
                                         <button class="theme-btn-1 btn" type="submit"><i class="fas fa-location-arrow"></i></button>
                                     </div>
@@ -2030,6 +2036,19 @@
     <!-- Main JS -->
     <script src="{% static 'js/main.js' %}"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
+    
+    <script src="{% static 'js/snackbar.min.js' %}"></script>
+
+    <script>
+        // $('#hhh').click(function() {
+        //     Snackbar.show({text: 'Example notification text.'});
+        //     });
+
+       function Snack(params) {
+        Snackbar.show({text: 'Example notification text.'});
+       }     
+    </script>
+
     <script>
         // var modal = document.getElementById("quick_view_modal")
         modal.addEventListener('show.bs.modal', function(event){
@@ -2150,5 +2169,17 @@
         });
 
     </script>
+      
+       
+       <!-- The Snackbar Message -->
+       {% if messages %}
+       <div id="snackbar">Email has been sent successfully added. <span style="color:green">DONE</span></div>    
+            {% for message in messages %} 
+               <script>
+                    showSnackbar()
+                </script>
+            {% endfor %}
+       {% endif %}
+           
 </body>
 </html>
