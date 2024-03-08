@@ -278,6 +278,7 @@ class Feedback(models.Model):
     message = models.CharField(max_length=500, blank=True, null= True)
     status = models.CharField(max_length=200, blank=True, null= True)
     name  = models.CharField(max_length=200, blank=True, null= True)  
+    profile = models.ImageField(upload_to= 'Feedback/Profile', null=True, blank = True)
 
 
 
@@ -303,3 +304,9 @@ class MailingList(models.Model):
     datetime = models.DateTimeField(default = timezone.now)  
     def __str__ (self):
         return self.email 
+    
+
+class Cart(models.Model):
+    user = models.CharField(max_length= 200, null=True, blank=True)
+    propety_ids = models.TextField(null=True, blank=True)
+    date_time = models.DateTimeField(default= timezone.now)
