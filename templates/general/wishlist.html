@@ -417,12 +417,12 @@
                                     </tr> -->
                                     {% for item in data %}
                                     <tr>
-                                        <td class="cart-product-remove">x</td>
+                                        <td onclick="confirmFunction('{{item.property_id}}')" class="cart-product-remove">x</td>
                                         <td class="cart-product-image">
-                                            <a href="product-details"><img src="{{item.image_1.url}}" alt="#"></a>
+                                            <a href="product-details"><img src="{{item.img_listing.url}}" alt="#"></a>
                                         </td>
                                         <td class="cart-product-info">
-                                            <h4><a href="product-details">{{item.title}}</a></h4>
+                                            <h4><a href="product-details">{{item.property_title}}</a></h4>
                                         </td>
                                         <td class="cart-product-price">GHS {{item.price}}</td>
                                         <td class="cart-product-stock">Available</td>
@@ -431,6 +431,50 @@
                                         </td>
                                     </tr>
                                     {% endfor %}
+
+                                    <script>
+                                        function confirmFunction(params) {
+                                            let result = confirm('Are you sure you want to remove?')
+                                            if (result){
+                                                console.log(`Item deleted, ${params}`)
+                                                    $.ajax({
+                                                            url: "deleteWishlist_Ajax",
+                                                            // url: "",
+                                                            type: "POST",
+                                                            data: {
+                                                                property_id: params,
+                                                                csrfmiddlewaretoken: '{{ csrf_token }}',
+                                                            },
+                                                            success: function (response) {
+                                                                console.log(response)
+                                                                window.location.reload()
+                                                            },
+                                                            error: function (e) {
+                                                                alert("Error", e)
+                                                            }
+                                                        });
+                                            }else{
+                                                console.log(`Deletion cancelled, ${params}`)
+                                            }
+                                        }
+
+        //     $.ajax({
+        //     url: "wishlist_ajax",
+        //     // url: "",
+        //     type: "POST", // http method
+        //     data: {
+        //         property_id: buttonId,
+        //         csrfmiddlewaretoken: '{{ csrf_token }}',
+        //     },
+        //     success: function (response) {
+        //         console.log(response)
+        //     },
+        //     error: function (e) {
+        //         alert("Error", e)
+        //     }
+        // });
+
+        </script>
                                     <!-- <tr>
                                         <td class="cart-product-remove">x</td>
                                         <td class="cart-product-image">
