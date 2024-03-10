@@ -1514,7 +1514,9 @@
                                 {{feed.message}}</p>
                             <div class="ltn__testimoni-info-inner">
                                 <div class="ltn__testimoni-img">
-                                    <img src="{% static 'img/testimonial/1.jpg' %}" alt="#">
+                                    <!-- <img src="{% static 'img/testimonial/1.jpg' %}" alt="#"> -->
+                                    <img src="{{feed.profile.url}}" style="border-radius: 50%; height: 59px; width: 70px;" alt="#">
+
                                 </div>
                                 <div class="ltn__testimoni-name-designation">
                                     <h5>{{feed.name}}</h5>

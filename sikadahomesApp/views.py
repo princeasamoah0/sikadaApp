@@ -41,14 +41,20 @@ def wishlist_Ajax(request):
         propety_id = request.POST.get('property_id')
         a = Wishlist(property_id = propety_id, username = request.user.username)
         a.save()
-        # print(request)
-        # print(number)
-        # print(request)
     else:
         print('GET')    
     data = {'message': 'Hello, world!', 'data': [1, 2, 3]}  # Example data
     return JsonResponse(data)
-    # return JsonResponse
+
+def deleteWishlist_Ajax(request):
+    if request.method == 'POST':
+        property_id = request.POST.get('property_id')
+        try:
+            item = Wishlist.objects.get(property_id = property_id)
+            item.delete()            
+        except item.DoesNotExist:
+            JsonResponse({'message':'Something went wrong'})
+    return JsonResponse({'message':'Something went wrong'})    
 def page_404 (request):
     
     return render(request, 'general/404.html')
@@ -392,11 +398,8 @@ def wishlist(request):
     house_rent = HouseRent.objects.filter(property_id__in=querylist)
     land_sale = LandSale.objects.filter(property_id__in=querylist)
     
-
     all = list(chain(house_sale,house_rent,land_sale))
-    # random.shuffle(all)
     print(f"chained {all}")
-    # print(querylist)
     return render(request, 'general/wishlist.html',  {'data': all})
 
 
