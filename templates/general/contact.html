@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% load static %}
 
-    <!-- Place favicon.png' %} in the root directory -->
+    <!-- Place favicon.png in the root directory -->
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon" />
     <!-- Font Icons css -->
     <link rel="stylesheet" href="{% static 'css/font-icons.css' %}">
@@ -428,7 +428,9 @@
                 <div class="col-lg-12">
                     <div class="ltn__form-box contact-form-box box-shadow white-bg">
                         <h4 class="title-2">Get A Quote</h4>
-                        <form id="contact-form" action="mail.php" method="post">
+                        <!-- <form id="contact-form" method="post"> The id prevents automatic page reload -->
+                        <form method="post">
+                            {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-item input-item-name ltn__custom-icon">
@@ -442,7 +444,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-item">
-                                        <select class="nice-select">
+                                        <select name="service_type" class="nice-select">
                                             <option>Select Service Type</option>
                                             <option>Property Management </option>
                                             <option>Mortgage Service </option>
@@ -650,6 +652,17 @@
     <script src="{% static 'js/contact.js' %}"></script>
     <!-- Main JS -->
     <script src="{% static 'js/main.js' %}"></script>
+
+
+     <!-- The Snackbar Message -->
+     {% if messages %}
+     <div id="snackbar">Message has successfully been sent.</div>    
+          {% for message in messages %} 
+             <script>
+                  showSnackbar()
+              </script>
+          {% endfor %}
+     {% endif %}
 
 </body>
 </html>

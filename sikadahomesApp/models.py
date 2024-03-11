@@ -292,6 +292,9 @@ class Message(models.Model):
     name = models.CharField(max_length = 100, null=True, blank=True)
     email = models.CharField(max_length = 100, null=True, blank=True)
     message = models.TextField(null=True, blank = True)
+    phone = models.CharField(max_length = 50, null=True, blank=True)
+    service_type = models.CharField(max_length = 200, null=True, blank=True)
+    save_my_mail = models.CharField(max_length = 50, null=True, blank=True)
     datetime = models.DateTimeField(default = timezone.now)  
     def __str__ (self):
         return self.email 
@@ -304,6 +307,7 @@ class MailingList(models.Model):
     datetime = models.DateTimeField(default = timezone.now)  
     def __str__ (self):
         return self.email 
+    
     
 
 class Cart(models.Model):
