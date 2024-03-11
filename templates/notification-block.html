@@ -1,0 +1,17 @@
+
+{% block content%}
+
+{%endblock%}
+    <!-- The Snackbar Message -->
+    {% if messages %}
+    <div id="snackbar">Email has been sent successfully added. <span style="color:green">DONE</span></div>    
+         {% for message in messages %} 
+            <script>
+                 showSnackbar()
+             </script>
+         {% endfor %}
+    {% endif %}
+
+
+</body>
+</html>

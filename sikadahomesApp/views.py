@@ -96,6 +96,19 @@ def coming_soon(request):
     return render(request, 'general/coming-soon.html')
 
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        service_type = request.POST.get('service_type')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message')
+        save_my_mail = request.POST.get('save_my_mail')
+        a = Message(name = name, email=email, message=message, phone=phone,
+                service_type=service_type, save_my_mail=save_my_mail )
+        a.save()
+        messages.success(request, "Message Sent")
+        # messages.(request, "Invalid Password")
+        # print(name,email,service_type,phone,message,save_my_mail)
     return render(request, 'general/contact.html')
 
 def faq(request):
@@ -166,8 +179,8 @@ def product_details(request,property_id):
     # elif request.method == 'POST':
 
         # request.method == 'POST' and 'mailingListForm' in request.POST.get('mailingListForm'):    
-    email = request.POST['email'] 
-    print(f'My email is {email}')
+    # email = request.POST['email'] 
+    # print(f'My email is {email}')
 
     query = ''
     if HouseRent.objects.filter(property_id = property_id):

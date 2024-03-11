@@ -26,7 +26,8 @@ urlpatterns = [
 path('admin/', admin.site.urls),
 path('', include('sikadahomesApp.urls')),
 path('admin-app/', include('adminApp.urls')),
-path('accounts/', include('allauth.urls'))
+path('accounts/', include('allauth.urls')),
+# path(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'admin-app/sign-in.html'}),
 
 ]
 
