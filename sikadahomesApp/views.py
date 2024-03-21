@@ -169,18 +169,32 @@ def portfolio(request):
     return render(request, 'general/portfolio.html')
 
 def product_details(request,property_id):
-    
-    #if request.method == 'POST' and 'messageForm' in request.POST.get('messageForm'):    
+    if request.method == 'POST':
+        if request.POST.get('messageForm'):
+            name = request.POST['yourname']
+            email = request.POST['youremail']
+            message = request.POST['yourmessage']
+            a = Message(email=email, name = name, message=message)
+            a.save()
+            messages.success(request, "Message has been sent successfully.")
+        else:  
+            email = request.POST['email'] 
+            a = MailingList(email = email)
+            a.save()
+            messages.success(request, "Your email was successfully been addded.")
+            print(f'My email is {email}')  
+
+    # if request.method == 'POST' and 'messageForm' in request.POST.get('messageForm'):    
     #         name = request.POST['yourname']
     #         email = request.POST['youremail']
     #         message = request.POST['yourmessage']
     #         a = Message(email=email, name = name, message=message)
     #         a.save()
-    # elif request.method == 'POST':
+    # # elif request.method == 'POST':
 
-        # request.method == 'POST' and 'mailingListForm' in request.POST.get('mailingListForm'):    
-    # email = request.POST['email'] 
-    # print(f'My email is {email}')
+    # if request.method == 'POST' and 'mailingListForm' in request.POST.get('mailingListForm'):
+    #     email = request.POST['email'] 
+    #     print(f'My email is {email}')
 
     query = ''
     if HouseRent.objects.filter(property_id = property_id):

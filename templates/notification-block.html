@@ -4,7 +4,19 @@
 {%endblock%}
     <!-- The Snackbar Message -->
     {% if messages %}
-    <div id="snackbar">Email has been sent successfully added. <span style="color:green">DONE</span></div>    
+    {% for message in messages %}
+    {% if 'error' in message.tags %}
+    <div style="background-color: rgb(255, 162, 0); color: black;" id="snackbar">
+        {{message}}
+        <!-- <span style="color:green">DONE</span> -->
+    </div> 
+    {%else%}
+    <div style="background-color: rgb(15, 183, 77); color: rgb(229, 229, 229);" id="snackbar">
+        {{message}}
+    </div> 
+    {%endif%} 
+    {%endfor%}
+
          {% for message in messages %} 
             <script>
                  showSnackbar()
