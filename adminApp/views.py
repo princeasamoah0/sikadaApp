@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth import login,logout,authenticate
-from django.contrib.auth.decorators import login_required,user_passes_test
+from django.contrib.auth.decorators import user_passes_test
 
 from django.contrib import messages
 from sikadahomesApp.models import *
@@ -17,15 +17,15 @@ def index(request):
     # else:
     #     return redirect('sign-in')
     
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def page_404(request):
     return render(request, 'admin-app/404.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def page_500(request):
     return render(request, 'admin-app/500.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def add_agent(request):
     return render(request, 'admin-app/add-agent.html')
 
@@ -185,66 +185,67 @@ def add_property_land(request):
         b.save()
     return render(request, 'admin-app/add-property_land.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def agent(request):
     return render(request, 'admin-app/agent.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def agent_invoice(request):
     return render(request, 'admin-app/agent-invoice.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def apartment(request):
     return render(request, 'admin-app/apartment.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def blank(request):
     return render(request, 'admin-app/blank.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def blog_dashboard(request):
     return render(request, 'admin-app/blog-dashboard.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def blog_details(request):
     return render(request, 'admin-app/blog-details.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def blog_grid(request):
     return render(request, 'admin-app/blog-grid.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def blog_list(request):
     return render(request, 'admin-app/blog-list.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def blog_post(request):
     return render(request, 'admin-app/blog-post.html')
 
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def chat(request):
     return render(request, 'admin-app/chat.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def contact(request):
     return render(request, 'admin-app/contact.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def events(request):
     return render(request, 'admin-app/events.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def file_dashboard(request):
     return render(request, 'admin-app/file-dashboard.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def file_documents(request):
     return render(request, 'admin-app/file-documents.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def file_images(request):
     return render(request, 'admin-app/file-images.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def file_media(request):
     return render(request, 'admin-app/file-media.html')
 
@@ -252,75 +253,75 @@ def file_media(request):
 def forgot_password(request):
     return render(request, 'admin-app/forgot-password.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def image_gallery(request):
     return render(request, 'admin-app/image-gallery.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def invoices(request):
     return render(request, 'admin-app/invoices.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def locked(request):
     return render(request, 'admin-app/locked.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def mail_compose(request):
     return render(request, 'admin-app/mail-compose.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def mail_inbox(request):
     return render(request, 'admin-app/mail-inbox.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def mail_single(request):
     return render(request, 'admin-app/mail-single.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def map(request):
     return render(request, 'admin-app/map.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def office(request):
     return render(request, 'admin-app/office.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def page_offline(request):
     return render(request, 'admin-app/page-offline.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def pricing(request):
     return render(request, 'admin-app/pricing.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def profile(request):
     return render(request, 'admin-app/profile.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def property_detail(request):
     return render(request, 'admin-app/property-detail.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def property_list(request):
     return render(request, 'admin-app/property-list.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def property_list3(request):
     return render(request, 'admin-app/property-list3.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def property_list4(request):
     return render(request, 'admin-app/property-list4.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def reports(request):
     return render(request, 'admin-app/reports.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def search_results(request):
     return render(request, 'admin-app/search-results.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def shop(request):
     return render(request, 'admin-app/shop.html')
 
@@ -335,7 +336,15 @@ def sign_in(request):
         if user is not None:
             if user.is_staff:
                 login(request, user)
-                return redirect(index)
+                # if 'next=/admin-app' in request.get_full_path():
+                view_name = request.get_full_path().split('next=/admin-app')[1][1:]
+                if view_name == '':
+                    return redirect(index)
+                else:
+                    # print(f"It is, {view_name}")
+                    return redirect(view_name)
+                # else:    
+                #     return redirect(index)
             else:
                 messages.error(request, "You are not an admin")
         else:
@@ -347,22 +356,22 @@ def sign_in(request):
 def sign_up(request):
     return render(request, 'admin-app/sign-up.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def timeline(request):
     return render(request, 'admin-app/timeline.html')
 
 
-def sign_up(request):
-    return render(request, 'admin-app/sign-up.html')
+# def sign_up(request):
+#     return render(request, 'admin-app/sign-up.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def villa(request):
     return render(request, 'admin-app/villa.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def widgets_app(request):
     return render(request, 'admin-app/widgets-app.html')
 
-
+@user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def widgets_data(request):
     return render(request, 'admin-app/widgets-data.html')

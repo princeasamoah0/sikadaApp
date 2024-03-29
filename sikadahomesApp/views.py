@@ -10,13 +10,24 @@ from django.http import JsonResponse
 from itertools import chain
 import random
 from .models import ( HouseRent,HouseSale,HouseLease,LandSale,
-                      AllProperties,Feedback, Wishlist,
+                     AllProperties,Feedback, Wishlist,
                       MailingList,Message
 
                     )
+import secrets
+import string 
 # Create your views here.
 
+
 def index (request):
+    if 'userId' in request.session :
+        print('Already have a session set.')
+    else:    
+        userId = ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(20))
+        request.session['userId'] = userId
+        print('No UserId, so new one has been set')
+    
+    # print(userId)
     if request.method == 'POST':
         email = request.POST['email']
         a = MailingList(email = email)
