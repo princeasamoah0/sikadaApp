@@ -336,11 +336,15 @@ def sign_in(request):
         if user is not None:
             if user.is_staff:
                 login(request, user)
-                if 'next=/admin-app' in request.get_full_path():
-                    view_name = request.get_full_path().split('next=/admin-app')[1][1:]
-                    return redirect(view_name)
-                else:    
+                # if 'next=/admin-app' in request.get_full_path():
+                view_name = request.get_full_path().split('next=/admin-app')[1][1:]
+                if view_name == '':
                     return redirect(index)
+                else:
+                    # print(f"It is, {view_name}")
+                    return redirect(view_name)
+                # else:    
+                #     return redirect(index)
             else:
                 messages.error(request, "You are not an admin")
         else:
