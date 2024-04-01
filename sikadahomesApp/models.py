@@ -312,5 +312,13 @@ class MailingList(models.Model):
 
 class Cart(models.Model):
     user = models.CharField(max_length= 200, null=True, blank=True)
-    propety_ids = models.TextField(null=True, blank=True)
+    propety_id = models.TextField(null=True, blank=True)
     date_time = models.DateTimeField(default= timezone.now)
+
+
+
+# class Wishlist(models.Model):
+#     # id - models.CharField()
+#     property_id = models.CharField(max_length=20, null=True, blank=True)
+#     username = models.CharField(max_length = 100, null=True, blank=True)
+#     date_time = models.DateTimeField(default = timezone.now)

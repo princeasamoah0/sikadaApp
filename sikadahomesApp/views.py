@@ -11,7 +11,7 @@ from itertools import chain
 import random
 from .models import ( HouseRent,HouseSale,HouseLease,LandSale,
                      AllProperties,Feedback, Wishlist,
-                      MailingList,Message
+                      MailingList,Message, Cart,
 
                     )
 import secrets
@@ -229,7 +229,9 @@ def product_details(request,property_id):
 def land_details(request,pk):
     land_details = LandSale.objects.get(property_id = pk)
     related_properties = LandSale.objects.all().order_by('-id')[:2]
-    # print(land_details.location)
+    
+    cart = Cart.objects.all()
+    
 
     return render(request, 'general/land-details.html', {'context':land_details, 'related_properties':related_properties}, )
     
