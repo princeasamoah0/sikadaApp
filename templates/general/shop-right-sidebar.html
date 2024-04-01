@@ -185,7 +185,7 @@
                         </div>
                         <!-- mini-cart -->
                         <div class="mini-cart-icon">
-                            <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+                            <a href="/cart">
                                 <i class="icon-shopping-cart"></i>
                                 <sup>0</sup>
                             </a>
@@ -481,16 +481,16 @@
                                                             Bath
                                                         </li>
                                                         {%else%}
-                        
+
                                                         {%if i.serviced == True %}
                                                         <li><span>Serviced</span></li>
                                                         {%endif%}
-                        
+
                                                         {%if i.fenced == True %}
                                                         <li><span>Fenced</span></li>
-                        
+
                                                         {%endif%}
-                        
+
                                                         {%endif%}
                                                         <li><span>{{i.lot_dimensions}} </span>
                                                             Square Ft
@@ -750,7 +750,7 @@
                                 try{document.getElementById({{context.price_range}}.id).checked ='checked'
                                     console.log('Price work well')
                                 }catch{console.log('Price Not work')};
-                                
+
                                 try{document.getElementById({{context.location}}.id).checked ='checked'
                                     console.log('LOcation work well')
                                 }catch{console.log('Location Not work')};
@@ -770,7 +770,7 @@
                                         window.location.reload()
                                     })
                                 });
-                                
+
                             </script>
 
 
