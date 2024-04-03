@@ -1,3 +1,5 @@
+{% extends 'notification-block.html' %}
+{% block content %}
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -1634,10 +1636,7 @@
 
             modal_image.src = original_image
             modal_title.innerText = original_title.innerText
-            // modal_price.innerText = original_price.innerText
 
-            // document.getElementById(buttonId)
-            // console.log(buttonId)
 
             $.ajax({
             url: "wishlist_ajax",
@@ -1663,7 +1662,12 @@
 
         });
 
+
+
+
+        
     </script>
 
+{% endblock %}
 </body>
 </html>

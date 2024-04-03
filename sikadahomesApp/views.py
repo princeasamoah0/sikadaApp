@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 import re
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 from itertools import chain
 import random
@@ -96,6 +96,9 @@ def blog_right_sidebar(request):
 def blog(request):
     return render(request, 'general/blog.html')
 
+# def add_to_cart(request):
+    
+#     return(redirect)
 
 def cart(request):
     return render(request, 'general/cart.html')
@@ -167,6 +170,7 @@ def logoutEvent(request):
     return redirect(index)
 
 
+
 def order_tracking(request):
     return render(request, 'general/order-tracking.html')
 
@@ -178,6 +182,9 @@ def portfolio_details(request):
 
 def portfolio(request):
     return render(request, 'general/portfolio.html')
+
+def add_to_cart(request):
+    return HttpResponse(request, '<h1>Hello Samuel, you have successfully added. </h1>')
 
 def product_details(request,property_id):
     if request.method == 'POST':
@@ -219,14 +226,15 @@ def product_details(request,property_id):
     else:
         related_properties = HouseSale.objects.all().order_by('-id')[:2]
 
-    # else:
-    #     query = LandSale.objects.get(property_id= property_id)
-
+    cart = Cart.objects.filter(user = request.user.username)   
+    print(cart) 
          
-    print(query.status)
+    # print(query.status)
     return render(request, 'general/product-details.html', {'context':query, 'related_properties':related_properties} )
 
 def land_details(request,pk):
+    
+
     land_details = LandSale.objects.get(property_id = pk)
     related_properties = LandSale.objects.all().order_by('-id')[:2]
     

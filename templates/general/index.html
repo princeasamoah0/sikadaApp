@@ -2105,10 +2105,6 @@
 
             modal_image.src = original_image
             modal_title.innerText = original_title.innerText
-            // modal_price.innerText = original_price.innerText
-
-            // document.getElementById(buttonId)
-            // console.log(buttonId)
 
             $.ajax({
             url: "wishlist_ajax",
@@ -2118,57 +2114,16 @@
                 property_id: buttonId,
                 csrfmiddlewaretoken: '{{ csrf_token }}',
             },
-
             // handle a successful response
             success: function (response) {
                 // alert(`hello, ${response["name"]}`);
                 console.log(response)
             },
-
             // handle a non-successful response
             error: function (e) {
                 alert("Error", e)
             }
-        });
-
-
-
-    // const csrftoken = "{{ csrf_token }}"
-    // fetch("{% url 'wishlist_ajax' %}", {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',  // Set content type for JSON data
-    //         'X-CSRFToken': csrftoken,
-    //         'topic': 'samuel'
-    //     },
-    //     body: JSON.stringify({'number': '23'}),
-    //     // body: JSON.stringify({ number: 35 })  // Send the number as JSON data
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     // Handle successful insertion
-    //     console.log(data);
-    //     // Update the UI accordingly
-    // })
-    // .catch(error => {
-    //     // Handle errors
-    //     console.error(error);
-    // });
-
-            // var xhr = new XMLHttpRequest();
-            // xhr.open('POST', 'about');
-            // xhr.setRequestHeader('X-Request-With', 'XMLHttpRequest');
-            // // {% csrf_token %}
-            // // xhr.setRequestHeader('X-CSRFToken', getCookie('cs'))
-            // xhr.onload = function(){
-            //     if(xhr.status === 200){
-            //         var response = JSON.parse(xhr.responseText);
-            //         // 'Hello' = response.likes;
-            //     }
-            // };
-            // xhr.send();
-
-
+        })
         });
 
     </script>
