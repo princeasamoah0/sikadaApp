@@ -775,9 +775,9 @@
                 <div class="header">
                     <h2><strong>Add features for listing</strong></h2>
                 </div>
-            <form enctype="multipart/form-data" method="POST"> 
-                {% csrf_token %}               
-                <div class="body">                
+            <form enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                <div class="body">
                     <div class="row clearfix">
                         <!-- <div class="col-sm-3">
                             <select class="form-control form-control-outline-info show-tick " multiple>
@@ -789,7 +789,7 @@
                                 <option value="50">Unfenced</option>
                             </select>
                         </div> -->
-                        
+
                         <div class="col-sm-3">
                             <select name="region" class="form-control form-control-outline-info show-tick">
                                 <option value="no_selection">-- Region --</option>
@@ -820,13 +820,19 @@
                                 <option value="high">High Budget (GH₵30,000 Up)</option>
                             </select>
                         </div>
-
+                        <div class="col-sm-3">
+                            <select name="price_range" class="form-control form-control-outline-info show-tick">
+                                <option value="no_selection">-- Condition --</option>
+                                <option value="sold">Sold</option>
+                                <option value="available">Available</option>
+                            </select>
+                        </div>
                         <div class="col-sm-3">
                             <div class="form-group form-group-outline-info">
                                 <input type="text" name="location" class="form-control form-control-outline-info" placeholder="Location">
                             </div>
                       </div>
-                        
+
                     </div>
                 </div>
                 <div class="card">
@@ -836,12 +842,12 @@
                   <div class="body">
                     <div class="row clearfix">
                       <div class="col-sm-12">
-                            <input name="img_listing" type="file" multiple />                       
+                            <input name="img_listing" type="file" multiple />
                       </div>
                       </div>
                     </div>
                   </div>
-                  
+
             </div>
           </div>
           <div class="col-lg-12">
@@ -955,8 +961,8 @@
                                 </ul>
                             </li>
                         </ul>
-                    </div>                                       
-                    
+                    </div>
+
                     <div class="body">
                         <div class="row clearfix">
                             <div class="col-sm-6">
@@ -1088,18 +1094,18 @@
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                                <input name="video_thumbnail" type="file" multiple />                              
+                                <input name="video_thumbnail" type="file" multiple />
                             </div>
                         </div>
                     </div>
                 </div>
-           
+
                 <div style="display: flex; padding:10px 0; background-color: white; justify-content: center" >
                     <button type="submit" style="width: 30%;" class="btn btn-primary btn-round">Submit</button>
                     <button type="reset" style="width: 30%;" class="btn btn-default btn-round btn-simple">Cancel</button>
                 </div>
             </div>
-        </form>    
+        </form>
         </div>
     </div>
 </section>
