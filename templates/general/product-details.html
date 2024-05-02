@@ -75,6 +75,7 @@
                                         <!-- ltn__social-media -->
                                         <div class="ltn__social-media">
                                           <ul>
+                                                <li>Hi, {{request.user.first_name}}</li>
                                               <li><a href="https://www.tiktok.com/@imagomedia3?_t=8fH6LUWXmNx&_r=1" title="Tiktok"><i class="fab fa-tiktok"></i></a></li>
                                               <li><a href="https://x.com/imagomedia147" title="Twitter"><i class="fab fa-twitter"></i></a></li>
 
@@ -178,19 +179,23 @@
                                 <li>
                                     <a href="#"><i class="icon-user"></i></a>
                                     <ul>
-                                        <li><a href="login">Sign in</a></li>
-                                        <li><a href="register">Register</a></li>
-                                        <li><a href="account">My Account</a></li>
-                                        <li><a href="wishlist">Wishlist</a></li>
+                                        {% if request.user.is_anonymous %}
+                                        <li><a href="/login">Sign in</a></li>
+                                        <li><a href="/register">Register</a></li>                                    
+                                        {% else %}
+                                        <li><a href="/account">My Account</a></li>
+                                        <li><a href="/wishlist">Wishlist</a></li>
+                                        <li><a href="/logoutEvent">Logout</a></li>
+                                        {% endif %}
                                     </ul>
                                 </li>
                             </ul>
                         </div>
                         <!-- mini-cart -->
                         <div class="mini-cart-icon">
-                            <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+                            <a onclick="FetchCartItems()" href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
                                 <i class="icon-shopping-cart"></i>
-                                <sup>2</sup>
+                                <sup id="cart_count">{{cart}}</sup>
                             </a>
                         </div>
                         <!-- mini-cart -->
@@ -221,7 +226,9 @@
             </div>
             <div class="mini-cart-product-area ltn__scrollbar">
 
-                <div class="mini-cart-item clearfix">
+                <div id="NodePlaceholder"></div>
+                
+                <!-- <div id="aside-cart-item" class="mini-cart-item clearfix">
                     <div class="mini-cart-img">
                         <a href="#"><img src="{% static 'img/product/2.png' %}" alt="Image"></a>
                         <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
@@ -230,8 +237,8 @@
                         <h6><a href="#">3 Rooms Manhattan</a></h6>
                         <span class="mini-cart-quantity">1 x $85.00</span>
                     </div>
-                </div>
-
+                </div> -->
+                
             </div>
             <div class="mini-cart-footer">
                 <div class="mini-cart-sub-total">
@@ -730,7 +737,7 @@
 
                             <!-- comment-reply -->
                             <div class="btn-wrapper">
-                                <a href="/cart" class="theme-btn-1 btn btn-effect-1">Add to cart</a>
+                                <a onclick="AddCartFunction('{{context.property_id}}')" class="theme-btn-1 btn btn-effect-1">Add to cart</a>
                             </div>
                         </div>
 
@@ -741,7 +748,7 @@
                             <div class="col-xl-6 col-sm-6 col-12">
                                 <div class="ltn__product-item ltn__product-item-4 ltn__product-item-5 text-center---">
                                     <div class="product-img">
-                                        <a href="/product-details/{{item.property_id}}"><img src="{{item.img_listing.url}}" alt="#"></a>
+                                        <a href="/product-details/{{item.property_id}}"><img id="latest_listings_img_{{item.property_id}}" src="{{item.img_listing.url}}" alt="#"></a>
                                         <div class="real-estate-agent">
                                             <div class="agent-img">
                                                 <a href="team-details"><img src="{% static 'img/blog/author.jpg' %}" alt="#"></a>
@@ -754,7 +761,7 @@
                                                 <li class="sale-badg">For Rent</li>
                                             </ul>
                                         </div>
-                                        <h2 class="product-title"><a href="/product-details/{{item.property_id}}">{{item.property_title}}</a></h2>
+                                        <h2 class="product-title"><a href="/product-details/{{item.property_id}}" id="latest_listings_title_{{item.property_id}}">{{item.property_title}}</a></h2>
                                         <div class="product-img-location">
                                             <ul>
                                                 <li>
@@ -776,16 +783,16 @@
                                         <div class="product-hover-action">
                                             <ul>
                                                 <li>
-                                                    <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                    <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-id="{{item.property_id}}" data-bs-target="#quick_view_modal">
                                                         <i class="flaticon-expand"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-target="#liton_wishlist_modal">
+                                                    <a href="#" title="Wishlist" data-bs-toggle="modal" data-bs-wishlist="{{item.property_id}}" data-bs-target="#wish_list_modal">
                                                         <i class="flaticon-heart-1"></i></a>
                                                 </li>
                                                 <li>
-                                                    <a href="portfolio-details" title="Compare">
+                                                    <a href="/product-details/{{item.property_id}}" title="Compare">
                                                         <i class="flaticon-add"></i>
                                                     </a>
                                                 </li>
@@ -794,7 +801,7 @@
                                     </div>
                                     <div class="product-info-bottom">
                                         <div class="product-price">
-                                            <span>$349,00<label>/Month</label></span>
+                                            <span id="latest_listings_price_{{item.property_id}}">{{item.price}}<label>/Month</label></span>
                                         </div>
                                     </div>
                                 </div>
@@ -1654,7 +1661,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-12">
                                         <div class="modal-product-img">
-                                            <img src="{% static 'img/product/4.png' %}" alt="#">
+                                            <img id="quick_view_img" src="{% static 'img/product/4.png' %}" alt="#">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-12">
@@ -1669,10 +1676,10 @@
                                                     <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
                                                 </ul>
                                             </div>
-                                            <h3>3 Rooms Manhattan</h3>
+                                            <h3 id="quick_view_title">3 Rooms Manhattan</h3>
                                             <div class="product-price">
-                                                <span>$149.00</span>
-                                                <del>$165.00</del>
+                                                <span id="quick_view_price">$149.00</span>
+                                                <!-- <del>$165.00</del> -->
                                             </div>
                                             <div class="modal-product-meta ltn__product-details-menu-1">
                                                 <ul>
@@ -1786,7 +1793,7 @@
 
     <!-- MODAL AREA START (Wishlist Modal) -->
     <div class="ltn__modal-area ltn__add-to-cart-modal-area">
-        <div class="modal fade" id="liton_wishlist_modal" tabindex="-1">
+        <div class="modal fade" id="wish_list_modal" tabindex="-1">
             <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -1800,10 +1807,10 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="modal-product-img">
-                                            <img src="{% static 'img/product/7.png' %}" alt="#">
+                                            <img id="wish_list_img" src="{% static 'img/product/7.png' %}" alt="#">
                                         </div>
                                          <div class="modal-product-info">
-                                            <h5><a href="product-details">3 Rooms Manhattan</a></h5>
+                                            <h5><a id="wish_list_title" href="product-details">3 Rooms Manhattan</a></h5>
                                             <p class="added-cart"><i class="fa fa-check-circle"></i>  Successfully added to your Wishlist</p>
                                             <div class="btn-wrapper">
                                                 <a href="wishlist" class="theme-btn-1 btn btn-effect-1">View Wishlist</a>
@@ -1834,5 +1841,149 @@
     <script src="{% static 'js/plugins.js' %}"></script>
     <!-- Main JS -->
     <script src="{% static 'js/main.js' %}"></script>
+
+    <script>
+        var modal = document.getElementById("quick_view_modal")
+
+        modal.addEventListener('show.bs.modal', function(event){
+            const button = event.relatedTarget;
+            const buttonId = button.getAttribute("data-bs-id")
+            const modal_image = document.getElementById('quick_view_img')
+            const modal_title = document.getElementById('quick_view_title')
+            const modal_price = document.getElementById('quick_view_price')
+
+            original_image = document.getElementById(`latest_listings_img_${buttonId}`).src
+            original_title = document.getElementById(`latest_listings_title_${buttonId}`)
+            original_price = document.getElementById(`latest_listings_price_${buttonId}`)
+
+            console.log(original_image)
+            modal_image.src = original_image
+            modal_title.innerText = original_title.innerText
+            modal_price.innerText = original_price.innerText
+        })
+
+        const wishlistModal = document.getElementById('wish_list_modal')
+
+        wishlistModal.addEventListener('show.bs.modal', function(event){
+            const button = event.relatedTarget;
+            const buttonId = button.getAttribute('data-bs-wishlist')
+            const modal_image = document.getElementById('wish_list_img')
+            const modal_title = document.getElementById('wish_list_title')
+
+            original_image = document.getElementById(`latest_listings_img_${buttonId}`).src
+            original_title = document.getElementById(`latest_listings_title_${buttonId}`)
+
+            modal_image.src = original_image
+            modal_title.innerText = original_title.innerText
+
+
+            $.ajax({
+            url: "/wishlist_ajax",
+            type: "POST", // http method
+            data: {
+                property_id: buttonId,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+
+            success: function (response) {
+
+            },
+
+            error: function (e) {
+
+                alert("Error" , e)
+            }
+        });
+        });
+
+        function AddCartFunction(property_id){
+            
+            $.ajax({
+            url: "/add-to-cart",
+            type: "POST",
+            data: {
+                property_id: property_id,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function (data, textStatus, jqXHR) {
+                if (data == 'unauthenticated') {               
+                window.location = '/login?next=/product-details/'+property_id
+            }else if (data == 'already_added'){
+             alert('Product already exists on your cart')   
+            }else{
+                alert('You have successfully added to cart')
+                GetCartCount()
+            }
+        },
+            error: function (e) {
+                alert("Error", e)
+            }
+        });
+        }
+  
+        
+        function GetCartCount(params) {
+            $.ajax({
+            url: "/get-cart-count",
+            type: "GET",
+            dataType: 'JSON',
+
+            success: function (response) {
+                document.getElementById('cart_count').innerText = response
+            },
+            error: function (e) {
+                alert("Error", e)
+            }
+        });   
+        }
+
+        function FetchCartItems(params) {
+            $.ajax({
+            url: "/fetch-cart-items",
+            type: "POST",
+            data: {
+                user : `{{request.user.username}}`,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function(data) {
+                alert('Done')
+                // console.log(data)
+                item = document.getElementById('NodePlaceholder')
+                for (let index = 0; index < data.length; index++) {
+                    const element = data[index];
+                    item.innerHTML += `<div id="aside-cart-item-${index}" class="mini-cart-item clearfix">
+                    <div class="mini-cart-img">
+                        <a href="#"><img src="{% static 'img/product/2.png' %}" alt="Image"></a>
+                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                    </div>
+                    <div class="mini-cart-info">
+                        <h6><a href="#">3 Rooms Manhattan</a></h6>
+                        <span class="mini-cart-quantity">1 x $85.00</span>
+                    </div>
+                </div>`
+                    // console.log(element)
+                    // a = `<div class="mini-cart-img">
+                    //     <a href="#"><img src="{% static 'img/product/2.png' %}" alt="Image"></a>
+                    //     <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                    // </div>
+                    // <div class="mini-cart-info">
+                    //     <h6><a href="#">3 Heyy Rooms Manhattan</a></h6>
+                    //     <span class="mini-cart-quantity">1 x $85.00</span>
+                    // </div>
+                    // `
+                    // item.innerHTML = a
+                    
+                }
+            },
+
+            error: function (e) {
+                alert("Error", e)
+            }
+        });  
+        }
+
+
+        
+    </script>
 
     {% endblock %}

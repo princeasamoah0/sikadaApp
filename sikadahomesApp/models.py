@@ -287,6 +287,8 @@ class Wishlist(models.Model):
     property_id = models.CharField(max_length=20, null=True, blank=True)
     username = models.CharField(max_length = 100, null=True, blank=True)
     date_time = models.DateTimeField(default = timezone.now)
+    def __str__ (self):
+        return (self.username + " - " + self.property_id)
 
 class Message(models.Model):
     name = models.CharField(max_length = 100, null=True, blank=True)
@@ -312,5 +314,28 @@ class MailingList(models.Model):
 
 class Cart(models.Model):
     user = models.CharField(max_length= 200, null=True, blank=True)
-    propety_ids = models.TextField(null=True, blank=True)
+    property_id = models.TextField(null=True, blank=True)
     date_time = models.DateTimeField(default= timezone.now)
+
+
+class Orders(models.Model):
+    user = models.CharField(max_length= 200, null=True, blank=True)
+    property_id = models.CharField(max_length=200, null=True, blank=True)
+    first_name = models.CharField(max_length=200, null=True, blank=True)
+    last_name = models.CharField(max_length=200, null=True, blank=True)
+    email = models.CharField(max_length=200, null=True, blank=True)
+    phone = models.CharField(max_length=200, null=True, blank=True)
+    company_name = models.CharField(max_length=200, null=True, blank=True)
+    company_address = models.CharField(max_length=200, null=True, blank=True)
+    country = models.CharField(max_length=200, null=True, blank=True)
+    address = models.CharField(max_length=200, null=True, blank=True)
+    address_2 = models.CharField(max_length=200, null=True, blank=True)
+    city = models.CharField(max_length=200, null=True, blank=True)
+    state = models.CharField(max_length=200, null=True, blank=True)
+    zip = models.CharField(max_length=200, null=True, blank=True)
+    order_notes = models.CharField(max_length=200, null=True, blank=True)
+    status = models.CharField(max_length=200, null=True, blank=True)
+    payment_method = models.CharField(max_length=200, null=True, blank=True)
+    date_time = models.DateTimeField(default= timezone.now)
+    # def __str__ (self):
+    #     return self.user + " - " + self.property_id

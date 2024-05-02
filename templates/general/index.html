@@ -56,7 +56,6 @@
                         <div class="top-bar-right text-end">
                             <div class="ltn__top-bar-menu">
                                 <ul>
-
                                     <li>
                                         <!-- ltn__language-menu -->
                                         <div class="ltn__drop-menu ltn__currency-menu ltn__language-menu">
@@ -110,7 +109,6 @@
                                             <ul>
                                                 <li><a href="https://www.tiktok.com/@imagomedia3?_t=8fH6LUWXmNx&_r=1" title="Tiktok"><i class="fab fa-tiktok"></i></a></li>
                                                 <li><a href="https://x.com/imagomedia147" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-
                                                 <li><a href="https://instagram.com/imagomedia3" title="Instagram"><i class="fab fa-instagram"></i></a></li>
                                                 <li><a href="https://m.youtube.com/@imagolivemedia1928" title="Youtube"><i class="fab fa-youtube"></i></a></li>
                                             </ul>
@@ -334,7 +332,7 @@
 
             <!-- HTML5 VIDEO -->
             <video autoplay muted loop id="myVideo">
-                <source src="{% static 'media/3.mp4' %}" type="video/mp4">
+                <source src="{% static 'front_video/3.mp4' %}" type="video/mp4">
             </video>
 
             <!-- YouTube VIDEO -->
@@ -2077,10 +2075,6 @@
 
             modal_image.src = original_image
             modal_title.innerText = original_title.innerText
-            // modal_price.innerText = original_price.innerText
-
-            // document.getElementById(buttonId)
-            // console.log(buttonId)
 
             $.ajax({
             url: "wishlist_ajax",
@@ -2090,57 +2084,16 @@
                 property_id: buttonId,
                 csrfmiddlewaretoken: '{{ csrf_token }}',
             },
-
             // handle a successful response
             success: function (response) {
                 // alert(`hello, ${response["name"]}`);
                 console.log(response)
             },
-
             // handle a non-successful response
             error: function (e) {
                 alert("Error", e)
             }
-        });
-
-
-
-    // const csrftoken = "{{ csrf_token }}"
-    // fetch("{% url 'wishlist_ajax' %}", {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json',  // Set content type for JSON data
-    //         'X-CSRFToken': csrftoken,
-    //         'topic': 'samuel'
-    //     },
-    //     body: JSON.stringify({'number': '23'}),
-    //     // body: JSON.stringify({ number: 35 })  // Send the number as JSON data
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     // Handle successful insertion
-    //     console.log(data);
-    //     // Update the UI accordingly
-    // })
-    // .catch(error => {
-    //     // Handle errors
-    //     console.error(error);
-    // });
-
-            // var xhr = new XMLHttpRequest();
-            // xhr.open('POST', 'about');
-            // xhr.setRequestHeader('X-Request-With', 'XMLHttpRequest');
-            // // {% csrf_token %}
-            // // xhr.setRequestHeader('X-CSRFToken', getCookie('cs'))
-            // xhr.onload = function(){
-            //     if(xhr.status === 200){
-            //         var response = JSON.parse(xhr.responseText);
-            //         // 'Hello' = response.likes;
-            //     }
-            // };
-            // xhr.send();
-
-
+        })
         });
 
     </script>
