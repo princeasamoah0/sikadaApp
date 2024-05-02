@@ -47,7 +47,7 @@
                           <ul>
                               <li><a href="mailto:info@sikadahomes.com?Subject=Flower%20greetings%20to%20you"><i class="icon-mail"></i> info@sikadahomes.com</a></li>
                               <li><a href="contact"><i class="icon-placeholder"></i> Cedar Crest Junction, Asuofua, Kumasi.</a></li>
-                          </ul>
+                          </ul>                        
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -72,9 +72,11 @@
                                         </div>
                                     </li>
                                     <li>
+                                        
                                         <!-- ltn__social-media -->
                                         <div class="ltn__social-media">
                                           <ul>
+                                            <li>Hi, {{request.user.first_name}}</li>
                                               <li><a href="https://www.tiktok.com/@imagomedia3?_t=8fH6LUWXmNx&_r=1" title="Tiktok"><i class="fab fa-tiktok"></i></a></li>
                                               <li><a href="https://x.com/imagomedia147" title="Twitter"><i class="fab fa-twitter"></i></a></li>
 
@@ -178,10 +180,14 @@
                                 <li>
                                     <a href="#"><i class="icon-user"></i></a>
                                     <ul>
-                                        <li><a href="login">Sign in</a></li>
-                                        <li><a href="register">Register</a></li>
-                                        <li><a href="account">My Account</a></li>
-                                        <li><a href="wishlist">Wishlist</a></li>
+                                        {% if request.user.is_anonymous %}
+                                        <li><a href="/login">Sign in</a></li>
+                                        <li><a href="/register">Register</a></li>                                    
+                                        {% else %}
+                                        <li><a href="/account">My Account</a></li>
+                                        <li><a href="/wishlist">Wishlist</a></li>
+                                        <li><a href="/logoutEvent">Logout</a></li>
+                                        {% endif %}
                                     </ul>
                                 </li>
                             </ul>
@@ -190,7 +196,7 @@
                         <div class="mini-cart-icon">
                             <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
                                 <i class="icon-shopping-cart"></i>
-                                <sup>0</sup>
+                                <sup id="bt">{{cart}}</sup>
                             </a>
                         </div>
                         <!-- mini-cart -->
@@ -472,7 +478,7 @@
                         </div>
 
                         <div class="btn-wrapper">
-                            <a href="/cart" class="theme-btn-1 btn btn-effect-1">Add to cart</a>
+                            <a onclick="AddCartFunction('{{context.property_id}}')" class="theme-btn-1 btn btn-effect-1">Add to cart</a>
                         </div>
 
                         <h4 class="title-2">Related Properties</h4>
@@ -1593,18 +1599,15 @@
         })
 
         const wishlistModal = document.getElementById('wish_list_modal')
-        console.log(wishlistModal)
+
         wishlistModal.addEventListener('show.bs.modal', function(event){
             const button = event.relatedTarget;
-            // console.log('Hello')
             const buttonId = button.getAttribute('data-bs-wishlist')
             const modal_image = document.getElementById('wish_list_img')
             const modal_title = document.getElementById('wish_list_title')
-            // const modal_price = document.getElementById('wish_list_price')
 
             original_image = document.getElementById(`latest_listings_img_${buttonId}`).src
             original_title = document.getElementById(`latest_listings_title_${buttonId}`)
-            // original_price = document.getElementById(`latest_listings_price_${buttonId}`)
 
             modal_image.src = original_image
             modal_title.innerText = original_title.innerText
@@ -1612,34 +1615,66 @@
 
             $.ajax({
             url: "wishlist_ajax",
-            // url: "",
             type: "POST", // http method
             data: {
                 property_id: buttonId,
                 csrfmiddlewaretoken: '{{ csrf_token }}',
             },
 
-            // handle a successful response
             success: function (response) {
-                // alert(`hello, ${response["name"]}`);
-                console.log(response)
+
             },
 
-            // handle a non-successful response
+            error: function (e) {
+                alert("Errors", e)
+            }
+        });
+        });
+
+        function AddCartFunction(property_id){
+            
+            $.ajax({
+            url: "/add-to-cart",
+            type: "POST",
+            data: {
+                property_id: property_id,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function (data, textStatus, jqXHR) {
+                if (data == 'unauthenticated') {               
+                window.location = '/login?next=/land-details/'+property_id
+            }else if (data == 'already_added'){
+             alert('Product already exists on your cart')   
+            }else{
+                alert('You have successfully added to cart')
+                GetCartCount()
+            }
+        },
             error: function (e) {
                 alert("Error", e)
             }
         });
+        }
+  
+        
+        function GetCartCount(params) {
+            $.ajax({
+            url: "/get-cart-count",
+            type: "GET",
+            dataType: 'JSON',
 
-
-        });
-
-
+            success: function (response) {
+                document.getElementById('cart_count').innerText = response
+            },
+            error: function (e) {
+                alert("Error", e)
+            }
+        });   
+        }
 
 
         
     </script>
 
 {% endblock %}
-</body>
-</html>
+

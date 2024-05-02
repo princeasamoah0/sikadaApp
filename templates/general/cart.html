@@ -73,6 +73,7 @@
                                         <!-- ltn__social-media -->
                                         <div class="ltn__social-media">
                                           <ul>
+                                              <li>Hi, {{request.user.first_name}}</li>
                                               <li><a href="https://www.tiktok.com/@imagomedia3?_t=8fH6LUWXmNx&_r=1" title="Tiktok"><i class="fab fa-tiktok"></i></a></li>
                                               <li><a href="https://x.com/imagomedia147" title="Twitter"><i class="fab fa-twitter"></i></a></li>
 
@@ -176,10 +177,14 @@
                                 <li>
                                     <a href="#"><i class="icon-user"></i></a>
                                     <ul>
-                                        <li><a href="login">Sign in</a></li>
-                                        <li><a href="register">Register</a></li>
-                                        <li><a href="account">My Account</a></li>
-                                        <li><a href="wishlist">Wishlist</a></li>
+                                        {% if request.user.is_anonymous %}
+                                        <li><a href="/login">Sign in</a></li>
+                                        <li><a href="/register">Register</a></li>                                    
+                                        {% else %}
+                                        <li><a href="/account">My Account</a></li>
+                                        <li><a href="/wishlist">Wishlist</a></li>
+                                        <li><a href="/logoutEvent">Logout</a></li>
+                                        {% endif %}
                                     </ul>
                                 </li>
                             </ul>
@@ -188,7 +193,7 @@
                         <div class="mini-cart-icon">
                             <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
                                 <i class="icon-shopping-cart"></i>
-                                <sup>0</sup>
+                                <sup id="cart_count">{{cart}}</sup>
                             </a>
                         </div>
                         <!-- mini-cart -->
@@ -373,22 +378,24 @@
                                     <th class="cart-product-subtotal">Subtotal</th>
                                 </thead> -->
                                 <tbody>
+                                    {% for item in cart_items %}
                                     <tr>
                                         <td class="cart-product-remove">x</td>
                                         <td class="cart-product-image">
-                                            <a href="product-details"><img src="{% static 'img/product/1.png' %}" alt="#"></a>
+                                            <a href="product-details"><img src="{{item.img_listing.url}}" alt="#"></a>
                                         </td>
                                         <td class="cart-product-info">
-                                            <h4><a href="product-details">3 Rooms Manhattan</a></h4>
+                                            <h4><a href="product-details">{{item.property_title|truncatechars:35}}</a></h4>
                                         </td>
-                                        <td class="cart-product-price">$149.00</td>
-                                        <td class="cart-product-quantity">
+                                        <td class="cart-product-price">GHS {{item.price}}</td>
+                                        <!-- <td class="cart-product-quantity">
                                             <div class="cart-plus-minus">
                                                 <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
                                             </div>
-                                        </td>
-                                        <td class="cart-product-subtotal">$298.00</td>
+                                        </td> -->
+                                        <!-- <td class="cart-product-subtotal">$298.00</td> -->
                                     </tr>
+                                    {% endfor %}
 
                                     <tr class="cart-coupon-row">
                                         <td colspan="6">
@@ -410,19 +417,19 @@
                                 <tbody>
                                     <tr>
                                         <td>Cart Subtotal</td>
-                                        <td>$618.00</td>
+                                        <td>GHS {{total_price|floatformat:2}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Shipping and Handing</td>
-                                        <td>$15.00</td>
+                                        <td>Processing Fee</td>
+                                        <td>0</td>
                                     </tr>
                                     <tr>
                                         <td>Vat</td>
-                                        <td>$00.00</td>
+                                        <td>0</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Order Total</strong></td>
-                                        <td><strong>$633.00</strong></td>
+                                        <td><strong id="order_total">GHS {{total_price|floatformat:2}}</strong></td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -11,8 +11,7 @@ from itertools import chain
 import random
 from .models import ( HouseRent,HouseSale,HouseLease,LandSale,
                      AllProperties,Feedback, Wishlist,
-                      MailingList,Message, Cart,
-
+                      MailingList,Message, Cart,Orders
                     )
 import secrets
 import string 
@@ -27,7 +26,6 @@ def index (request):
         request.session['userId'] = userId
         print('No UserId, so new one has been set')
     
-    # print(userId)
     if request.method == 'POST':
         email = request.POST['email']
         a = MailingList(email = email)
@@ -96,14 +94,42 @@ def blog_right_sidebar(request):
 def blog(request):
     return render(request, 'general/blog.html')
 
-# def add_to_cart(request):
-    
-#     return(redirect)
 
 def cart(request):
-    return render(request, 'general/cart.html')
+    cart_items = Cart.objects.filter(user = request.user)
+    cart = cart_items.count()
+
+    querylist = [i.property_id for i in cart_items]
+    house_sale = HouseSale.objects.filter(property_id__in=querylist)
+    house_rent = HouseRent.objects.filter(property_id__in=querylist)
+    land_sale = LandSale.objects.filter(property_id__in=querylist)
+    
+    all = list(chain(house_sale,house_rent,land_sale))
+    
+    total_price = 0
+    for i in all:
+        total_price += int(i.price)
+    # print(total_price)
+    return render(request, 'general/cart.html', {'cart':cart, 'cart_items':all, 'total_price':total_price})
 
 def checkout(request):
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        company_name = request.POST.get('company_name')
+        company_address = request.POST.get('company_address')
+        country = request.POST.get('country')
+        address = request.POST.get('address')
+        address_2 = request.POST.get('address_2')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        zip = request.POST.get('zip')
+        order_notes = request.POST.get('order_notes')
+
+        a = Orders(first_name = first_name, user = request.user.username, last_name = last_name, email = email, phone = phone, company_name = company_name, company_address = company_address, country = country, address = address, address_2 = address_2, city = city, state = state, zip = zip, order_notes = order_notes)
+        a.save()
     return render(request, 'general/checkout.html')
 
 def coming_soon(request):
@@ -183,8 +209,33 @@ def portfolio_details(request):
 def portfolio(request):
     return render(request, 'general/portfolio.html')
 
-def add_to_cart(request):
-    return HttpResponse(request, '<h1>Hello Samuel, you have successfully added. </h1>')
+
+# @login_required
+def add_to_cart(request):  
+    property_id = request.POST.get('property_id')
+    if request.user.is_authenticated:
+        try:
+            Cart.objects.get(user=request.user.username, property_id=property_id)
+            return JsonResponse('already_added', safe=False)
+        except Cart.DoesNotExist:
+            a = Cart(property_id= property_id, user=request.user.username)
+            a.save()
+            messages.success(request, "Property Successfully added to Cart")
+            return JsonResponse('successfully_added', safe=False)
+    else:
+        return JsonResponse('unauthenticated', safe=False)
+
+
+def fetch_cart_items(request):
+    user = request.POST.get('user')
+    data = Cart.objects.filter(user=user)
+    return JsonResponse(list(data.values()), safe=False)
+
+
+def get_cart_count(request):
+    data = Cart.objects.all().count()
+    # return JsonResponse(list(data), safe=False)
+    return JsonResponse(data, safe=False)
 
 def product_details(request,property_id):
     if request.method == 'POST':
@@ -195,13 +246,14 @@ def product_details(request,property_id):
             a = Message(email=email, name = name, message=message)
             a.save()
             messages.success(request, "Message has been sent successfully.")
-        else:  
+        elif request.POST.get('mailingListForm'):  
             email = request.POST['email'] 
             a = MailingList(email = email)
             a.save()
             messages.success(request, "Your email was successfully been addded.")
             print(f'My email is {email}')  
-
+        else:
+            pass
     # if request.method == 'POST' and 'messageForm' in request.POST.get('messageForm'):    
     #         name = request.POST['yourname']
     #         email = request.POST['youremail']
@@ -229,19 +281,14 @@ def product_details(request,property_id):
     cart = Cart.objects.filter(user = request.user.username)   
     print(cart) 
          
-    # print(query.status)
-    return render(request, 'general/product-details.html', {'context':query, 'related_properties':related_properties} )
+    cart = Cart.objects.filter(user = request.user).count()
+    return render(request, 'general/product-details.html', {'context':query, 'related_properties':related_properties, 'cart':cart} )
 
-def land_details(request,pk):
-    
-
+def land_details(request,pk):   
     land_details = LandSale.objects.get(property_id = pk)
     related_properties = LandSale.objects.all().order_by('-id')[:2]
-    
-    cart = Cart.objects.all()
-    
-
-    return render(request, 'general/land-details.html', {'context':land_details, 'related_properties':related_properties}, )
+    cart = Cart.objects.filter(user = request.user).count()
+    return render(request, 'general/land-details.html', {'context':land_details, 'related_properties':related_properties, 'cart':cart}, )
     
 def register(request):
     if request.method == 'POST':
@@ -447,7 +494,7 @@ def wishlist(request):
     land_sale = LandSale.objects.filter(property_id__in=querylist)
     
     all = list(chain(house_sale,house_rent,land_sale))
-    print(f"chained {all}")
+    # print(f"chained {all}")
     return render(request, 'general/wishlist.html',  {'data': all})
 
 
