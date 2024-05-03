@@ -194,9 +194,9 @@
                         </div>
                         <!-- mini-cart -->
                         <div class="mini-cart-icon">
-                            <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+                            <a onclick="FetchCartItems()" href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
                                 <i class="icon-shopping-cart"></i>
-                                <sup id="bt">{{cart}}</sup>
+                                <sup id="cart_count">{{cart}}</sup>
                             </a>
                         </div>
                         <!-- mini-cart -->
@@ -227,7 +227,9 @@
             </div>
             <div class="mini-cart-product-area ltn__scrollbar">
 
-                <div class="mini-cart-item clearfix">
+                <div id="NodePlaceholder"></div>
+
+                <!-- <div class="mini-cart-item clearfix">
                     <div class="mini-cart-img">
                         <a href="#"><img src="{% static 'img/product/2.png' %}" alt="Image"></a>
                         <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
@@ -236,12 +238,12 @@
                         <h6><a href="#">3 Rooms Manhattan</a></h6>
                         <span class="mini-cart-quantity">1 x $85.00</span>
                     </div>
-                </div>
+                </div> -->
                 
             </div>
             <div class="mini-cart-footer">
                 <div class="mini-cart-sub-total">
-                    <h5>Subtotal: <span>$310.00</span></h5>
+                    <h5>Subtotal: <span id="subtotal">$310.00</span></h5>
                 </div>
                 <div class="btn-wrapper">
                     <a href="/cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
@@ -1615,7 +1617,7 @@
 
             $.ajax({
             url: "wishlist_ajax",
-            type: "POST", // http method
+            type: "POST",
             data: {
                 property_id: buttonId,
                 csrfmiddlewaretoken: '{{ csrf_token }}',
@@ -1672,7 +1674,47 @@
         });   
         }
 
+        cartClickCounter = 0 
+        function FetchCartItems(params) {
+            if (cartClickCounter == 0){
+                $.ajax({
+                url: "/fetch-cart-items",
+                type: "POST",
+                data: {
+                    user : `{{request.user.username}}`,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function(data) {
+                    cartClickCounter = 1
+                    sub_total = 0
+                    item = document.getElementById('NodePlaceholder')
+                    for (let index = 0; index < data.length; index++) {
+                        const element = data[index];
+                        sub_total =  sub_total + parseInt(element.price)
 
+                        item.innerHTML += `<div id="aside-cart-item-${index}" class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="${element.img_listing}" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">${element.property_title}</a></h6>
+                            <span class="mini-cart-quantity">${element.price}</span>
+                        </div>
+                    </div>`
+                    }
+                    document.getElementById('subtotal').innerText = `GHS ${sub_total}`
+                },
+    
+                error: function (e) {
+                    alert("Error", e)
+                }
+            });  
+            }
+        }
+
+
+        
         
     </script>
 

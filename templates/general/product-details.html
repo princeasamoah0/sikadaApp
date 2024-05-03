@@ -242,7 +242,7 @@
             </div>
             <div class="mini-cart-footer">
                 <div class="mini-cart-sub-total">
-                    <h5>Subtotal: <span>$310.00</span></h5>
+                    <h5>Subtotal: <span id="subtotal"></span></h5>
                 </div>
                 <div class="btn-wrapper">
                     <a href="/cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
@@ -737,7 +737,7 @@
 
                             <!-- comment-reply -->
                             <div class="btn-wrapper">
-                                <a onclick="AddCartFunction('{{context.property_id}}')" class="theme-btn-1 btn btn-effect-1">Add to cart</a>
+                                <a onclick="AddCartFunction('{{context.property_id}}','{{context.price}}','{{context.img_listing}}, {{context.title}}')" class="theme-btn-1 btn btn-effect-1">Add to cart</a>
                             </div>
                         </div>
 
@@ -1879,7 +1879,7 @@
 
             $.ajax({
             url: "/wishlist_ajax",
-            type: "POST", // http method
+            type: "POST",
             data: {
                 property_id: buttonId,
                 csrfmiddlewaretoken: '{{ csrf_token }}',
@@ -1890,13 +1890,12 @@
             },
 
             error: function (e) {
-
                 alert("Error" , e)
             }
         });
         });
 
-        function AddCartFunction(property_id){
+        function AddCartFunction(property_id, price, img_listing, title) {
             
             $.ajax({
             url: "/add-to-cart",
@@ -1909,7 +1908,7 @@
                 if (data == 'unauthenticated') {               
                 window.location = '/login?next=/product-details/'+property_id
             }else if (data == 'already_added'){
-             alert('Product already exists on your cart')   
+             alert('Product already exists on your cart') 
             }else{
                 alert('You have successfully added to cart')
                 GetCartCount()
@@ -1937,49 +1936,43 @@
         });   
         }
 
+        cartClickCounter = 0 
         function FetchCartItems(params) {
-            $.ajax({
-            url: "/fetch-cart-items",
-            type: "POST",
-            data: {
-                user : `{{request.user.username}}`,
-                csrfmiddlewaretoken: '{{ csrf_token }}',
-            },
-            success: function(data) {
-                alert('Done')
-                // console.log(data)
-                item = document.getElementById('NodePlaceholder')
-                for (let index = 0; index < data.length; index++) {
-                    const element = data[index];
-                    item.innerHTML += `<div id="aside-cart-item-${index}" class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="{% static 'img/product/2.png' %}" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">3 Rooms Manhattan</a></h6>
-                        <span class="mini-cart-quantity">1 x $85.00</span>
-                    </div>
-                </div>`
-                    // console.log(element)
-                    // a = `<div class="mini-cart-img">
-                    //     <a href="#"><img src="{% static 'img/product/2.png' %}" alt="Image"></a>
-                    //     <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    // </div>
-                    // <div class="mini-cart-info">
-                    //     <h6><a href="#">3 Heyy Rooms Manhattan</a></h6>
-                    //     <span class="mini-cart-quantity">1 x $85.00</span>
-                    // </div>
-                    // `
-                    // item.innerHTML = a
-                    
-                }
-            },
+            if (cartClickCounter == 0){
+                $.ajax({
+                url: "/fetch-cart-items",
+                type: "POST",
+                data: {
+                    // user : `{{request.user.username}}`,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function(data) {
+                    cartClickCounter = 1
+                    sub_total = 0
+                    item = document.getElementById('NodePlaceholder')
+                    for (let index = 0; index < data.length; index++) {
+                        const element = data[index];
+                        sub_total =  sub_total + parseInt(element.price)
 
-            error: function (e) {
-                alert("Error", e)
+                        item.innerHTML += `<div id="aside-cart-item-${index}" class="mini-cart-item clearfix">
+                        <div class="mini-cart-img">
+                            <a href="#"><img src="${element.img_listing}" alt="Image"></a>
+                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                        </div>
+                        <div class="mini-cart-info">
+                            <h6><a href="#">${element.property_title}</a></h6>
+                            <span class="mini-cart-quantity">${element.price}</span>
+                        </div>
+                    </div>`
+                    }
+                    document.getElementById('subtotal').innerText = `GHS ${sub_total}`
+                },
+    
+                error: function (e) {
+                    alert("Error", e)
+                }
+            });  
             }
-        });  
         }
 
 

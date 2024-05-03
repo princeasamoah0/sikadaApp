@@ -96,7 +96,7 @@ def blog(request):
 
 
 def cart(request):
-    cart_items = Cart.objects.filter(user = request.user)
+    cart_items = Cart.objects.filter(user = request.user, status = 'active')
     cart = cart_items.count()
 
     querylist = [i.property_id for i in cart_items]
@@ -106,13 +106,24 @@ def cart(request):
     
     all = list(chain(house_sale,house_rent,land_sale))
     
+    property_id = ''
+    if len(all) > 1:
+        for i in all[:-1]:
+            property_id += i.property_id + ','
+        property_id += all[-1].property_id
+    else:
+        property_id = all[0].property_id  
+
     total_price = 0
     for i in all:
         total_price += int(i.price)
-    # print(total_price)
-    return render(request, 'general/cart.html', {'cart':cart, 'cart_items':all, 'total_price':total_price})
 
-def checkout(request):
+
+
+     
+    return render(request, 'general/cart.html', {'cart':cart, 'cart_items':all, 'total_price':total_price, 'property_id':property_id})
+
+def checkout(request, property_id):
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -128,7 +139,14 @@ def checkout(request):
         zip = request.POST.get('zip')
         order_notes = request.POST.get('order_notes')
 
-        a = Orders(first_name = first_name, user = request.user.username, last_name = last_name, email = email, phone = phone, company_name = company_name, company_address = company_address, country = country, address = address, address_2 = address_2, city = city, state = state, zip = zip, order_notes = order_notes)
+
+        def generate_unique_code():
+            code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))
+            while Orders.objects.filter(order_id=code).exists():
+                code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))
+            return code 
+        order_id = generate_unique_code()  
+        a = Orders(first_name = first_name, user = request.user.username, property_id = property_id,order_id=order_id, last_name = last_name, email = email, phone = phone, company_name = company_name, company_address = company_address, country = country, address = address, address_2 = address_2, city = city, state = state, zip = zip, order_notes = order_notes)
         a.save()
     return render(request, 'general/checkout.html')
 
@@ -227,9 +245,28 @@ def add_to_cart(request):
 
 
 def fetch_cart_items(request):
-    user = request.POST.get('user')
-    data = Cart.objects.filter(user=user)
-    return JsonResponse(list(data.values()), safe=False)
+
+    data = Cart.objects.filter(user=request.user.username, status='active') 
+    querylist = [i.property_id for i in data]
+
+    all_results = [
+        {
+        'property_id': result.property_id,
+        'pk': result.pk,
+        'price': result.price,
+        'property_title': result.property_title,
+        'img_listing': result.img_listing.url,
+        # Add other fields you want to include in the response
+        }
+    for result in chain(
+        HouseSale.objects.filter(property_id__in=querylist),
+        HouseRent.objects.filter(property_id__in=querylist),
+        HouseLease.objects.filter(property_id__in=querylist),
+        LandSale.objects.filter(property_id__in=querylist)
+        )
+    ]
+
+    return JsonResponse(all_results, safe=False)
 
 
 def get_cart_count(request):
@@ -279,7 +316,7 @@ def product_details(request,property_id):
         related_properties = HouseSale.objects.all().order_by('-id')[:2]
 
     cart = Cart.objects.filter(user = request.user.username)   
-    print(cart) 
+    # print(cart) 
          
     cart = Cart.objects.filter(user = request.user).count()
     return render(request, 'general/product-details.html', {'context':query, 'related_properties':related_properties, 'cart':cart} )

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% load static %}
 
-    <!-- Place favicon.png' %} in the root directory -->
+    <!-- Place favicon.png'  in the root directory -->
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon" />
     <!-- Font Icons css -->
     <link rel="stylesheet" href="{% static 'css/font-icons.css' %}">
@@ -405,7 +405,7 @@
                         <div class="ltn__checkout-single-content mt-50">
                             <h4 class="title-2">Billing Details</h4>
                             <div class="ltn__checkout-single-content-info">
-                                <form method="POST" >
+                                <form onsubmit="GetPaymentMethod()" method="POST" >
                                     {% csrf_token %}
                                     <h6>Personal Information</h6>
                                     <div class="row">
@@ -444,7 +444,7 @@
                                         <div class="col-lg-4 col-md-6">
                                             <h6>Country</h6>
                                             <div class="input-item">
-                                                <select class="nice-select">
+                                                <select name="country" class="nice-select">
                                                     <option name="country">Select Country</option>
                                                     <option value="australia">Australia</option>
                                                     <option value="canada">Canada</option>
@@ -749,6 +749,34 @@
     <script src="{% static 'js/plugins.js' %}"></script>
     <!-- Main JS -->
     <script src="{% static 'js/main.js' %}"></script>
+
+    <script>
+
+    function GetPaymentMethod(params) {
+         
+    // Get all the radio elements with the common class
+    const radioElements = document.querySelectorAll('.ltn__card-title');
+    alert(radioElements.length)
+    // Loop through the radio elements and check which one is active
+    let activeElement = null;
+    for (let i = 0; i < radioElements.length; i++) {
+        if (radioElements[i].parentElement.classList.contains('show')) {
+            activeElement = radioElements[i];
+            break;
+        }
+    }
+    
+    // Log the active element or perform further actions
+    if (activeElement) {
+        alert('Active element:', activeElement);
+        // Perform further actions with the active element
+    } else {
+        alert('No active element found');
+    }
+        }
+        
+    </script>
+
 
 </body>
 </html>
