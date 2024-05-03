@@ -315,11 +315,13 @@ class MailingList(models.Model):
 class Cart(models.Model):
     user = models.CharField(max_length= 200, null=True, blank=True)
     property_id = models.TextField(null=True, blank=True)
+    status = models.CharField(default='active', max_length=100)
     date_time = models.DateTimeField(default= timezone.now)
 
 
 class Orders(models.Model):
     user = models.CharField(max_length= 200, null=True, blank=True)
+    order_id = models.CharField(max_length=200, null=True, blank=True)
     property_id = models.CharField(max_length=200, null=True, blank=True)
     first_name = models.CharField(max_length=200, null=True, blank=True)
     last_name = models.CharField(max_length=200, null=True, blank=True)
@@ -334,8 +336,8 @@ class Orders(models.Model):
     state = models.CharField(max_length=200, null=True, blank=True)
     zip = models.CharField(max_length=200, null=True, blank=True)
     order_notes = models.CharField(max_length=200, null=True, blank=True)
-    status = models.CharField(max_length=200, null=True, blank=True)
+    status = models.CharField(max_length=200, default='pending', null=True, blank=True)
     payment_method = models.CharField(max_length=200, null=True, blank=True)
     date_time = models.DateTimeField(default= timezone.now)
     # def __str__ (self):
-    #     return self.user + " - " + self.property_id
+    #     return self.property_id
