@@ -246,7 +246,7 @@
                 </div>
                 <div class="btn-wrapper">
                     <a href="/cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                    <a href="/cart" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+                    <a onclick="Checkout()" class="theme-btn-2 btn btn-effect-2">Checkout</a>
                 </div>
                 <p>Free Shipping on All Orders Over $100!</p>
             </div>
@@ -1895,7 +1895,7 @@
         });
         });
 
-        function AddCartFunction(property_id, price, img_listing, title) {
+        function AddCartFunction(property_id) {
             
             $.ajax({
             url: "/add-to-cart",
@@ -1937,6 +1937,8 @@
         }
 
         cartClickCounter = 0 
+        property_ids = []
+
         function FetchCartItems(params) {
             if (cartClickCounter == 0){
                 $.ajax({
@@ -1947,12 +1949,14 @@
                     csrfmiddlewaretoken: '{{ csrf_token }}',
                 },
                 success: function(data) {
+                    
                     cartClickCounter = 1
                     sub_total = 0
                     item = document.getElementById('NodePlaceholder')
                     for (let index = 0; index < data.length; index++) {
                         const element = data[index];
                         sub_total =  sub_total + parseInt(element.price)
+                        property_ids += element.property_id + ','
 
                         item.innerHTML += `<div id="aside-cart-item-${index}" class="mini-cart-item clearfix">
                         <div class="mini-cart-img">
@@ -1966,6 +1970,7 @@
                     </div>`
                     }
                     document.getElementById('subtotal').innerText = `GHS ${sub_total}`
+                    
                 },
     
                 error: function (e) {
@@ -1975,7 +1980,10 @@
             }
         }
 
-
+        function Checkout(params) {
+            const sliced_ids = property_ids.slice(0, -1);
+            window.location = `/checkout/${sliced_ids}`
+        }
         
     </script>
 

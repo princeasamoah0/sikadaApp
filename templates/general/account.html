@@ -1,3 +1,5 @@
+{% extends 'notification-block.html' %}
+{% block content %}
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -512,11 +514,11 @@
                                                         <div class="row mb-50">
                                                             <div class="col-md-6">
                                                                 <label>First name:</label>
-                                                                <input type="text" name="ltn__name">
+                                                                <input type="text" value="{{user.first_name}}" name="ltn__name">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label>Last name:</label>
-                                                                <input type="text" name="ltn__lastname">
+                                                                <input type="text" value="{{user.last_name}}" name="ltn__lastname">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label>Display Name:</label>
@@ -524,7 +526,7 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label>Display Email:</label>
-                                                                <input type="email" name="ltn__lastname" placeholder="example@example.com">
+                                                                <input type="email" name="ltn__lastname" value="{{user.email}}" placeholder="example@example.com">
                                                             </div>
                                                         </div>
                                                         <fieldset>
@@ -1249,32 +1251,32 @@
                                                                         <div class="row">
                                                                             <div class="col-md-6">
                                                                                 <div class="input-item input-item-name ltn__custom-icon">
-                                                                                    <input type="text" name="ltn__name" placeholder="First name">
+                                                                                    <input type="text" value="{{request.user.first_name}}" name="ltn__name" placeholder="First name">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="input-item input-item-name ltn__custom-icon">
-                                                                                    <input type="text" name="ltn__lastname" placeholder="Last name">
+                                                                                    <input type="text" value="{{request.user.last_name}}" name="ltn__lastname" placeholder="Last name">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="input-item input-item-email ltn__custom-icon">
-                                                                                    <input type="email" name="ltn__email" placeholder="email address">
+                                                                                    <input type="email" value="{{request.user.email}}" name="ltn__email" placeholder="email address">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="input-item input-item-phone ltn__custom-icon">
-                                                                                    <input type="text" name="ltn__phone" placeholder="phone number">
+                                                                                    <input type="text" value="{{request.user.username}}" name="ltn__phone" placeholder="phone number">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="input-item input-item-website ltn__custom-icon">
-                                                                                    <input type="text" name="ltn__company" placeholder="Company name (optional)">
+                                                                                    <input type="text" name="ltn__company" value="{{userdetails.company_name}}" placeholder="Company name (optional)">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="input-item input-item-website ltn__custom-icon">
-                                                                                    <input type="text" name="ltn__phone" placeholder="Company address (optional)">
+                                                                                    <input type="text" name="ltn__phone" value="{{userdetails.company_address}}" placeholder="Company address (optional)">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -1284,6 +1286,7 @@
                                                                                 <div class="input-item">
                                                                                     <select class="nice-select">
                                                                                         <option>Select Country</option>
+                                                                                        <option selected>{{userdetails.country}}</option>
                                                                                         <option>Australia</option>
                                                                                         <option>Canada</option>
                                                                                         <option>China</option>
@@ -1299,12 +1302,12 @@
                                                                                 <div class="row">
                                                                                     <div class="col-md-6">
                                                                                         <div class="input-item">
-                                                                                            <input type="text" placeholder="House number and street name">
+                                                                                            <input type="text" value="{{userdetails.address}}" placeholder="House number and street name">
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <div class="input-item">
-                                                                                            <input type="text" placeholder="Apartment, suite, unit etc. (optional)">
+                                                                                            <input type="text" value="{{userdetails.address_2}}" placeholder="Apartment, suite, unit etc. (optional)">
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1312,123 +1315,45 @@
                                                                             <div class="col-lg-4 col-md-6">
                                                                                 <h6>Town / City</h6>
                                                                                 <div class="input-item">
-                                                                                    <input type="text" placeholder="City">
+                                                                                    <input value="{{userdetails.city}}" type="text" placeholder="City">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-4 col-md-6">
                                                                                 <h6>State </h6>
                                                                                 <div class="input-item">
-                                                                                    <input type="text" placeholder="State">
+                                                                                    <input value="{{userdetails.state}}" type="text" placeholder="State">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-lg-4 col-md-6">
                                                                                 <h6>Zip</h6>
                                                                                 <div class="input-item">
-                                                                                    <input type="text" placeholder="Zip">
+                                                                                    <input value="{{userdetails.zip}}" type="text" placeholder="Zip">
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <p><label class="input-info-save mb-0"><input type="checkbox" name="agree"> Create an account?</label></p>
-                                                                        <h6>Order Notes (optional)</h6>
-                                                                        <div class="input-item input-item-textarea ltn__custom-icon">
-                                                                            <textarea name="ltn__message" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                                                        </div>
-
+                                                                        <button class="btn theme-btn-1 btn-effect-1 text-uppercase " type="submit">Save Changes</button>
                                                                     </form>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="ltn__checkout-payment-method mt-50">
-                                                            <h4 class="title-2">Payment Method</h4>
-                                                            <div id="checkout_accordion_1">
-                                                                <!-- card -->
-                                                                <div class="card">
-                                                                    <h5 class="collapsed ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-1" aria-expanded="false">
-                                                                        Check payments
-                                                                    </h5>
-                                                                    <div id="faq-item-2-1" class="collapse" data-parent="#checkout_accordion_1">
-                                                                        <div class="card-body">
-                                                                            <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- card -->
-                                                                <div class="card">
-                                                                    <h5 class="ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-2" aria-expanded="true">
-                                                                        Cash on delivery
-                                                                    </h5>
-                                                                    <div id="faq-item-2-2" class="collapse show" data-parent="#checkout_accordion_1">
-                                                                        <div class="card-body">
-                                                                            <p>Pay with cash upon delivery.</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- card -->
-                                                                <div class="card">
-                                                                    <h5 class="collapsed ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-3" aria-expanded="false" >
-                                                                        PayPal <img src="{% static 'img/icons/payment-3.png' %}" alt="#">
-                                                                    </h5>
-                                                                    <div id="faq-item-2-3" class="collapse" data-parent="#checkout_accordion_1">
-                                                                        <div class="card-body">
-                                                                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="ltn__payment-note mt-30 mb-30">
-                                                                <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.</p>
-                                                            </div>
-                                                            <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Place order</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="shoping-cart-total mt-50">
-                                                            <h4 class="title-2">Cart Totals</h4>
-                                                            <table class="table">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>3 Rooms Manhattan <strong>× 2</strong></td>
-                                                                        <td>$298.00</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>OE Replica Wheels <strong>× 2</strong></td>
-                                                                        <td>$170.00</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Wheel Bearing Retainer <strong>× 2</strong></td>
-                                                                        <td>$150.00</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Shipping and Handing</td>
-                                                                        <td>$15.00</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Vat</td>
-                                                                        <td>$00.00</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><strong>Order Total</strong></td>
-                                                                        <td><strong>$633.00</strong></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
+                                                   
+                                                    
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="ltn_tab_1_9">
                                             <div class="ltn__myaccount-tab-content-inner">
                                                 <div class="account-login-inner">
-                                                    <form action="#" class="ltn__form-box contact-form-box">
+                                                    <form action="#" method="post" class="ltn__form-box contact-form-box">
+                                                        {% csrf_token %}
                                                         <h5 class="mb-30">Change Password</h5>
-                                                        <input type="password" name="password" placeholder="Current Password*">
-                                                        <input type="password" name="password" placeholder="New Password*">
-                                                        <input type="password" name="password" placeholder="Confirm New Password*">
+                                                        <input type="text" name="current_password" placeholder="Enter Current Password*">
+                                                        <input type="password" id="password" name="new_password" placeholder="New Password*">
+                                                        <small style="display: none;" id="Password_Validator">Passwords don't match.</small>
+                                                        <input type="password" id="confirmpassword" name="confirm_password" placeholder="Confirm New Password*">
                                                         <div class="btn-wrapper mt-0">
-                                                            <button class="theme-btn-1 btn btn-block" type="submit">Save Changes</button>
+                                                            <button id="submit_btn" class="theme-btn-1 btn btn-block"  type="submit">Save Changes</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -1611,6 +1536,9 @@
     <script src="{% static 'js/plugins.js' %}"></script>
     <!-- Main JS -->
     <script src="{% static 'js/main.js' %}"></script>
+    
+    <!-- Custom JS -->
+    <script src="{% static 'js/custom.js' %}"></script>
 
-</body>
-</html>
+    {% endblock %}    
+

@@ -21,6 +21,7 @@ urlpatterns = [
     path('add-to-cart', views.add_to_cart, name='add-to-cart'),
     path('fetch-cart-items', views.fetch_cart_items, name='fetch-cart-items'),
     # path('check-duplicate-cart', views.check_duplicate_cart, name = 'check-duplicate-cart' ),
+    path('delete-cart-item', views.delete_cart_item, name = 'delete-cart-item'),
     path('get-cart-count', views.get_cart_count, name = 'get-cart-count' ),
     path('cart', views.cart, name='cart'),
     path('coming-soon', views.coming_soon, name='coming-soon'),

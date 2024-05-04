@@ -124,7 +124,7 @@ def SaveFunction(request, param):
                           security=security,indoor_game=indoor_game,cable_tv=cable_tv,microwave=microwave,
                           )
             a.save()
-        b = AllProperties(property_id = property_id , property_type=f'{param}', price=price, location=region)
+        b = AllProperties(property_id = property_id , property_type=f'{param}', price=price, location=region, property_title = property_title)
         b.save()    
 
 
