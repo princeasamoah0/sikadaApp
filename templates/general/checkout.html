@@ -191,9 +191,9 @@
                         </div>
                         <!-- mini-cart -->
                         <div class="mini-cart-icon">
-                            <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+                            <a>
                                 <i class="icon-shopping-cart"></i>
-                                <sup>2</sup>
+                                <sup>{{cart_count}}</sup>
                             </a>
                         </div>
                         <!-- mini-cart -->
@@ -215,41 +215,7 @@
     </header>
     <!-- HEADER AREA END -->
 
-    <!-- Utilize Cart Menu Start -->
-    <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
-        <div class="ltn__utilize-menu-inner ltn__scrollbar">
-            <div class="ltn__utilize-menu-head">
-                <span class="ltn__utilize-menu-title">Cart</span>
-                <button class="ltn__utilize-close">×</button>
-            </div>
-            <div class="mini-cart-product-area ltn__scrollbar">
 
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="{% static 'img/product/2.png' %}" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">3 Rooms Manhattan</a></h6>
-                        <span class="mini-cart-quantity">1 x $85.00</span>
-                    </div>
-                </div>
-
-            </div>
-            <div class="mini-cart-footer">
-                <div class="mini-cart-sub-total">
-                    <h5>Subtotal: <span>$310.00</span></h5>
-                </div>
-                <div class="btn-wrapper">
-                    <a href="cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                    <a href="cart" class="theme-btn-2 btn btn-effect-2">Checkout</a>
-                </div>
-                <p>Free Shipping on All Orders Over $100!</p>
-            </div>
-
-        </div>
-    </div>
-    <!-- Utilize Cart Menu End -->
 
     <!-- Utilize Mobile Menu Start -->
     <div id="ltn__utilize-mobile-menu" class="ltn__utilize ltn__utilize-mobile-menu">
@@ -358,7 +324,18 @@
         </div>
     </div>
     <!-- BREADCRUMB AREA END -->
-
+    <div>
+        {% if messages %}
+                {% for message in messages %}
+                <div class="text-center">
+                   <h3 class="text-success">{{message}}</h3> 
+                   <p>Wait for your for your payment to be confirmed.</p>
+                   <p>Click <a style="color:blue" href="#"><b>here</b></a> to check the status of your order or check your <b>email</b> for updates.</p>
+                </div>
+                {% endfor %}
+        {% else %}
+    </div>
+           
     <!-- WISHLIST AREA START -->
     <div class="ltn__checkout-area mb-105">
         <div class="container">
@@ -405,7 +382,7 @@
                         <div class="ltn__checkout-single-content mt-50">
                             <h4 class="title-2">Billing Details</h4>
                             <div class="ltn__checkout-single-content-info">
-                                <form onsubmit="GetPaymentMethod()" method="POST" >
+                                <form  onsubmit="GetPaymentMethod()" method="POST" >
                                     {% csrf_token %}
                                     <h6>Personal Information</h6>
                                     <div class="row">
@@ -507,7 +484,7 @@
                         <div id="checkout_accordion_1">
                             <!-- card -->
                             <div class="card">
-                                <h5 class="collapsed ltn__card-title" data-bs-toggle="collapse" data-bs-target="#faq-item-2-1" aria-expanded="false">
+                                <h5 id="check" class="collapsed ltn__card-title" data-bs-toggle="collapse" data-bs-target="#faq-item-2-1" aria-expanded="false">
                                     Check payments
                                 </h5>
                                 <div id="faq-item-2-1" class="collapse" data-bs-parent="#checkout_accordion_1">
@@ -518,7 +495,7 @@
                             </div>
                             <!-- card -->
                             <div class="card">
-                                <h5 class="ltn__card-title" data-bs-toggle="collapse" data-bs-target="#faq-item-2-2" aria-expanded="true">
+                                <h5 id="cash" class="ltn__card-title"  data-bs-toggle="collapse" data-bs-target="#faq-item-2-2" aria-expanded="true">
                                     Cash on delivery
                                 </h5>
                                 <div id="faq-item-2-2" class="collapse show" data-bs-parent="#checkout_accordion_1">
@@ -529,7 +506,7 @@
                             </div>
                             <!-- card -->
                             <div class="card">
-                                <h5 class="collapsed ltn__card-title" data-bs-toggle="collapse" data-bs-target="#faq-item-2-3" aria-expanded="false" >
+                                <h5 id="paypal" class="collapsed ltn__card-title"  id="3" data-bs-toggle="collapse" data-bs-target="#faq-item-2-3" aria-expanded="false" >
                                     PayPal <img src="{% static 'img/icons/payment-3.png' %}" alt="#">
                                 </h5>
                                 <div id="faq-item-2-3" class="collapse" data-bs-parent="#checkout_accordion_1">
@@ -545,13 +522,20 @@
                         <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Place order</button>
                     </div>
                 </div>
+                <input id="payment_method" name="payment_method" type="hidden">
             </form>
                 <div class="col-lg-6">
                     <div class="shoping-cart-total mt-50">
                         <h4 class="title-2">Cart Totals</h4>
                         <table class="table">
                             <tbody>
+                                {% for item in all_items %}
                                 <tr>
+                                    <td>{{item.property_title}} </td>
+                                    <td>GHS {{item.price}}</td>
+                                </tr>
+                                {% endfor %}
+                                <!-- <tr>
                                     <td>3 Rooms Manhattan <strong>× 2</strong></td>
                                     <td>$298.00</td>
                                 </tr>
@@ -562,18 +546,18 @@
                                 <tr>
                                     <td>Wheel Bearing Retainer <strong>× 2</strong></td>
                                     <td>$150.00</td>
-                                </tr>
-                                <tr>
+                                </tr> -->
+                                <!-- <tr>
                                     <td>Shipping and Handing</td>
                                     <td>$15.00</td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td>Vat</td>
-                                    <td>$00.00</td>
+                                    <td>GHS 00.00</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Order Total</strong></td>
-                                    <td><strong>$633.00</strong></td>
+                                    <td><strong>GHS {{total_price}}</strong></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -584,6 +568,7 @@
     </div>
     <!-- WISHLIST AREA START -->
 
+    {% endif %} 
     <!-- CALL TO ACTION START (call-to-action-6) -->
     <div class="ltn__call-to-action-area call-to-action-6 before-bg-bottom" data-bs-bg="{% static 'img/1.jpg' %}--">
         <div class="container">
@@ -752,28 +737,22 @@
 
     <script>
 
+    // Attach an event listener to the form submission event
+    // document.getElementById('paymentForm').addEventListener('submit', function(event) {
+    //     event.preventDefault(); 
     function GetPaymentMethod(params) {
-         
-    // Get all the radio elements with the common class
-    const radioElements = document.querySelectorAll('.ltn__card-title');
-    alert(radioElements.length)
-    // Loop through the radio elements and check which one is active
-    let activeElement = null;
-    for (let i = 0; i < radioElements.length; i++) {
-        if (radioElements[i].parentElement.classList.contains('show')) {
-            activeElement = radioElements[i];
-            break;
-        }
+        
+        // Prevent the form from submitting
+        const radioElements = document.querySelectorAll('.ltn__card-title');
+
+        radioElements.forEach(element => {
+            if(!element.classList.contains('collapsed')){
+                document.getElementById('payment_method').value = element.id
+                // console.log(element.id)
+            }})
     }
-    
-    // Log the active element or perform further actions
-    if (activeElement) {
-        alert('Active element:', activeElement);
-        // Perform further actions with the active element
-    } else {
-        alert('No active element found');
-    }
-        }
+
+    // });
         
     </script>
 

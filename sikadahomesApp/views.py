@@ -117,9 +117,6 @@ def cart(request):
     total_price = 0
     for i in all:
         total_price += int(i.price)
-
-
-
      
     return render(request, 'general/cart.html', {'cart':cart, 'cart_items':all, 'total_price':total_price, 'property_id':property_id})
 
@@ -138,7 +135,7 @@ def checkout(request, property_id):
         state = request.POST.get('state')
         zip = request.POST.get('zip')
         order_notes = request.POST.get('order_notes')
-
+        payment_method = request.POST.get('payment_method')
 
         def generate_unique_code():
             code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))
@@ -146,9 +143,19 @@ def checkout(request, property_id):
                 code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))
             return code 
         order_id = generate_unique_code()  
-        a = Orders(first_name = first_name, user = request.user.username, property_id = property_id,order_id=order_id, last_name = last_name, email = email, phone = phone, company_name = company_name, company_address = company_address, country = country, address = address, address_2 = address_2, city = city, state = state, zip = zip, order_notes = order_notes)
+        a = Orders(first_name = first_name, payment_method=payment_method, user = request.user.username, property_id = property_id,order_id=order_id, last_name = last_name, email = email, phone = phone, company_name = company_name, company_address = company_address, country = country, address = address, address_2 = address_2, city = city, state = state, zip = zip, order_notes = order_notes)
         a.save()
-    return render(request, 'general/checkout.html')
+        messages.success(request, "You have successfully placed your order")
+    property_ids = property_id.split(',')
+    # print(property_ids)
+    all_items = [obj for i in property_ids for obj in AllProperties.objects.filter(property_id=i)]
+    cart_count = len(all_items)
+    total_price = sum(int(i.price) for i in all_items)
+
+
+    
+
+    return render(request, 'general/checkout.html', {'all_items':all_items, 'total_price':total_price, 'cart_count':cart_count})
 
 def coming_soon(request):
     return render(request, 'general/coming-soon.html')

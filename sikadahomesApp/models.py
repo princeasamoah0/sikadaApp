@@ -6,6 +6,7 @@ from django.utils import timezone
 class AllProperties(models.Model):
     property_id = models.CharField(max_length=100)
     property_type = models.CharField(max_length=100)
+    property_title = models.CharField(max_length=100, null=True, blank=True)
     price = models.CharField(max_length=100, null=True, blank=True)
     location = models.CharField(max_length=100)
 
