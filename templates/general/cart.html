@@ -191,7 +191,7 @@
                         </div>
                         <!-- mini-cart -->
                         <div class="mini-cart-icon">
-                            <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+                            <a>
                                 <i class="icon-shopping-cart"></i>
                                 <sup id="cart_count">{{cart}}</sup>
                             </a>
@@ -215,41 +215,6 @@
     </header>
     <!-- HEADER AREA END -->
 
-    <!-- Utilize Cart Menu Start -->
-    <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
-        <div class="ltn__utilize-menu-inner ltn__scrollbar">
-            <div class="ltn__utilize-menu-head">
-                <span class="ltn__utilize-menu-title">Cart</span>
-                <button class="ltn__utilize-close">×</button>
-            </div>
-            <div class="mini-cart-product-area ltn__scrollbar">
-
-                <div class="mini-cart-item clearfix">
-                    <div class="mini-cart-img">
-                        <a href="#"><img src="{% static 'img/product/2.png' %}" alt="Image"></a>
-                        <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
-                    </div>
-                    <div class="mini-cart-info">
-                        <h6><a href="#">3 Rooms Manhattan</a></h6>
-                        <span class="mini-cart-quantity">1 x $85.00</span>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="mini-cart-footer">
-                <div class="mini-cart-sub-total">
-                    <h5>Subtotal: <span>$310.00</span></h5>
-                </div>
-                <div class="btn-wrapper">
-                    <a href="cart" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                    <a href="cart" class="theme-btn-2 btn btn-effect-2">Checkout</a>
-                </div>
-                <p>Free Shipping on All Orders Over $100!</p>
-            </div>
-
-        </div>
-    </div>
-    <!-- Utilize Cart Menu End -->
 
     <!-- Utilize Mobile Menu Start -->
     <div id="ltn__utilize-mobile-menu" class="ltn__utilize ltn__utilize-mobile-menu">
@@ -378,9 +343,10 @@
                                     <th class="cart-product-subtotal">Subtotal</th>
                                 </thead> -->
                                 <tbody>
+                                    {% if cart_items %}
                                     {% for item in cart_items %}
                                     <tr>
-                                        <td class="cart-product-remove">x</td>
+                                        <td onclick="DeleteCartItem(`{{item.property_id}}`)" class="cart-product-remove">x</td>
                                         <td class="cart-product-image">
                                             <a href="product-details"><img src="{{item.img_listing.url}}" alt="#"></a>
                                         </td>
@@ -396,7 +362,7 @@
                                         <!-- <td class="cart-product-subtotal">$298.00</td> -->
                                     </tr>
                                     {% endfor %}
-
+                                    
                                     <tr class="cart-coupon-row">
                                         <td colspan="6">
                                             <div class="cart-coupon">
@@ -443,6 +409,9 @@
             </div>
         </div>
     </div>
+    {%else%}
+    <h3 class="text-center text-warning"> Cart is empty </h3>
+    {% endif %}
     <!-- SHOPING CART AREA END -->
 
     <!-- CALL TO ACTION START (call-to-action-6) -->
@@ -655,6 +624,34 @@
     <script src="{% static 'js/plugins.js' %}"></script>
     <!-- Main JS -->
     <script src="{% static 'js/main.js' %}"></script>
+
+<script>
+    function DeleteCartItem(params) {
+        let result = confirm('Are you sure you want to remove?')
+        if (result){
+            console.log(`Item deleted, ${params}`)
+                $.ajax({
+                        url: "/delete-cart-item",
+                        // url: "",
+                        type: "POST",
+                        data: {
+                            property_id: params,
+                            csrfmiddlewaretoken: '{{ csrf_token }}',
+                        },
+                        success: function (response) {
+                            console.log(response)
+                            window.location.reload()
+                        },
+                        error: function (e) {
+                            alert("Error", e)
+                        }
+                    });
+        }else{
+            console.log(`Deletion cancelled, ${params}`)
+        }
+    }
+</script>
+
 
 </body>
 </html>

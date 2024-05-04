@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (HouseRent,HouseSale,HouseLease,LandSale, AllProperties, Feedback, Wishlist,
-                        MailingList, Message, Cart, Orders)
+                        MailingList, Message, Cart, Orders, UserDetails)
 
 # Register your models here.
 
@@ -21,9 +21,10 @@ class RenderingFeedback(admin.ModelAdmin):
 
 
 class RenderingCart(admin.ModelAdmin):
-    list_display = ("user", "property_id", "date_time")      
+    list_display = ("user", "property_id", "status", "date_time")      
 
           
+admin.site.site_header = 'Sikada Homes Admin Dashboard'
 
 
 admin.site.register(AllProperties, RenderingAllProperties)
@@ -37,3 +38,4 @@ admin.site.register(MailingList)
 admin.site.register(Message)
 admin.site.register(Orders)
 admin.site.register(Cart, RenderingCart)
+admin.site.register(UserDetails)

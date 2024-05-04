@@ -11,7 +11,8 @@ from itertools import chain
 import random
 from .models import ( HouseRent,HouseSale,HouseLease,LandSale,
                      AllProperties,Feedback, Wishlist,
-                      MailingList,Message, Cart,Orders
+                      MailingList,Message, Cart,Orders,
+                      UserDetails
                     )
 import secrets
 import string 
@@ -74,7 +75,23 @@ def about(request):
 
 @login_required
 def account(request):
-    return render(request, 'general/account.html')
+    if request.method == 'POST':
+        if request.POST.get('current_password'):
+            current_password = request.POST.get('current_password')
+            confirm_password = request.POST.get('confirm_password')
+            try:
+                user = User.objects.get(username=request.user.username)
+                if user.check_password(current_password):
+                    user.set_password(confirm_password)
+                    user.save()
+                    messages.success(request, 'Password changed successfully.')
+                else:
+                    messages.error(request, 'Incorrect old password.')
+            except User.DoesNotExist:
+                messages.error(request, 'User does not exist.')
+
+    userdetails = UserDetails.objects.get(username = request.user.username)           
+    return render(request, 'general/account.html', {'userdetails':userdetails})
 
 def add_listing(request):
     return render(request, 'general/add-listing.html')
@@ -112,8 +129,10 @@ def cart(request):
             property_id += i.property_id + ','
         property_id += all[-1].property_id
     else:
-        property_id = all[0].property_id  
-
+        try:
+            property_id = all[0].property_id  
+        except:
+            pass
     total_price = 0
     for i in all:
         total_price += int(i.price)
@@ -146,6 +165,15 @@ def checkout(request, property_id):
         a = Orders(first_name = first_name, payment_method=payment_method, user = request.user.username, property_id = property_id,order_id=order_id, last_name = last_name, email = email, phone = phone, company_name = company_name, company_address = company_address, country = country, address = address, address_2 = address_2, city = city, state = state, zip = zip, order_notes = order_notes)
         a.save()
         messages.success(request, "You have successfully placed your order")
+        
+        if ',' in property_id:
+            property_ids = property_id.split(',')
+            for i in property_ids:
+                Cart.objects.filter(user = request.user, property_id = i, status = 'active' ).update(status = 'inactive')
+        else:
+            Cart.objects.filter(user = request.user, property_id = property_id, status = 'active' ).update(status = 'inactive')
+
+
     property_ids = property_id.split(',')
     # print(property_ids)
     all_items = [obj for i in property_ids for obj in AllProperties.objects.filter(property_id=i)]
@@ -240,12 +268,12 @@ def add_to_cart(request):
     property_id = request.POST.get('property_id')
     if request.user.is_authenticated:
         try:
-            Cart.objects.get(user=request.user.username, property_id=property_id)
+            Cart.objects.get(user=request.user.username, property_id=property_id, status='active')
             return JsonResponse('already_added', safe=False)
         except Cart.DoesNotExist:
-            a = Cart(property_id= property_id, user=request.user.username)
+            a = Cart(property_id=property_id,user=request.user.username)
             a.save()
-            messages.success(request, "Property Successfully added to Cart")
+            # messages.success(request, "Property Successfully added to Cart")
             return JsonResponse('successfully_added', safe=False)
     else:
         return JsonResponse('unauthenticated', safe=False)
@@ -275,9 +303,16 @@ def fetch_cart_items(request):
 
     return JsonResponse(all_results, safe=False)
 
+def delete_cart_item(request):
+    property_id = request.POST.get('property_id')
+    item = Cart.objects.get(property_id=property_id, user=request.user.username, status='active')
+    item.delete()
+    return JsonResponse('deleted', safe=False)
 
 def get_cart_count(request):
-    data = Cart.objects.all().count()
+    # data = Cart.objects.all().count()
+    data = Cart.objects.filter(user=request.user.username, status='active').count()
+
     # return JsonResponse(list(data), safe=False)
     return JsonResponse(data, safe=False)
 
@@ -298,17 +333,6 @@ def product_details(request,property_id):
             print(f'My email is {email}')  
         else:
             pass
-    # if request.method == 'POST' and 'messageForm' in request.POST.get('messageForm'):    
-    #         name = request.POST['yourname']
-    #         email = request.POST['youremail']
-    #         message = request.POST['yourmessage']
-    #         a = Message(email=email, name = name, message=message)
-    #         a.save()
-    # # elif request.method == 'POST':
-
-    # if request.method == 'POST' and 'mailingListForm' in request.POST.get('mailingListForm'):
-    #     email = request.POST['email'] 
-    #     print(f'My email is {email}')
 
     query = ''
     if HouseRent.objects.filter(property_id = property_id):
@@ -325,13 +349,13 @@ def product_details(request,property_id):
     cart = Cart.objects.filter(user = request.user.username)   
     # print(cart) 
          
-    cart = Cart.objects.filter(user = request.user).count()
+    cart = Cart.objects.filter(user = request.user, status = 'active').count()
     return render(request, 'general/product-details.html', {'context':query, 'related_properties':related_properties, 'cart':cart} )
 
 def land_details(request,pk):   
     land_details = LandSale.objects.get(property_id = pk)
     related_properties = LandSale.objects.all().order_by('-id')[:2]
-    cart = Cart.objects.filter(user = request.user).count()
+    cart = Cart.objects.filter(user = request.user, status = 'active').count()
     return render(request, 'general/land-details.html', {'context':land_details, 'related_properties':related_properties, 'cart':cart}, )
     
 def register(request):

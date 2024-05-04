@@ -316,8 +316,21 @@ class MailingList(models.Model):
 class Cart(models.Model):
     user = models.CharField(max_length= 200, null=True, blank=True)
     property_id = models.TextField(null=True, blank=True)
+    order_id = models.CharField(max_length= 200, null=True, blank=True)
     status = models.CharField(default='active', max_length=100)
     date_time = models.DateTimeField(default= timezone.now)
+
+class UserDetails(models.Model):
+    username = models.CharField(max_length= 200, null=True, blank=True)
+    company_name = models.CharField(max_length= 200, null=True, blank=True)
+    company_address = models.CharField(max_length= 200, null=True, blank=True)
+    country = models.CharField(max_length= 200, null=True, blank=True)
+    address = models.CharField(max_length= 200, null=True, blank=True)
+    address_2 = models.CharField(max_length= 200, null=True, blank=True)
+    city = models.CharField(max_length= 200, null=True, blank=True)
+    state = models.CharField(max_length= 200, null=True, blank=True)
+    zip = models.CharField(max_length= 200, null=True, blank=True)
+
 
 
 class Orders(models.Model):
