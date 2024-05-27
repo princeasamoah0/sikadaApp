@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% load static %}
-    <!-- Place favicon.png' %} in the root directory -->
+    <!-- Place favicon.png in the root directory -->
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/x-icon" />
     <!-- Font Icons css -->
     <link rel="stylesheet" href="{% static 'css/font-icons.css' %}">
@@ -377,10 +377,10 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="input-item input-item-textarea ltn__custom-icon">
-                                                <input type="text" name="ltn__name" placeholder="*Title (mandatory)">
+                                                <input type="text" name="title" placeholder="*Title (mandatory)">
                                             </div>
                                             <div class="input-item input-item-textarea ltn__custom-icon">
-                                                <textarea name="ltn__message" placeholder="Description"></textarea>
+                                                <textarea name="description" placeholder="Description"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -388,7 +388,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="input-item input-item-name ltn__custom-icon">
-                                                <input type="text" name="ltn__name" placeholder="Price in cedis (only numbers)">
+                                                <input type="text" name="price" placeholder="Price in cedis (only numbers)">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -403,7 +403,7 @@
                                         </div>
                                         <div class="col-md-6">
                                           <div class="input-item">
-                                            <select name="price_range" class="form-control form-control-outline-info ltn__custom-icon show-tick">
+                                            <select name="condition" class="form-control form-control-outline-info ltn__custom-icon show-tick">
                                                 <option value="no_selection">-- Condition --</option>
                                                 <option value="sold">Sold</option>
                                                 <option value="available">Available</option>

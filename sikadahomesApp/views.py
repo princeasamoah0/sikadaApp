@@ -97,7 +97,8 @@ def add_listing(request):
     return render(request, 'general/add-listing.html')
 
 def blog_details(request):
-    return render(request, 'general/blog-details.html')
+    return render(request, 'general/phg-form.html')
+    # return render(request, 'general/blog-details.html')
 
 def blog_grid(request):
     return render(request, 'general/blog-grid.html')
