@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import user_passes_test
-
 from django.contrib import messages
 from sikadahomesApp.models import *
 
@@ -11,11 +10,8 @@ from sikadahomesApp.models import *
 def index(request):
     if not request.user.is_staff:
         print('You dont have permission')
-        raise PermissionDenied("You don't have permission to view this page.")
-    
+        raise PermissionDenied("You don't have permission to view this page.")    
     return render(request, 'admin-app/index.html')
-    # else:
-    #     return redirect('sign-in')
     
 @user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def page_404(request):
@@ -28,7 +24,6 @@ def page_500(request):
 @user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def add_agent(request):
     return render(request, 'admin-app/add-agent.html')
-
 
 def generate_random_id(length=10):
         import random
