@@ -94,6 +94,90 @@ def account(request):
     return render(request, 'general/account.html', {'userdetails':userdetails})
 
 def add_listing(request):
+    
+    if request.method == "POST":
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+        price_range = request.POST.get('price_range')
+        condition = request.POST.get('condition')
+        property_type = request.POST.get('property_type')
+        img_listing = request.FILES.get('img_listing')
+        img_front = request.FILES.get('img_front')
+        img_gallery_1 = request.FILES.get('img_gallery_1')
+        img_gallery_2 = request.FILES.get('img_gallery_2')
+        img_gallery_3 = request.FILES.get('img_gallery_3')
+        property_address = request.POST.get('property_address')
+        region = request.POST.get('region')
+        location = request.POST.get('location')
+        neigbourhood = request.POST.get('neigbourhood')
+        latitude = request.POST.get('latitude')
+        longitude = request.POST.get('longitude')
+        air_conditioning = request.POST.get('air_conditioning') == 'on'
+        swimming_pool = request.POST.get('swimming_pool') == 'on'
+        wifi = request.POST.get('wifi') == 'on'
+        near_church = request.POST.get('near_church') == 'on'
+        near_estate = request.POST.get('near_estate') == 'on'
+        dish_washer = request.POST.get('dish_washer') == 'on'
+        security = request.POST.get('security') == 'on'
+        indoor_game = request.POST.get('indoor_game') == 'on'
+        cable_tv = request.POST.get('cable_tv') == 'on'
+        microwave = request.POST.get('microwave') == 'on'
+
+
+        def generate_random_id(length=10):
+            import random
+            import string
+            characters = string.ascii_letters + string.digits
+            return ''.join(random.choice(characters) for _ in range(length))
+        property_id = generate_random_id()
+
+        if property_type == 'house_for_sale':
+            a = HouseSale(property_id=property_id,location=location,
+                            region=region, budget=price_range,img_listing=img_listing,img_front=img_front,
+                            status=condition,price=price, 
+                            property_title=title,property_address=property_address,description=description,
+                            neigbourhood=neigbourhood,img_gallery_1=img_gallery_1,img_gallery_2=img_gallery_2,img_gallery_3=img_gallery_3,
+                            wifi=wifi,near_church=near_church,near_estate=near_estate,dish_washer=dish_washer,
+                            security=security,indoor_game=indoor_game,cable_tv=cable_tv,microwave=microwave,
+                            )
+            a.save()
+        elif property_type == 'house_for_rent':
+            a = HouseRent(property_id=property_id,location=location,
+                            region=region, budget=price_range,img_listing=img_listing,img_front=img_front,
+                            status=condition,price=price, 
+                            property_title=title,property_address=property_address,description=description,
+                            neigbourhood=neigbourhood,img_gallery_1=img_gallery_1,img_gallery_2=img_gallery_2,img_gallery_3=img_gallery_3,
+                            wifi=wifi,near_church=near_church,near_estate=near_estate,dish_washer=dish_washer,
+                            security=security,indoor_game=indoor_game,cable_tv=cable_tv,microwave=microwave,
+                            )
+            a.save()
+        elif property_type == 'land_for_sale':
+            print('Work it out for land for sale in Admin View') 
+        else:
+            a = HouseRent(property_id=property_id,location=location,
+                            region=region, budget=price_range,img_listing=img_listing,img_front=img_front,
+                            status=condition,price=price, 
+                            property_title=title,property_address=property_address,description=description,
+                            neigbourhood=neigbourhood,img_gallery_1=img_gallery_1,img_gallery_2=img_gallery_2,img_gallery_3=img_gallery_3,
+                            wifi=wifi,near_church=near_church,near_estate=near_estate,dish_washer=dish_washer,
+                            security=security,indoor_game=indoor_game,cable_tv=cable_tv,microwave=microwave,
+                            )
+            a.save()
+
+        b = AllProperties(property_id=property_id,property_type=property_type,price=price,location=region, property_title = title)
+        b.save() 
+        messages.success(request,"Listing successfully added.")
+        return redirect(index)
+        print('Message Added')    
+        # status = request.POST.get('')
+
+        # print(f'''Posting Has started {title, description, price, price_range,
+        #                              condition, property_type, img_listing, img_front,img_gallery_1,
+        #                              img_gallery_2, img_gallery_3, property_address, region, location,
+        #                              neigbourhood, latitude, longitude, air_conditioning,
+        #                              swimming_pool, wifi, near_church, near_estate, dish_washer,
+        #                              security, indoor_game, cable_tv, microwave}''')
     return render(request, 'general/add-listing.html')
 
 def blog_details(request):
