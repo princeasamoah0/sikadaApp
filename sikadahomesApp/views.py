@@ -140,7 +140,7 @@ def add_listing(request):
                             neigbourhood=neigbourhood,img_gallery_1=img_gallery_1,img_gallery_2=img_gallery_2,img_gallery_3=img_gallery_3,
                             wifi=wifi,near_church=near_church,near_estate=near_estate,dish_washer=dish_washer,
                             security=security,indoor_game=indoor_game,cable_tv=cable_tv,microwave=microwave,
-                            )
+                        )
             a.save()
         elif property_type == 'house_for_rent':
             a = HouseRent(property_id=property_id,location=location,
