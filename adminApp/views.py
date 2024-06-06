@@ -4,6 +4,7 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
 from sikadahomesApp.models import *
+from reusable_snippets import ImagePreprocessor
 
 # Create your views here.
 @user_passes_test(lambda u: u.is_staff, login_url='sign-in')
@@ -73,6 +74,14 @@ def SaveFunction(request, param):
         indoor_game = request.POST.get('indoor_game') == 'on'
         cable_tv = request.POST.get('cable_tv') == 'on'
         microwave = request.POST.get('microwave') == 'on'
+
+        # heyy = ImagePreprocessor.imagePreprocessor(img_listing)
+        # print(f"Preprocessed Image {heyy}")
+
+        # print(f"Initial Image {img_listing}")
+        
+
+
         # print(f''' Region = {region}, budget = {budget}, img_listing = {img_listing}, img_front = {img_front}, status = {status},
         #      price = {price}, date = {date} , property_title = {property_title},
         #      property_address = {property_address},  description = {description} , property_name = {property_name} ,

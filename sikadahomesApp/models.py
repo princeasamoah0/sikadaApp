@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+import PIL
+
 
 # from sikadahomesApp.views import locations
 
@@ -101,11 +103,24 @@ class HouseRent(models.Model):
         return self.property_title
 
 class HouseSale(models.Model):
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = PIL.Image.open(self.img_listing)
+        target_width = 850
+        target_height = target_width/1.31
+        img = img.resize((int(target_width), int(target_height)), PIL.Image.ANTIALIAS)
+        img.save(self.img_listing.path, quality=100)
+        img.close()
+        self.img_listing.close()
+
     def image_upload_path(instance, filename):
         return "HouseSale"+"/"+str(instance.property_id)+"/"+filename
+
     property_id = models.CharField(max_length=100, null=True, blank=True)
     region = models.CharField(max_length=30, null=True, blank=True)
     budget = models.CharField(max_length=30, null=True, blank=True)
+    img_listing = models.ImageField(upload_to=image_upload_path, null=True, blank=True)
     img_listing = models.ImageField(upload_to=image_upload_path, null=True, blank=True)
     img_front = models.ImageField(upload_to=image_upload_path, null=True, blank=True)
     status = models.CharField(max_length=30, null=True, blank=True)
@@ -145,6 +160,32 @@ class HouseSale(models.Model):
     microwave = models.CharField(max_length=100, null=True, blank=True)
     date_time = models.DateTimeField(default = timezone.now)
     admin = models.CharField(max_length=100, blank = True, null = True)
+
+    # img_listing_thumbnail = ImageSpecField(source = 'img_listing', processors=[ResizeToFill(850, 650)],
+    #                                        format='JPEG',
+    #                                        options = {'quality': 60})
+
+    
+
+    
+
+
+        #  try:
+    # image = Image.open(image_path)
+    # width, height = image.size
+
+    # Calculate new dimensions to maintain aspect ratio
+    # new_width = min(width, max_width)
+    # new_height = int(height * (new_width / width)) if width > new_width else height
+
+    # Resize the image
+#     resized_image = image.resize((new_width, new_height), Image.ANTIALIAS)
+#     return resized_image
+
+#     # Save the resized image
+#     resized_image.save(output_path)
+#   except Exception as e:
+#     print(f"Error resizing image: {e}") 
     
     def __str__(self):
         return self.property_title

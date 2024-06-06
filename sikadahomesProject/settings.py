@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'sikadahomesApp',
     'adminApp',
+    # 'django_rq'
     # 'allauth',
     # 'allauth.account',
     # 'allauth.socialaccount',
