@@ -16,7 +16,7 @@ from .models import ( HouseRent,HouseSale,HouseLease,LandSale,
                     )
 import secrets
 import string 
-# Create your views here.
+
 
 
 def index (request):

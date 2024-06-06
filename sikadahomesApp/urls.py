@@ -1,7 +1,4 @@
 from django.urls import path
-
-
-# app_name = 'adminApp'
 from . import views
 
 urlpatterns = [
