@@ -878,35 +878,46 @@
                 </div>
             </div>
             <div class="col-lg-12">
+                {% for property in properties %}                              
                 <div class="card property_list">
                     <div class="body">
                         <div class="row">
                             <div class="col-lg-4 col-md-6">
                                 <div class="property_image">
-                                    <img class="img-thumbnail img-fluid" src="{% static 'admin-app/assets/images/image-gallery/1.jpg' %}" alt="img">
-                                    <span class="badge badge-danger">For Sale</span>
+                                    <a href="property-detail/{{property.property_id}}">
+                                        <img class="img-thumbnail img-fluid" src="{{property.img_listing.url}}" alt="img">
+                                    </a>
+                                    {% if property.status|slice:"-4:" == 'sale' %}
+                                    <span class="badge badge-success">For Sale</span>
+                                    {% else %}
+                                    <span class="badge badge-danger">For Rent</span>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="col-lg-8 col-md-6">
                                 <div class="property-content">
                                     <div class="detail">
-                                        <h5 class="text-success m-t-0 m-b-0">$390,000 - $430,000</h5>
-                                        <h4 class="m-t-0"><a href="#" class="col-blue-grey">4BHK Alexander Court,New York</a></h4>
-                                        <p class="text-muted"><i class="zmdi zmdi-pin m-r-5"></i>245 E 20th St, New York, NY 201609</p>
-                                        <p class="text-muted m-b-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit Aliquam gravida magna et fringilla convallis. Pellentesque habitant morb</p>
+                                        <h5 class="text-success m-t-0 m-b-0">GHS {{property.price}}</h5>
+                                        <h4 class="m-t-0"><a href="property-detail/{{property.property_id}}" class="col-blue-grey">{{property.property_title}}</a></h4>
+                                        <p class="text-muted"><i class="zmdi zmdi-pin m-r-5"></i>{{property.address}},{{property.location}}, {{property.region}} </p>
+                                        <p class="text-muted m-b-0">
+                                            {{property.description}}
+
+                                        </p>
                                     </div>
                                     <div class="property-action m-t-15">
                                         <a href="#" title="Square Feet"><i class="zmdi zmdi-view-dashboard"></i><span>280</span></a>
-                                        <a href="#" title="Bedroom"><i class="zmdi zmdi-hotel"></i><span>4</span></a>
-                                        <a href="#" title="Parking space"><i class="zmdi zmdi-car-taxi"></i><span>2</span></a>
-                                        <a href="#" title="Garages"><i class="zmdi zmdi-home"></i><span> 24H</span></a>
+                                        <a href="#" title="Bedroom"><i class="zmdi zmdi-hotel"></i><span>{{property.beds}}</span></a>
+                                        <a href="#" title="Parking space"><i class="zmdi zmdi-car-taxi"></i><span>{{property.garage}}</span></a>
+                                        <a href="#" title="Garages"><i class="zmdi zmdi-home"></i><span> {{property.rooms}}</span></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card property_list">
+                {% endfor %}
+                <!-- <div class="card property_list">
                     <div class="body">
                         <div class="row">
                             <div class="col-lg-4 col-md-6">
@@ -933,8 +944,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card property_list">
+                </div> -->
+                <!-- <div class="card property_list">
                     <div class="body">
                         <div class="row">
                             <div class="col-lg-4 col-md-6">
@@ -961,8 +972,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card property_list">
+                </div> -->
+                <!-- <div class="card property_list">
                     <div class="body">
                         <div class="row">
                             <div class="col-lg-4 col-md-6">
@@ -989,7 +1000,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
 from sikadahomesApp.models import *
 from reusable_snippets import ImagePreprocessor
+from itertools import chain
 
 # Create your views here.
 @user_passes_test(lambda u: u.is_staff, login_url='sign-in')
@@ -302,12 +303,23 @@ def profile(request):
     return render(request, 'admin-app/profile.html')
 
 @user_passes_test(lambda u: u.is_staff, login_url='sign-in')
-def property_detail(request):
-    return render(request, 'admin-app/property-detail.html')
+def property_detail(request, pk):
+    if HouseRent.objects.filter(property_id = pk):
+        query = HouseRent.objects.get(property_id = pk)
+    else:
+        query = HouseSale.objects.get(property_id= pk)
+    return render(request, 'admin-app/property-detail.html', {'query':query})
 
 @user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def property_list(request):
-    return render(request, 'admin-app/property-list.html')
+    houseSale = HouseSale.objects.all()
+    houseRent = HouseRent.objects.all()
+    landSale = LandSale.objects.all()
+
+    properties = list(chain(houseRent, houseSale,landSale))
+    # random.shuffle(latest_listings)
+
+    return render(request, 'admin-app/property-list.html', {'properties':properties})
 
 @user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def property_list3(request):
