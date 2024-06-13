@@ -840,35 +840,21 @@
                   <div class="body">
                     <div class="row clearfix">
                       <div class="col-sm-12">
-                        <input name="img_listing"  id="img_listing" type="file" />
+                        <div style="display: flex;">
+                            <p><span style="color: blue;"><small>current: </small></span>{{query.img_listing}}</p>
+                            <label style="margin-left:20px;"  for="imgListing"><small style="color:blue">change</small></label>
                         </div>
+                        <input name="img_listing" onchange="getImgData(this.id)" value="{{query.img_listing}}" style="visibility:hidden;" id="imgListing" type="file" />                     
+                    </div>
                       </div>
                     </div>
+                <div id="imgListing_placeholder">
+                  <img width="200px" height="200px"  src="{{query.img_listing.url}}" />
+                </div>
                   </div>
-                  <div id="img_listing_placeholder"></div>
             </div>
           </div>
-          <script>
-
-            const chooseFile = document.getElementById("img_listing");
-            const imgPreview = document.getElementById("img_listing_placeholder");
-            
-            function getImgData() {
-              const files = chooseFile.files[0];
-              if (files) {
-                const fileReader = new FileReader();
-                fileReader.readAsDataURL(files);
-                fileReader.addEventListener("load", function () {
-                  imgPreview.style.display = "block";
-                  imgPreview.innerHTML = '<img style="height: 200px; width: 200px" src="' + this.result + '" />';
-                });    
-              }
-            }
-            
-            chooseFile.addEventListener("change", function () {
-              getImgData();
-            });
-                   </script>
+         
             <div class="col-lg-12">
               <div class="card">
                   <div class="header">
@@ -877,9 +863,16 @@
                   <div class="body">
                       <div class="row clearfix">
                           <div class="col-sm-12">
-                                    <input name="img_front" type="file" multiple />
+                            <div style="display: flex;">
+                                <p><span style="color: blue;"><small>current: </small></span>{{query.img_front}}</p>
+                                <label style="margin-left:20px;"     for="imgFront"><small style="color:blue">change</small></label>
+                            </div>
+                            <input style="visibility:hidden;" name="img_front" onchange="getImgData(this.id)" id="imgFront" type="file" multiple />
                           </div>
                       </div>
+                  </div>
+                  <div id="imgFront_placeholder">
+                    <img width="200px" height="200px" src="{{query.img_front.url}}" />
                   </div>
               </div>
             </div>
@@ -1130,24 +1123,46 @@
                       </div>
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                                <input name="img_gallery_1" type="file" multiple />
+                                <div style="display: flex;">
+                                    <p><span style="color: blue;"><small>current: </small></span>{{query.img_gallery_1}}</p>
+                                    <label style="margin-left:20px;"  for="imgGallery1"><small style="color:blue">change</small></label>
+                                </div>
+                                <input name="img_gallery_1" onchange="getImgData(this.id)" style="visibility:hidden;" id="imgGallery1" type="file" multiple />
                             </div>
                         </div>
+                        </div>
+                        <div id="imgGallery1_placeholder">
+                            <img width="200px" height="200px"  src="{{query.img_listing.url}}" />
+                          </div>
                         <div class="header">
                           <h2><small>Add Gallery Images (740x426)</small></h2>
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                                <input name="img_gallery_2" type="file" multiple />
+                                <div style="display: flex;">
+                                    <p><span style="color: blue;"><small>current: </small></span>{{query.img_gallery_2}}</p>
+                                    <label style="margin-left:20px;"  for="imgGallery2"><small style="color:blue">change</small></label>
+                                </div>
+                                <input name="img_gallery_2" id="imgGallery2" onchange="getImgData(this.id)" style="visibility:hidden;" type="file" multiple />
                             </div>
+                            <div id="imgGallery2_placeholder">
+                                <img width="200px" height="200px"  src="{{query.img_lGallery2.url}}" />
+                              </div>
                         </div>
                         <div class="header">
                           <h2><small>Add Gallery Images (740x834)</small></h2>
                         </div>
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                                <input name="img_gallery_3" type="file" multiple />
+                                <div style="display: flex;">
+                                    <p><span style="color: blue;"><small>current: </small></span>{{query.img_gallery_2}}</p>
+                                    <label style="margin-left:20px;"  for="imgGallery3"><small style="color:blue">change</small></label>
+                                </div>
+                                <input name="img_gallery_3" id="imgGallery3" onchange="getImgData(this.id)" style="visibility:hidden;" type="file" multiple />
                             </div>
+                            <div id="imgGallery3_placeholder">
+                                <img width="200px" height="200px"  src="{{query.img_lGallery3.url}}" />
+                              </div>
                         </div>
                     </div>
                 </div>
@@ -1231,6 +1246,22 @@ function BudgetElementChange(params) {
 function img_change(params) {
     console.log(`Changed Image ${params}`)
 }
+
+
+          function getImgData(id) {
+            const chooseFile = document.getElementById(id);
+            const imgPreview = document.getElementById(`${id}_placeholder`);
+            const files = chooseFile.files[0];
+            if (files) {
+              const fileReader = new FileReader();
+              fileReader.readAsDataURL(files);
+              fileReader.addEventListener("load", function () {
+                imgPreview.style.display = "block";
+                imgPreview.innerHTML = '<img style="height: 200px; width: 200px" src="' + this.result + '" />';
+              });    
+            }
+          }
+          
 </script>
 <!-- Jquery Core Js -->
 <script src="{% static 'admin-app/assets/bundles/libscripts.bundle.js' %}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
