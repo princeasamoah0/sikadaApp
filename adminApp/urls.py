@@ -6,6 +6,7 @@ urlpatterns = [
     path('404', views.page_404, name='404'),
     path('500', views.page_500, name='500'),
     path('add-agent', views.add_agent, name='add-agent'),
+    path('edit-add-property_house/<str:pk>', views.edit_add_property_house, name='edit-add-property_house'),
     path('add-property_house', views.add_property_house, name='add-property_house'),
     path('add-property_land', views.add_property_land, name='add-property_land'),
     path('agent', views.agent, name='agent'),

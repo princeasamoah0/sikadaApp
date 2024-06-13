@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="POST" enctype="multipart/form-data">
+        <input id="imageInput" type="file">
+
+        <div style="max-height: 100px; max-width: 100px; background-color:blueviolet" id="selectedImage">
+     Hello
+        </div>
+    </form>
+
+<script>
+
+const chooseFile = document.getElementById("imageInput");
+const imgPreview = document.getElementById("selectedImage");
+
+function getImgData() {
+  const files = chooseFile.files[0];
+  if (files) {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(files);
+    fileReader.addEventListener("load", function () {
+      imgPreview.style.display = "block";
+      imgPreview.innerHTML = '<img style="height: 100px; width: 100px" src="' + this.result + '" />';
+    });    
+  }
+}
+
+chooseFile.addEventListener("change", function () {
+  getImgData();
+});
+       </script>
+</body>
+</html>
