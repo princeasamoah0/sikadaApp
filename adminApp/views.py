@@ -4,7 +4,7 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
 from sikadahomesApp.models import *
-from reusable_snippets import ImagePreprocessor
+from reusable_snippets.BudgetRanger import BudgetRanger
 from itertools import chain
 
 # Create your views here.
@@ -140,12 +140,20 @@ def add_property_house(request):
         # status_text = status.split('_')[1].capitalize()
         SaveFunction(request, status)
                                                                                                                                         
-    #     region = request.POST.get('region')
-    #     budget = request.POST.get('budget')
-    #     file = request.POST.get('file')
-    #     print(region, budget, file)
-        # print('Posting')
     return render(request, 'admin-app/add-property_house.html')
+
+def edit_add_property_house(request, pk):
+    print(pk)
+    query = ''
+    if HouseRent.objects.filter(property_id = pk):
+        query = HouseRent.objects.get(property_id = pk)
+    else:
+        # HouseSale.objects.filter(property_id= property_id)
+        query = HouseSale.objects.get(property_id= pk)
+
+    query.price_range = BudgetRanger(query).price_range
+
+    return render(request, 'admin-app/edit-add-property_house.html', {'query':query})
 
 @user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def add_property_land(request):
