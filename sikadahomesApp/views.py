@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 import re
 from django.http import JsonResponse, HttpResponse
-
+from reusable_snippets import RandomIdGenerator
 from itertools import chain
 import random
 from .models import ( HouseRent,HouseSale,HouseLease,LandSale,
@@ -94,7 +94,7 @@ def account(request):
     return render(request, 'general/account.html', {'userdetails':userdetails})
 
 def add_listing(request):
-    
+ 
     if request.method == "POST":
         title = request.POST.get('title')
         description = request.POST.get('description')
@@ -123,14 +123,7 @@ def add_listing(request):
         indoor_game = request.POST.get('indoor_game') == 'on'
         cable_tv = request.POST.get('cable_tv') == 'on'
         microwave = request.POST.get('microwave') == 'on'
-
-
-        def generate_random_id(length=10):
-            import random
-            import string
-            characters = string.ascii_letters + string.digits
-            return ''.join(random.choice(characters) for _ in range(length))
-        property_id = generate_random_id()
+        property_id = RandomIdGenerator.GenerateRandomId(10).Generate()
 
         if property_type == 'house_for_sale':
             a = HouseSale(property_id=property_id,location=location,

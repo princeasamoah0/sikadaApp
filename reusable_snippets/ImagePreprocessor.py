@@ -21,6 +21,7 @@ from PIL import Image
 
 
 def save(self, *args, **kwargs):
+        
         super().save(*args, **kwargs)
         img = PIL.Image.open(self.img_listing)
         target_width = 850
