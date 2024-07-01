@@ -4,7 +4,7 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
 from sikadahomesApp.models import *
-from reusable_snippets.BudgetRanger import BudgetRanger
+from reusable_snippets import BudgetRanger,RandomIdGenerator,ImagePreprocessor
 from itertools import chain
 
 # Create your views here.
@@ -94,7 +94,8 @@ def SaveFunction(request, param):
         #      pool={pool}, wifi={wifi}, near_church={near_church}, near_estate={near_estate}, dish_washer={dish_washer}, security={security},
         #      indoor_game={indoor_game}, cable_tv={cable_tv}, microwave={microwave}
         #     ''') 
-        property_id = generate_random_id()
+        property_id = RandomIdGenerator.GenerateRandomId(10).Generate()
+        
         if param == 'house_for_sale':          
             a = HouseSale(property_id=property_id,location=location,
                           region=region,budget=budget,img_listing=img_listing,img_front=img_front,
@@ -151,14 +152,14 @@ def edit_add_property_house(request, pk):
         # HouseSale.objects.filter(property_id= property_id)
         query = HouseSale.objects.get(property_id= pk)
 
-    query.price_range = BudgetRanger(query).price_range
+    query.price_range = BudgetRanger.BudgetRanger(query).price_range
 
     return render(request, 'admin-app/edit-add-property_house.html', {'query':query})
 
 @user_passes_test(lambda u: u.is_staff, login_url='sign-in')
 def add_property_land(request):
     if request.method == "POST":
-        property_id = generate_random_id()
+        property_id = RandomIdGenerator.GenerateRandomId(10).Generate()
         region = request.POST.get('region')
         location = request.POST.get('location')  
         property_title = request.POST.get('property_title') 
