@@ -40,11 +40,12 @@ def index (request):
     houseSale = HouseSale.objects.all().order_by('-id')[:2]
     landSale = LandSale.objects.all().order_by('-id')[:2]
     feedback = Feedback.objects.all().order_by('-id')[:4]
+    houseLease = HouseLease.objects.all().order_by('-id') 
 
     latest_listings = list(chain(houseRent, houseSale,landSale))
     random.shuffle(latest_listings)
     
-    return render(request, 'general/index.html', {'context':latest_listings, 'feedback':feedback })
+    return render(request, 'general/index.html', {'context':latest_listings, 'feedback':feedback, 'houseLease':houseLease })
 
 def wishlist_Ajax(request):
     if request.method == 'POST':

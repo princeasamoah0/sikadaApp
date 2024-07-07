@@ -2,6 +2,12 @@ from django.db import models
 from django.utils import timezone
 import PIL
 
+CONDITION_CHOICES = (
+    ('pending', 'Pending'),
+    ('sold', 'Sold'),
+    ('deleted', 'Deleted'),
+    ('active', 'Active')
+)
 
 # from sikadahomesApp.views import locations
 
@@ -199,6 +205,7 @@ class HouseLease(models.Model):
     img_listing = models.ImageField(upload_to=image_upload_path, null=True, blank=True)
     img_front = models.ImageField(upload_to=image_upload_path, null=True, blank=True)
     status = models.CharField(max_length=30, null=True, blank=True)
+    condition = models.CharField(choices=CONDITION_CHOICES,max_length=30, null=True, blank=True)
     price = models.CharField(max_length=30, null=True, blank=True)
     date = models.CharField(max_length=100,null=True, blank=True)
     property_title = models.CharField(max_length=200, null=True, blank=True)
